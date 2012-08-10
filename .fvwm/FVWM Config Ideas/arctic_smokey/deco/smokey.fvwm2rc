@@ -1,0 +1,120 @@
+################
+# Smokey Theme #
+################
+
+#####
+# Colorsets (matching the fvwm-theme policy
+# http://fvwm-themes.sourceforge.net/doc/colorsets
+###########
+# Inactive windows
+Colorset 0  fg lightgray, bg black, hi black, sh black, \
+	    fgsh black, RootTransparent buffer, Tint black 65
+# Active windows
+Colorset 1  fg white, bg black, hi black, sh black, \
+	    fgsh black, RootTransparent buffer, Tint black 50
+# Pixmap menu 
+Colorset 5  fg white, bg black, sh black, hi white, fgsh black, \
+	    RootTransparent buffer, Tint black 50, \
+	    shape   $[fvwm_theme_img]/menu_shape.xpm
+# Hilighted menu item
+Colorset 6 fg black, bg black, hi white, fgsh white
+# Background of IconMan
+Colorset 12 fg lightgray, bg lightgray, sh lightgray, fgsh darkgray, \
+	    RootTransparent, Tint black 50
+# Pager normal
+Colorset 14 fg white, bg white, hi black, \
+	    RootTransparent, Tint black 60
+# Pager hilighted
+Colorset 15 fg white, bg white, hi black, \
+	    RootTransparent, Tint black 30 
+# Pager ballon
+Colorset 16 fg blach, bg white
+# Item standard of IconMan
+Colorset 17 fg white, bg white, sh white, fgsh black, \
+	    RootTransparent, Tint black 55
+# Item active of IconMan
+Colorset 18 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 45
+# Ident
+Colorset 21 fg white, fgsh black, \
+	    RootTransparent buffer, Tint black 50
+# Button Bar (TopBar)
+Colorset 23 fg red, fg blue, sh green, fgsh yellow, \
+	    RootTransparent buffer, Tint black 50, \
+	    Shape   $[fvwm_theme_img]/topbar_shape_1280.xpm
+# Pager mini windows normal
+Colorset 40 fg white, bg white, hi white, \
+	    Pixmap  $[fvwm_theme_img]/pa_minwinoff.png
+# Pager mini windows higlighted
+Colorset 41 fg white, bg white, hi white, \
+	    Pixmap  $[fvwm_theme_img]/pa_minwinon.png
+# Dock main
+Colorset 50 fg white, bg white, sh white, \
+	    RootTransparent buffer, Tint black 50, \
+	    Shape   $[fvwm_theme_img]/dock_shape.xpm
+# Dock applet on the left, upper part
+Colorset 51 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the left, upper part
+Colorset 52 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the middle, upper part
+Colorset 53 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the middle, upper part
+Colorset 54 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the right, hour
+Colorset 55 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the right, minute
+Colorset 56 fg black, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the right, AM/PM
+Colorset 57 fg white, bg white, sh white, fgsh white, \
+	    RootTransparent, Tint black 50
+# Dock applet on the right, minute
+Colorset 58 fg white, bg white, sh white, fgsh black, \
+	    RootTransparent, Tint black 50
+# Other menu
+Colorset 60 fg white, bg white, hi black, sh black, \
+	    fgsh black, Translucent black 50
+# Applet in the TopBar
+Colorset 70 fg black, bg black, RootTransparent, Tint black 50
+
+#####
+# Window decoration
+###########
+Style *	Button 1, Button 2, Button 4, Button 6, GrabFocusOff
+Style *	Colorset 0, HilightColorset 1
+Style * Borderwidth 0, HandleWidth 5
+Style *	BorderColorset 0, HilightBorderColorset 1
+Style * Font "Shadow=1 C:xft:Blippo:pixelsize=16"
+
+DestroyDecor	Default
+AddToDecor	Default
++ BorderStyle	Inactive Colorset 0 -- flat
++ BorderStyle	Active Colorset 1 -- flat
++ BorderStyle	-- NoInset HiddenHandles
++ TitleStyle	Centered Height 28 -- flat
++ TitleStyle	Inactive Colorset 0 -- flat
++ TitleStyle	Active Colorset 1 -- flat
++ ButtonStyle	Reset
++ ButtonStyle	All Active (Colorset 1 -- flat) Inactive (Colorset 0 -- flat)
+
++ AddButtonStyle    1	    Active	Pixmap $[fvwm_theme_img]/tb_leftend.png -- flat
++ AddButtonStyle    1	    MiniIcon
+
++ AddTitleStyle	    Active	MultiPixmap Main	TiledPixmap	$[fvwm_theme_img]/tb_titlemain.png, \
+					    RightEnd    AdjustedPixmap	$[fvwm_theme_img]/tb_titleright.png
++ AddTitleStyle	    Inactive	MultiPixmap Main	TiledPixmap	$[fvwm_theme_img]/tb_titlemain.png, \
+					    RightEnd    AdjustedPixmap	$[fvwm_theme_img]/tb_titleright.png
+
++ AddButtonStyle    6	    Active	Pixmap $[fvwm_theme_img]/tb_min.png -- flat
++ AddButtonStyle    6	    Inactive	Pixmap $[fvwm_theme_img]/tb_min.png -- flat
+
++ AddButtonStyle    4	    Active	Pixmap $[fvwm_theme_img]/tb_max.png -- flat
++ AddButtonStyle    4	    Inactive	Pixmap $[fvwm_theme_img]/tb_max.png -- flat
+
++ AddButtonStyle    2	    Active	Pixmap $[fvwm_theme_img]/tb_close.png -- flat
++ AddButtonStyle    2	    Inactive	Pixmap $[fvwm_theme_img]/tb_close.png -- flat

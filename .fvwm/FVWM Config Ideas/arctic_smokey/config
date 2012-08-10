@@ -1,0 +1,350 @@
+###########
+#  ____________________________
+# |  __________________________|
+# | |___  _  _  _    _  
+# |  ___|( \/ )( \/\/ )/\/\
+# | |     \  /  \    //    \
+# |_|      \/    \/\/(_/\/\_) 2.5.12
+#
+# My personal config file
+#
+# For any question on this config (tuning,
+#  modifying, participating):
+# http://fvwm.lair.be/viewtopic.php?t=118
+#
+# Many thanks to:
+# http://www.zensites.net/fvwm/guide
+# http://desintegr.free.fr
+# http://www.clan-hash.com/~guli
+# http://www.as.ua.edu/~flux/fvwm
+# http://chwombat.net
+# http://ikaro.dk/news.php
+# http://jefklak.suidzer0.org
+# http://dev.gentoo.org/~taviso
+# http://fvwm-crystal.linux.net.pl
+# http://fvwm.lair.be
+# and of course my deepest to
+# http://www.fvwm.org
+#######################
+
+#####
+# Set Environment variables
+###########
+SetEnv	fvwm_img		$./img/
+SetEnv	fvm_gnome_icon_theme	gnant
+SetEnv	fvwm_icon		/usr/share/icons/$[fvm_gnome_icon_theme]
+SetEnv	fvwm_wave_path 		$[HOME]/Borealis/
+SetEnv	fvwm_script		$./script/
+SetEnv	fvwm_wallpaper_dir	$[HOME]/MyPictures/
+# Available themes: arctic, smokey
+SetEnv	fvwm_theme		smokey
+SetEnv	fvwm_theme_img		$./deco/$[fvwm_theme]
+# Available themes: um , weather.com
+SetEnv	fvwm_weather		um
+# Apps
+SetEnv	fvwm_goleft		"3ddesk --view=goleft --noautofun"
+SetEnv	fvwm_goright		"3ddesk --view=goright --noautofun"
+SetEnv	fvwm_wave_play		"ogg123 -d esd"
+SetEnv	fvwm_file		rox
+#SetEnv	fvwm_browser		"epiphany --sm-disable --disable-crash-dialog"
+SetEnv	fvwm_browser		"firefox"
+SetEnv	fvwm_editor		gvim
+#SetEnv	fvwm_term		gnome-terminal
+SetEnv	fvwm_term		mrxvt
+#SetEnv	fvwm_mail		"evolution --no-splash --sm-disable --disable-crash-dialog"
+SetEnv	fvwm_mail		"balsa"
+SetEnv	fvwm_calc		"gcalctool --sm-disable --disable-crash-dialog"
+# Composition rules
+# SetEnv	fvwm_composite		"xcompmgr -cCfF -D 3 -I 0.01 -O 0.05 -o 0.6 -l -9 -t -9 -r 8"
+SetEnv	fvwm_composite		"xcompmgr -c"
+
+#####
+# Set the image path
+###########
+ImagePath $[fvwm_icon]:$[fvwm_icon];.png:+
+
+#####
+# Virtual Desktops
+###########
+DesktopName	0 Main
+DesktopName	1 Work
+DesktopName	2 Games
+DesktopName	3 Internet
+# Only one page for each desktop
+DeskTopSize	1x1
+EdgeScroll	100 100
+EdgeResistance	100 100
+EdgeThickness	2
+# Avoid full screen window to overlap a task bar (for instance)
+EwmhBaseStruts	0 0 0 0
+IgnoreModifiers	L25
+SnapAttraction	5
+
+#####
+# Mouse and Focus Behavior
+###########
+ClickTime	350
+MoveThreshold	3
+Style	*	SloppyFocus, MouseFocusClickRaises
+
+#####
+# Global Styles and options
+###########
+Style	*	TileCascadePlacement, GrabFocusOff
+Style	*	NoPPosition, ResizeOpaque
+OpaqueMoveSize	unlimited
+# This puts the resize/geometry super-mini-window-things in the middle
+#  of the screen rather than the upper-left corner.
+Emulate		Mwm
+# Useful for placement manipulation (set it under comment)
+HideGeometryWindow Always
+SnapAttraction 	5 SameType Screen
+SnapGrid	3 3
+XorValue	55555
+Style	*	DecorateTransient, DontRaiseTransient
+Style	*	DontLowerTransient, StackTransientParent
+Style	*	GrabFocusTransientOff
+Style	*	WindowShadeSteps 50, WindowShadeScrolls
+SetAnimation  	10  -.01 0 .01 .03 .08 .18 .3 .45 .6 .75 .85 .90 .94 .97 .99 1.0
+Style	*	MwmDecor, SlipperyIcon, MWMButtons
+Style	*	HintOverride, MWMFunctions, MWMBorder
+BugOpts 	FlickeringMoveWorkaround On
+ColormapFocus	FollowsFocus
+
+#####
+# Icon box
+###########
+# (SreenWidth(1280) - LeftBorder(20) - RightBorder(20))
+# (ScreenHeight(800) - TopBarHeightAndBorder(60) - DockHeightAndBorder(90))
+Style	*	IconBox 1240x650+20+60, IconFill top left, SloppyFocus
+Style	*	MouseFocusClickRaises, Padding 170 20
+Style	*	NoIconTitle
+
+#####
+# Window Styles
+###########
+Read	$./deco/$[fvwm_theme].fvwm2rc
+
+#####
+# Program Styles
+###########
+Read	$./conf/style.fvwm2rc
+
+#####
+# Menus
+###########
+# Menu definition
+Read	$[FVWM_USERDIR]/conf/menu.fvwm2rc
+
+#####
+# Startup and exit functions
+###########
+AddtoFunc InitFunction
++ I exec exec	Esetroot -scale $[fvwm_wallpaper_dir]/.current
++ I exec exec	$[fvwm_script]/weather_log.plx $./img/weather/$[fvwm_weather]/ > /dev/shm/weather.log
+#+ I exec exec	$[fvwm_composite]
+#+ I exec exec	/usr/libexec/gnome-settings-daemon
+
+AddToFunc StartFunction
++ I module	FvwmEvent
++ I test (Restart) all (iconic)\
+    test (f /dev/shm/icon.tmp.$[w.id].png)\
+    windowstyle iconoverride, icon /dev/shm/icon.tmp.$[w.id].png
++ I module      FvwmButtons FvwmDock
++ I module	FvwmButtons FvwmTopBar
++ I module	FvwmAnimate
++ I module	FvwmBanner
++ I test (!Restart) exec exec 3ddeskd
+
+AddToFunc ExitFunction
++ I test (!torestart) exec exec rm -f /dev/shm/icon.tmp.*
++ I test (!torestart) exec exec killall -9 xcompmgr
++ I test (!torestart) exec exec 3ddesk --stop
+
+#####
+# FvwmIconMan
+###########
+Read	$./conf/iconman.fvwm2rc
+
+#####
+# FvwmEvent
+###########
+DestroyModuleConfig FvwmEvent: *
+*FvwmEvent: deiconify DeThumbnail 
+
+#####
+# Thumbnails function
+###########
+SetEnv fvwm_icon_size	150
+DestroyFunc	Thumbnail
+AddToFunc	Thumbnail
++ I Raise
++ I SetEnv Icon-$[w.id] $[w.IconFile]
++ I ThisWindow (!Shaded, Iconifiable, !Iconic) PipeRead \
+    "xwd -silent -id $[w.id] | convert -scale $[fvwm_icon_size] -quality 0 \
+    xwd:- png:/dev/shm/icon.tmp.$[w.id].png; \
+    composite -geometry +5+5 $[w.IconFile] \
+    /dev/shm/icon.tmp.$[w.id].png /dev/shm/icon.tmp.$[w.id].png; \
+    echo WindowStyle IconOverride, Icon /dev/shm/icon.tmp.$[w.id].png"
++ I Iconify
+
+DestroyFunc	DeThumbnail
+AddToFunc	DeThumbnail
++ I Exec exec ogg123 -d esd $[fvwm_wave_path]/Popup.ogg
++ I PipeRead "echo WindowStyle IconOverride, Icon \\$\\[Icon-$[w.id]\\]"
++ I UnsetEnv Icon-$[w.id]
++ I Exec exec "rm -f /dev/shm/icon.tmp.$[w.id].png"
+
+#####
+# Music browse function (for menu)
+###########
+DestroyFunc	MusicBrowse
+AddToFunc	MusicBrowse
++ I DestroyMenu	recreate MenuMusic
++ I AddToMenu	MenuMusic
++ I PipeRead '$[fvwm_script]/music.sh'
+
+#####
+# Help function (for menu)
+###########
+DestroyFunc	FvwmViewManPage
+AddToFunc  	FvwmViewManPage
++ I exec exec mrxvt -g 80x40 -ht -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+
+#####
+# WallpaperBrowser function
+##################
+DestroyFunc	WallpaperBrowser
+AddToFunc	WallpaperBrowser
++ I DestroyMenu recreate MenuWallpaper
++ I AddToMenu	MenuWallpaper
++ I PipeRead '$[fvwm_script]/wallpaper.sh $[fvwm_wallpaper_dir]'
+
+#####
+# Weather function
+##################
+DestroyFunc	WeatherCheck
+AddToFunc	WeatherCheck
++ I DestroyMenu recreate MenuWeather
++ I AddToMenu MenuWeather
++ I PipeRead '$[fvwm_script]/weather_menu.plx'
+
+#####
+# FvwmAnimate
+###########
+Read	$./conf/animate.fvwm2rc
+
+#####
+# FvwmIdent
+# Identification window
+###########
+Read	$./conf/ident.fvwm2rc
+
+#####
+# FvwmBanner
+# Splash screen at window manager startup
+###########
+*FvwmBanner:	NoDecor
+*FvwmBanner:	Pixmap	$[fvwm_theme_img]/splash.png
+*FvwmBanner:	Timeout	10
+
+#####
+# FvwmPager
+###########
+Read	$./conf/pager.fvwm2rc
+
+#####
+# FvwmTopBar (FvwmButtons)
+###########
+Read	$./conf/topbar.fvwm2rc
+
+#####
+# FvwmDock (FvwmButtons)
+###########
+Read	$./conf/dock.fvwm2rc
+
+#####
+# Mouse cursor style
+###########
+# Change style to left_ptr and fleur (missing cursors in my cursors theme)
+CursorStyle root	left_ptr
+CursorStyle default	left_ptr 
+CursorStyle position	left_ptr
+CursorStyle sys		left_ptr 
+CursorStyle menu	left_ptr
+CursorStyle title	left_ptr
+CursorStyle resize	fleur
+CursorStyle stroke	cross
+CursorStyle select	draped_box
+
+#####
+# Key and mouse bindings
+###########
+# Mouse Bindings
+# Root Menus
+Mouse	1	R	A	StrokeFunc DrawMotion FeedBack StrokeWidth 1
+Mouse	2	R	A	WindowList NoCurrentDeskTitle
+Mouse	3	R	A	Menu MenuFvwmRoot
+Mouse	6	R	A	exec exec $[fvwm_goleft]
+Mouse	7	R	A	exec exec $[fvwm_goright]
+# Titlebar Buttons
+Mouse	1	1	A   	Menu MenuFvwmWindowOps
+Mouse	2	1	A   	Menu MenuFvwmWindowOps
+Mouse	3	1	A	Menu MenuFvwmwindowOps
+Mouse	1	6	A	Thumbnail
+Mouse	1	4	A	Maximize
+Mouse	1	2	A	Close
+# Window, Frame, Side, Others
+Mouse	1	FS	A	ResizeFunc
+Mouse	2	W	C	ResizeFunc
+Mouse	3	W	C	MoveFunc
+Mouse	1	W	M	MoveFunc
+Mouse	3	W	M	ResizeFunc
+Mouse	3	TSIF	A	RaiseLower
+Mouse	3	T	A	Menu MenuFvwmWindowOps
+AddToFunc ResizeFunc "M" Resize
+AddToFunc MoveFunc   "M" Move
+# Icons Binding
+Mouse	1	I	A	Iconify
+Mouse	2	I	A	Move
+# Wheel Toggle Shade
+Mouse	4	T	N	WindowShade	True
+Mouse	5	T	N	WindowShade	False
+Mouse	4	TW	M	WindowShade	True
+Mouse	5	TW	M	WindowShade	False
+# Mouse Gesture Binding
+Mouse	1	R	A	StrokeFunc
+Mouse	1	W	CM	StrokeFunc
+# Mouse gestures for pager
+Stroke N456	0 	R N	exec exec $[fvwm_goleft]
+Stroke N654	0 	R N	exec exec $[fvwm_goright]
+
+# Keyboard Bindings
+Key	Escape	A	M	SendToModule FvwmProxy ShowToggle
+Key	Tab	A	M	Windowlist Root c c NoCurrentDeskTitle
+Key	H	A	4	Next (CirculateHit, HiddenConsole) HiddenConsoleKeyBinding
+# Windows Key Root Menu
+Key	Super_L	A	A	Menu MenuFvwmRoot
+Key	Super_R	A	A	WindowList NoCurrentDeskTitle
+# MenuFvwmWindowOps
+# Traditional Bindings
+Key	F4	A	M	Pick Close
+Key	X	A	M	Pick Destroy
+# Desk access
+Key	F1	A	C	GoToDesk 0 0
+Key	F2	A	C	GoToDesk 0 1
+Key	F3	A	C	GoToDesk 0 2
+Key	F4	A	C	GoToDesk 0 3
+
+# Fvwm Special Bindings
+Key	F3	A	M	Module FvwmConsole -terminal xterm
+Key	I	A	M	Pick Module FvwmIdent
+Key	R	A	CM	Restart
+Key	F4	A	CM	Quit
+# Applications Bindings
+Key	F1	A	M	exec exec $[fvwm_term]
+# Pager Bindings
+Key	Up	A	CM	GoToDesk +1 0 3
+Key	Down	A	CM	GoToDesk -1 0 3
+Key	Right	A	CM	exec exec $[fvwm_goright]
+Key	Left	A	CM	exec exec $[fvwm_goleft]

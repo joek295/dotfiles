@@ -1,0 +1,54 @@
+[begin] (Fluxbox)
+
+   [submenu] (File Management) {}
+      [exec] (File-Roller) {/usr/bin/file-roller} <>
+      [exec] (Gentoo) {/usr/bin/gentoo} <>
+      [exec] (Thunar) {/usr/bin/thunar} <>
+   [end]
+   [submenu] (Graphics) {}
+      [exec] (The GIMP) {/usr/bin/gimp} <>
+      [exec] (X Window Snapshot) {xwd | xwud} <>
+   [end]
+   [submenu] (Media) {}
+      [exec] (aumix) { x-terminal-emulator -T "aumix" -e /usr/bin/aumix} <>
+      [exec] (Xfce Mixer) {/usr/bin/xfce4-mixer} <>
+      [exec] (VLC media player) {/usr/bin/qvlc} <>
+   [end]
+   [submenu] (Network) {}
+      [exec] (Iceweasel) {iceweasel} <>
+      [exec] (Transmission BitTorrent Client (GTK\)) {/usr/bin/transmission} <>
+   [end]
+   [submenu] (System) {}
+       [exec] (Aptitude (terminal\)) { x-terminal-emulator -T "Aptitude (terminal)" -e /usr/bin/aptitude-curses} <>
+       [exec] (GDM flexiserver) {gdmflexiserver} <>
+       [exec] (GNOME partition editor) {su-to-root -X -c /usr/sbin/gparted} <>
+       [exec] (QtConfig) {/usr/bin/qtconfig-qt4} <>
+       [exec] (Synaptic Package Manager) {/usr/bin/su-to-root -X -c /usr/sbin/synaptic} <>
+       [exec] (Xkill) {xkill} <>
+       [exec] (Xrefresh) {xrefresh} <>
+   [end]
+   [submenu] (Terminal Emulators) {}
+      [exec] (Xfce Terminal) {/usr/bin/xfce4-terminal} <>
+      [exec] (Xfterm4) { x-terminal-emulator -T "Xfterm4" -e xfterm4} <>
+      [exec] (X-Terminal as root (GKsu\)) {/usr/bin/gksu -u root /usr/bin/x-terminal-emulator} <>
+   [end]
+   [submenu] (Viewers) {}
+      [exec] (Evince) {/usr/bin/evince} <>
+   [end]
+   [separator] () {} 
+   [config] (Configuration)
+   [submenu] (Styles) {}
+      [stylesdir] (/usr/share/fluxbox/styles)
+      [stylesdir] (~/.fluxbox/styles)
+   [end]
+   [submenu] (Wallpapers) {}
+      [wallpapers] (~/images/wallpapers) {}
+      [wallpapers] (~/.fluxbox/backgrounds) {}
+   [end]
+   [workspaces] (Workspaces)
+   [separator] () {} 
+   [reconfig] (Reconfigure)
+   [restart] (Restart)
+   [exit] (Exit)
+
+[end]

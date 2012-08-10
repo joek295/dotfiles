@@ -1,0 +1,71 @@
+# Mouse 1-5: leftclick, middleclick, rightclick, wheelup, wheeldown
+# Mod1: alt; Mod4: meta
+
+# Desktop
+OnDesktop Mouse1 :HideMenus
+OnDesktop Mouse2 :WorkspaceMenu
+OnDesktop Mouse3 :RootMenu
+OnDesktop Mouse4 :PrevWorkspace
+OnDesktop Mouse5 :NextWorkspace
+OnRightGrip Move1 :StartResizing bottomright
+OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindowBorder Move1 :StartMoving
+OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnLeftGrip Move1 :StartResizing bottomleft
+OnWindow Mod1 Mouse2 :Lower
+Mod1 space :RootMenu
+
+# alt-tab
+Mod1 Tab :NextWindow {groups} (workspace=[current])
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
+Mod1 k :NextTab
+Mod1 j :PrevTab
+Mod4 1 :Tab 1
+Mod4 2 :Tab 2
+Mod4 3 :Tab 3
+Mod4 4 :Tab 4
+Mod4 5 :Tab 5
+Mod4 6 :Tab 6
+Mod4 7 :Tab 7
+Mod4 8 :Tab 8
+Mod4 9 :Tab 9
+
+# quicklaunch
+Mod4 t :Exec x-terminal-emulator
+Mod1 Return :Exec xfce4-terminal
+Mod4 f :Exec thunar
+Mod4 w :Exec iceweasel
+Mod4 e :Exec gedit
+Mod1 p :Exec /home/joe/.config/dmenu/dmenu-bind.sh
+Mod1 F2 :Exec fbrun
+Mod4 v :Exec gvim
+
+# current window commands
+Shift Mod1 c :Close
+Shift Mod1 x :Kill
+Mod1 m :Minimize
+Mod1 u :Deiconify last
+Mod1 n :Maximize
+Mod1 f :Fullscreen
+Menu :WindowMenu
+Mod1 semicolon :ArrangeWindowsVertical
+Mod1 minus :ArrangeWindowsHorizontal
+
+# fluxbox
+Shift Mod1 q :Exit
+Shift Mod1 r :Restart
+Control Mod1 r :Reconfigure
+
+# Workspaces
+Mod1 Left :PrevWorkspace
+Mod1 Right :NextWorkspace
+Shift Mod1 Left :SendToPrevWorkspace
+Shift Mod1 Right :SendToNextWorkspace
+Mod1 1 :Workspace 1
+Mod1 2 :Workspace 2
+Mod1 3 :Workspace 3
+Mod1 4 :Workspace 4
+Shift Mod1 1 :TakeToWorkspace 1
+Shift Mod1 2 :TakeToWorkspace 2
+Shift Mod1 3 :TakeToWorkspace 3
+Shift Mod1 4 :TakeToWorkspace 4

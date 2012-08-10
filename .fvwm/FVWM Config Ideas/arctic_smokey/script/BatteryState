@@ -1,0 +1,71 @@
+WindowTitle		{BatteryState}
+WindowSize 		36 40
+WindowPosition		0 0
+
+Init
+Begin
+	Set $battery4 = (GetScriptArgument 1)
+	Set $battery3 = (GetScriptArgument 2)
+	Set $battery2 = (GetScriptArgument 3)
+	Set $battery1 = (GetScriptArgument 4)
+	Set $battery0 = (GetScriptArgument 5)
+	ChangeIcon 1 $battery0
+	Set $battery_old_val = 100
+	Set $battery_val = 0
+End
+
+PeriodicTasks
+Begin
+    If (RemainderOfDiv (GetTime) 30)==0 Then
+    Begin
+	Set $battery_val = (GetOutput {exec $fvwm_script/bat.sh} 1 -1)
+	If $battery_val == 100 Then
+	Begin
+	    If $battery_old_val == 99 Then
+		Do {exec echo "The battery is charged. Now, you can unplug me" | esddsp festival --tts -b}
+	End
+	Set $battery_old_val = $battery_val
+	If $battery_val > 80 Then
+	    ChangeIcon 1 $battery4
+	Else
+	Begin
+	    If $battery_val > 60 Then
+		ChangeIcon 1 $battery3
+	    Else
+	    Begin
+		If $battery_val > 40 Then
+		    ChangeIcon 1 $battery2
+		Else
+		Begin
+		    If $battery_val > 20 Then
+			ChangeIcon 1 $battery1
+		    Else
+		    Begin		    
+			ChangeIcon 1 $battery0
+			If $battery_old_val == 6 Then
+			Begin
+			    If $battery_val == 5 Then
+				Do {exec echo "The battery is almost empty. Please, plug me in." | esddsp festival --tts -b}
+			End
+		    End
+		End
+	    End
+	End
+    End
+End
+
+Widget 			1
+Property
+    Type		ItemDraw
+    Size		36 40
+    Position		0 0
+    Colorset		70
+    Flags 		NoFocus NoReliefString
+Main
+Case message of
+
+    SingleClic:
+    Begin
+	Do {exec $fvwm_script/bat.sh speak | esddsp festival --tts -b}
+    End
+End

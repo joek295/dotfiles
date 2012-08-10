@@ -1,0 +1,45 @@
+WindowTitle		{WeatherIconAndTemp}
+WindowSize 		64 64
+WindowPosition		0 0
+
+Init
+Begin
+    Set $weather_icon = (GetScriptArgument 1)
+    ChangeIcon 1 $weather_icon
+    Set $check = 1
+End
+
+PeriodicTasks
+Begin
+    If $check==1 Then
+    Begin
+	If (RemainderOfDiv (GetTime) 60)==0 Then
+	Begin
+	    Set $weather_icon = (GetOutput { exec cat /dev/shm/weather.log } 1 -1)
+	    Set $weather_title = (GetOutput { exec cat /dev/shm/weather.log } 2 -1)
+	    ChangeIcon 1 $weather_icon
+	    ChangeTitle 2 $weather_title
+	    Set $check = 0
+	End
+    End
+End
+
+Widget 			1
+Property
+    Type		ItemDraw
+    Size		64 48
+    Position		0 0
+    Colorset 		53
+    Flags 		NoFocus NoReliefString Center
+End
+
+Widget 			2
+Property
+    Title		{?? ?}
+    Type		ItemDraw
+    Size 		64 16
+    Position		0 48
+    Colorset 		54
+    Font 		"Shadow=1 C:xft:Blippo:Bold:pixelsize=14"
+    Flags 		NoFocus NoReliefString Center
+End

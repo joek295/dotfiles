@@ -1,0 +1,40 @@
+WindowTitle	{TimeAndDateNormal}
+WindowSize	60 32
+Colorset	30
+
+Init
+Begin
+	Set $time = (GetOutput {date "+%H:%M"} 1 -1)
+	Set $date = (GetOutput {date "+%a %e %b"} 1 -1)
+	ChangeTitle 1 $time
+	ChangeTitle 2 $date
+End
+
+PeriodicTasks
+Begin 
+	If (RemainderOfDiv (GetTime) 60)==0 Then
+	Begin
+		Set $time = (GetOutput {date "+%H:%M"} 1 -1)
+		Set $date = (GetOutput {date "+%a %e %b"} 1 -1)
+		ChangeTitle 1 $time
+		ChangeTitle 2 $date
+	End
+End
+
+Widget			1
+Property
+	Type		ItemDraw
+	Size		60 21	
+	Position	0 0
+	Font		"Shadow=1 1 se:xft:Blippo:Bold:pixelsize=16"
+	Flags		NoFocus NoReliefString
+End
+
+Widget			2
+Property
+	Type		ItemDraw
+	Size		60 11	
+	Position	0 21
+	Font		"shadow=1 1 se:xft:Blippo:Bold:pixelsize=11"
+	Flags		NoFocus NoReliefString
+End

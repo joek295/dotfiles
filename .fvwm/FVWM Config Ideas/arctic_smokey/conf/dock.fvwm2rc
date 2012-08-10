@@ -1,0 +1,56 @@
+Style FvwmDock	NoTitle, StaysOnBottom, Sticky, WindowListSkip, \
+		CirculateSkipIcon, CirculateSkip, HandleWidth 0, BorderWidth 0, \
+		NeverFocus, Layer 1
+
+# This size corresponds to: (ScreenWidth(1280) - DockWidth(779)) / 2
+SetEnv fvwm_dock_x 250
+		
+DestroyModuleConfig FvwmDock: *
+*FvwmDock:	BoxSize		fixed
+*FvwmDock:	Colorset	50
+*FvwmDock:	Rows		7
+*FvwmDock:	Columns		60
+*FvwmDock:	Geometry	779x75+$[fvwm_dock_x]-5
+*FvwmDock:	Padding		0 0
+*FvwmDock:	Frame		0
+*FvwmDock:	(5x7+1+0, ActionOnPress, \
+		Icon		$[FVWM_USERDIR]/img/icon/desk_64.png, \
+		ActiveIcon	$[FVWM_USERDIR]/img/icon/desk_48.png, \
+		Action(Mouse 1)	`exec exec $[fvwm_file]`, \
+		Action(Mouse 2)	`exec exec $[fvwm_file] -d=/`, \
+		Action(Mouse 3)	`exec exec $[fvwm_file] -d=/mnt`
+*FvwmDock:	(5x7+7+0, ActionOnPress, \
+		Icon		$[FVWM_USERDIR]/img/icon/term_64.png, \
+		ActiveIcon	$[FVWM_USERDIR]/img/icon/term_48.png, \
+		Action(Mouse 1)	`exec exec $[fvwm_term]`
+		Action(Mouse 2)	`exec exec urxvt`
+		Action(Mouse 3)	`exec exec Eterm --borderless --buttonbar 0 --trans --shade 50 --scrollbar false`
+*FvwmDock:	(5x7+13+0, ActionOnPress, \
+		Icon		$[FVWM_USERDIR]/img/icon/world_64.png, \
+		ActiveIcon	$[FVWM_USERDIR]/img/icon/world_48.png, \
+		Action(Mouse 1)	`exec exec $[fvwm_browser]`, \
+		Action(Mouse 2)	`Popup MenuInternet Rectangle +$left+$top 0 -100m`, \
+		Action(Mouse 3)	`exec exec $[fvwm_mail]`)
+*FvwmDock:	(5x7+19+0, ActionOnPress, \
+		Icon		$[FVWM_USERDIR]/img/icon/vlc_64.png, \
+		ActiveIcon	$[FVWM_USERDIR]/img/icon/vlc_48.png, \
+		Action(Mouse 1) `exec exec vlc`, \
+		Action(Mouse 2) `Popup MenuMultimedia Rectangle +$left+$top 0 -100m`, \
+		Action(Mouse 3) `exec exec $[fvwm_file] -d=$[HOME]/bt`)
+*FvwmDock:	(20x5+25+1, Swallow "FvwmPager" "FvwmPager 0 3")
+*FvwmDock:	(5x7+45+0, ActionOnPress, \
+		Swallow "MailIconAndCount" `FvwmScript $[fvwm_script]/MailIconAndCount \
+		    $[FVWM_USERDIR]/img/icon/stamp_new.png \
+		    $[FVWM_USERDIR]/img/icon/stamp.png \
+		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png`, \
+		Action(Mouse 1)	`exec exec $[fvwm_mail]`, \
+		Action(Mouse 2)	`exec exec $[fvwm_mail]`, \
+		Action(Mouse 3)	`exec exec $[fvwm_mail]`)
+*FvwmDock:	(5x7+50+0, ActionOnPress, \
+		Swallow "WeatherIconAndTemp" `FvwmScript $[fvwm_script]/WeatherIconAndTemp \
+		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png`, \
+		Action(Mouse 1)	`Popup MenuWeather Rectangle +$left+$top 0 -105m`, \
+		Action(Mouse 2)	`Popup MenuWeather Rectangle +$left+$top 0 -105m`, \
+		Action(Mouse 3)	`Popup MenuWeather Rectangle +$left+$top 0 -105m`)
+*FvwmDock:	(5x5+55+1, ActionOnPress, \
+		Swallow "TimeStyleAndDateNormal" `FvwmScript $[fvwm_script]/TimeStyleAndDateNormal`)

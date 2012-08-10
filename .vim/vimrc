@@ -1,0 +1,136 @@
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" GENERAL OPTIONS
+
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrcset nocompatible
+set mouse=a            " mouse is always available
+set hidden             " hide abandoned buffers
+set noswapfile
+set nobackup
+set nowb
+set wildmenu           " allow tab-completion and stuff
+set showcmd
+set number
+set cursorline
+set cursorcolumn
+set ruler
+set shortmess+=I       "disable welcome message
+set laststatus=2       "always show statusline
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" CODING
+
+syntax on
+" make tabs behave sanely
+set tabstop=2
+set shiftwidth=2
+set expandtab
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+set autoindent
+set copyindent
+set smartindent
+" show matching brackets
+set showmatch
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" SEARCHING
+
+" case insensitive matching
+set ignorecase
+" smart case matching
+set smartcase
+" Search incrementally
+set incsearch
+" Hilight search hits
+set hlsearch
+" pressing \<space> clears the search highlights
+nmap <silent> <leader><space> :nohlsearch<CR>
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" SOFT WORD-WRAP
+" enable soft word-wrap
+set formatoptions=l
+set lbr
+" move by screen lines, not by real lines in both visual and text modes
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" KEYMAPPING
+" toggle paste mode (to paste properly indented text)
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+" use ; to enter command mode
+nnoremap ; :
+"Will allow you to use :w!! to write to a file using sudo if you forgot to
+""sudo vim file" (it will prompt for sudo password when writing)
+cmap w!! %!sudo tee > /dev/null %
+" return inserts line-break at cursor
+nmap <silent> <leader><CR> i<CR><ESC>
+" /o and /O insert newlines without entering insert mode
+nmap <silent> <leader>o o<ESC>
+nmap <silent> <leader>O O<ESC>
+" I can type :help on my own, thanks.
+noremap <F1> <Esc>
+
+" toggle between abs. and rel. line nums function
+function! g:ToggleNuMode()
+	if(&rnu == 1)
+		set nu
+	else
+		set rnu
+	endif
+endfunc
+" F5 toggles between absolute and relative line numbers with vim 7.3 onwards...
+nnoremap <f5> :call g:ToggleNuMode()<cr>
+ 
+" Remove functionality of arrow keys for good habits
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" jj escapes insert mode
+inoremap jj <ESC>
+
+" tab navigation 
+map  <C-Tab> :tabnext <CR>
+imap <C-Tab> <ESC> :tabnext <CR>
+map  <C-S-Tab> :tabprevious <CR>
+imap <C-S-Tab> <ESC> :tabprevious <CR>
+
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" statusline
+
+"define 3 custom highlight groups
+hi User1 ctermbg=green ctermfg=black   guibg=green guifg=black 
+" in TTY, this is difficult to read...
+hi User2 ctermbg=red   ctermfg=darkblue  guibg=red   guifg=darkblue
+hi User3 ctermbg=blue  ctermfg=green guibg=blue  guifg=green
+
+"filepath, filetype, modified, permissions, help
+set statusline=
+set statusline+=%1*
+set statusline+=%f
+set statusline+=%*
+set statusline+=\ %y\ %m%r%h
+" statusline: separation between left and right aligned items
+set statusline+=%=
+" statusline: line number, column number, percent
+set statusline+=%3*
+set statusline+=[L:\ %l/%L]\ [C:\ %v]
+set statusline+=%2*
+set statusline+=\ [%p%%]

@@ -1,0 +1,82 @@
+echo $fvwm.x
+echo $fvwm_term
+echo $[vp.w]
+SetEnv fvwm_width "$[vp.width] - 20"
+echo $[fvwm_width]
+exec exec mrxvt
+pwd
+fvwmscript script/TimeStyleAndDateNormal
+exec script/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript-WidgetDemo
+FvwmScript FvwmScript-WidgetDemo
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/TimeStyleAndDateNormal
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/MailIconAndCount 		    $[FVWM_USERDIR]/img/icon/stamp_new.png 		    $[FVWM_USERDIR]/img/icon/stamp.png 		    $[FVWM_USERDIR]/img/icon/stamp_unknown.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/WeatherIconAndTemp 		    $[FVWM_USERDIR]/img/weather/$[fvwm_weather]/na.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+`FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png)
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png)
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png)
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png)
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png)
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png
+FvwmScript $[fvwm_script]/BatteryState 					$[fvwm_theme_img]/bat4.png 					$[fvwm_theme_img]/bat3.png 					$[fvwm_theme_img]/bat2.png 					$[fvwm_theme_img]/bat1.png 					$[fvwm_theme_img]/bat0.png

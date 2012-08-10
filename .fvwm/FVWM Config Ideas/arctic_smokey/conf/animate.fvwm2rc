@@ -1,0 +1,6 @@
+DestroyModuleConfig FvwmAnimate: *
+*FvwmAnimate:   Effect          Zoom3D
+*FvwmAnimate:   Twist           2
+*FvwmAnimate:   Delay           50
+*FvwmAnimate:   Iterations      50
+*FvwmAnimate:   Width           3

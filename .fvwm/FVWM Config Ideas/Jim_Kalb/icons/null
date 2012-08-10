@@ -1,0 +1,4 @@
+#define null_width 1
+#define null_height 1
+static unsigned char null_bits[] = {
+   0x00};

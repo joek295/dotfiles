@@ -1,0 +1,17 @@
+#Joe's Nethack config
+OPTIONS=pickup_types:$
+OPTIONS=autopickup,autodig
+OPTIONS=!cmdassist
+OPTIONS=color,hilite_pet
+OPTIONS=showexp,showscore,time
+#OPTIONS=nopet
+OPTIONS=menucolors
+MENUCOLOR=" blessed"=green
+MENUCOLOR=" holy"=green
+MENUCOLOR=" cursed"=red
+MENUCOLOR=" unholy"=red
+MENUCOLOR=" (lit)"=yellow
+MENUCOLOR=" \((being worn)\|hands?)\|(in quiver)\)"=&bold
+MENUCOLOR=" blessed .* \((being worn)\|hands?)\|(in quiver)\)"=green&bold
+MENUCOLOR=" cursed .* \((being worn)\|hands?)\)"=orange&underline
+MENUCOLOR=" corpse"=brown

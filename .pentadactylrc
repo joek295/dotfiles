@@ -1,0 +1,14 @@
+:map : ;
+:noremap ; :
+:map w gT
+:map e gt
+:nmap <Leader>a :dialog addons <CR>
+
+:set! browser.startup.page=1
+:set defsearch=duckduckgo
+:set newtab=all
+:set showtabline=multitab
+:set incfind
+:set findcase=smart
+:set noerrorbells
+:set novisualbell

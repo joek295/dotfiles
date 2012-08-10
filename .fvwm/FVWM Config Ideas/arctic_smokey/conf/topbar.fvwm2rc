@@ -1,0 +1,58 @@
+Style FvwmTopBar NoTitle, StaysOnBottom, Sticky, WindowListSkip, \
+		CirculateSkipIcon, CirculateSkip, HandleWidth 0, BorderWidth 0, \
+		NeverFocus, Layer 1
+
+# This size corresponds to: ScreenWidth(1280) - Border(5) - Border(5)
+SetEnv fvwm_topbar_width	    1270
+# This size corresponds to: fvwm_topbar_width - 265
+SetEnv fvwm_topbar_iconman_width    1005
+SetEnv fvwm_topbar_icon_width	    125
+# This end of IconMan position corresponds to: fvwm_topbar_width + fvwm_topbar_icon_width(125)
+SetEnv fvwm_topbar_endim_pos	    1130
+# This battery level position corresponds to: fvwm_topbar_endim_pos + EndIconManWidth(12)
+SetEnv fvwm_topbar_battery_pos	    1142
+# This inter application position 1 corresponds to: fvwm_topbar_battery_pos + VolumeWidth(36)
+SetEnv fvwm_topbar_interap_pos1	    1178
+# This volume level position corresponds to: fvwm_topbar_interap_pos1 + InterApWidth(6)
+SetEnv fvwm_topbar_volume_pos	    1184
+# This inter application position 2 corresponds to: fvwm_topbar_volume_pos + VolumeWidth(36)
+SetEnv fvwm_topbar_interap_pos2	    1220
+# This wifi position corresponds to: fvwm_topbar_interap_pos2 + InterApWidth(6)
+SetEnv fvwm_topbar_wifi_pos	    1226
+# This end of topbar position corresponds to: fvwm_topbar_wifi_pos + WifiWidth(36)
+SetEnv fvwm_topbar_end_pos	    1262
+
+DestroyModuleConfig FvwmTopBar: *
+*FvwmTopBar: BoxSize		fixed
+*FvwmTopBar: Colorset		23
+*FvwmTopBar: Columns		$[fvwm_topbar_width]
+*FvwmTopBar: Rows		40
+*FvwmTopBar: Geometry		$[fvwm_topbar_width]x40+5+5
+*FvwmTopBar: Frame		0
+*FvwmTopBar: Padding		0 0
+*FvwmTopBar: (	$[fvwm_topbar_icon_width]x40+0+0,	Icon $[fvwm_theme_img]/topbar_head.png)
+*FvwmTopBar: (	$[fvwm_topbar_iconman_width]x7+$[fvwm_topbar_icon_width]+0,	Icon $[fvwm_theme_img]/topbar_up.png)
+*FvwmTopBar: (	$[fvwm_topbar_iconman_width]x26+$[fvwm_topbar_icon_width]+7,	Swallow "FvwmIconMan" "FvwmIconMan -g $[fvwm_topbar_iconman_width]x26")
+*FvwmTopBar: (	$[fvwm_topbar_iconman_width]x7+$[fvwm_topbar_icon_width]+33,	Icon $[fvwm_theme_img]/topbar_down.png)
+*FvwmTopBar: (	12x40+$[fvwm_topbar_endim_pos]+0,	Icon $[fvwm_theme_img]/topbar_endim.png)
+*FvwmTopBar: (	36x40+$[fvwm_topbar_battery_pos]+0,	Swallow "BatteryState" `FvwmScript $[fvwm_script]/BatteryState \
+					$[fvwm_theme_img]/bat4.png \
+					$[fvwm_theme_img]/bat3.png \
+					$[fvwm_theme_img]/bat2.png \
+					$[fvwm_theme_img]/bat1.png \
+					$[fvwm_theme_img]/bat0.png )
+*FvwmTopBar: (	6x40+$[fvwm_topbar_interap_pos1]+0,	Icon $[fvwm_theme_img]/topbar_interap.png)
+*FvwmTopBar: (	36x40+$[fvwm_topbar_volume_pos]+0,	Swallow "VolumeLevel" `FvwmScript $[fvwm_script]/VolumeLevel \
+					$[fvwm_theme_img]/volume4.png \
+					$[fvwm_theme_img]/volume3.png \
+					$[fvwm_theme_img]/volume2.png \
+					$[fvwm_theme_img]/volume1.png \
+					$[fvwm_theme_img]/volume0.png )
+*FvwmTopBar: (	6x40+$[fvwm_topbar_interap_pos2]+0,	Icon $[fvwm_theme_img]/topbar_interap.png)
+*FvwmTopBar: (	36x40+$[fvwm_topbar_wifi_pos]+0,	Swallow "WifiSensor" `FvwmScript $[fvwm_script]/WifiSensor \
+					$[fvwm_theme_img]/wifi4.png \
+					$[fvwm_theme_img]/wifi3.png \
+					$[fvwm_theme_img]/wifi2.png \
+					$[fvwm_theme_img]/wifi1.png \
+					$[fvwm_theme_img]/wifi0.png )
+*FvwmTopBar: (	8x40+$[fvwm_topbar_end_pos]+0,	Icon $[fvwm_theme_img]/topbar_tail.png)

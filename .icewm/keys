@@ -1,0 +1,14 @@
+# Valid modifiers are Alt, Ctrl, Shift, Meta, Super and Hyper.
+
+# Launching Applications
+key "Super+t"		x-terminal-emulator
+key "Super+f"		thunar
+key "Super+e"		gvim
+key "Super+w"		iceweasel
+key "Alt+p"  dmenu_customise
+
+# "Multimedia key" bindings for XFree86.
+key "XF86AudioLowerVolume"	aumix -v -5
+key "XF86AudioRaiseVolume"	aumix -v +5
+key "XF86AudioMute"  aumix -v 0
+

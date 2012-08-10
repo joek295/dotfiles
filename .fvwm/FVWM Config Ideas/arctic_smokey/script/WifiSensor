@@ -1,0 +1,82 @@
+WindowTitle		{WifiSensor}
+WindowSize 		36 40
+WindowPosition		0 0
+
+Init
+Begin
+	Set $wifi4 = (GetScriptArgument 1)
+	Set $wifi3 = (GetScriptArgument 2)
+	Set $wifi2 = (GetScriptArgument 3)
+	Set $wifi1 = (GetScriptArgument 4)
+	Set $wifi0 = (GetScriptArgument 5)
+	Set $animate = 0
+	ChangeIcon 1 $wifi4
+#	echo $[`grep wlan0 /proc/net/wireless | awk {'print $3'}` / 25]
+	Set $wifi_animate = 0
+#	Set $wifi_icon=(GetOutput {echo \"$fvwm_theme_img\"/wifi\"$animate\".png} 1 -1)
+#	ChangeIcon 1 $wifi_icon
+End
+
+PeriodicTasks
+Begin
+    If $animate > 0 Then
+    Begin
+	If $wifi_animate == 0 Then
+	Begin
+	    ChangeIcon 1 $wifi0
+	    Set $wifi_animate = 1
+	End
+	Else
+	Begin
+	    If $wifi_animate == 1 Then
+	    Begin
+		ChangeIcon 1 $wifi1
+		Set $wifi_animate = 2
+	    End
+	    Else
+	    Begin
+		If $wifi_animate == 2 Then
+		Begin
+		    ChangeIcon 1 $wifi2
+		    Set $wifi_animate = 3
+		End
+		Else
+		Begin
+		    If $wifi_animate == 3 Then
+		    Begin
+			ChangeIcon 1 $wifi3
+			Set $wifi_animate = 4
+		    End
+		    Else
+		    Begin
+			ChangeIcon 1 $wifi4
+			Set $wifi_animate = 0
+		    End
+		End
+	    End
+	End	    
+    End
+End
+
+Widget 			1
+Property
+    Type		ItemDraw
+    Size		36 40
+    Position		0 0
+    Colorset		70
+    Flags 		NoFocus NoReliefString
+
+Main
+Case message of
+
+    SingleClic:
+    Begin
+	If $animate == 0 Then
+	    Set $animate = 1
+	Else
+	Begin
+	    Set $animate = 0
+	    ChangeIcon 1 $wifi4
+	End
+    End
+End

@@ -1,0 +1,22 @@
+Style FvwmIconMan NoTitle, StaysOnBottom, Sticky, WindowListSkip, \
+		CirculateSkipIcon, CirculateSkip, HandleWidth 0, BorderWidth 0, \
+		NeverFocus, Layer 1
+
+DestroyModuleConfig FvwmIconMan: *
+*FvwmIconMan: NumManagers	1
+*FvwmIconMan: 1 ButtonGeometry	175x26
+*FvwmIconMan: 1 Colorset	12
+*FvwmIconMan: 1 DrawIcons	always
+*FvwmIconMan: 1 FocusAndSelectColorset 18
+*FvwmIconMan: 1 FocusColorset	18
+*FvwmIconMan: 1 FollowFocus	true
+*FvwmIconMan: 1 Font "Shadow=1 C:xft:Blippo:pixelsize=16"
+*FvwmIconMan: 1 Format		"%t"
+*FvwmIconMan: 1 ManagerGeometry 8x1+0+0
+*FvwmIconMan: 1 PlainColorset	17
+*FvwmIconMan: 1 ReliefThickness	0
+*FvwmIconMan: 1 Resolution	page
+*FvwmIconMan: 1 SelectColorset	17
+*FvwmIconMan: 1 Sort		name
+*FvwmIconMan: 1 Title		""
+*FvwmIconMan: 1 UseWinList	true

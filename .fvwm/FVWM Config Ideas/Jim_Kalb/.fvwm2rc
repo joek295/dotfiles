@@ -1,0 +1,750 @@
+#
+# Jim Kalb's fvwm2rc for FVWM 2.5 and Slackware 13.1 Linux
+#
+
+# Features: (Pseudo) transparency, sound effects, randomly chosen
+# background image, extra info cycles through titlebars, invisible
+# terminal window ("micro") in lower left corner, invoke programs
+# by clicking on edge of screen.
+
+#========================================================================#
+#
+# I use a 1x3 desktop with wrapping so each page is adjacent to each
+# other.
+
+DeskTopSize 1x3
+
+#========================================================================#
+#
+# Moving from page to page. Google what these do and adjust to taste.
+
+EdgeThickness 1
+EdgeScroll 100000 100000
+EdgeResistance 300
+Style * EdgeMoveDelay 300
+Style * EdgeMoveResistance 200
+Style * SnapAttraction 3 All Screen
+
+#========================================================================#
+#
+# Icon path
+
+ImagePath	$FVWM_USERDIR/icons
+
+#========================================================================#
+#
+# Colorsets
+#
+
+Colorset 0 fg Gray90, bg Gray20
+Colorset 1 RootTransparent buffer, fg rgb:ee/ee/ee, bg average
+Colorset 2 RootTransparent buffer, fg rgb:ee/ee/ee, bg average, Tint black 20
+Colorset 3 RootTransparent buffer, fg rgb:cc/cc/cc, bg average, Tint black 50
+
+DefaultColorset 0
+
+#========================================================================#
+#
+# Fonts. I have a 2048x1536 display and and so use rather large
+# fonts.
+
+DefaultFont	-*-lucida-medium-r-*-*-20-*-*-*-*-*-*-*
+WindowFont	-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
+
+#========================================================================#
+
+#
+# Menus
+#
+
+MenuStyle * Font -*-lucida-medium-r-*-*-24-*-*-*-*-*-*-* fvwm
+MenuStyle * MenuColorset 2
+
+#========================================================================#
+
+# Set the decoration styles and window options. Order is important!
+# If compatible styles are set for a single window in multiple
+# Style commands, then the styles are ORed together. If conflicting
+# styles are set, the last one specified is used.
+
+# These commands should come before any menus or functions are
+# defined, and before the internal pager is started.
+
+#========================================================================#
+#
+# Default Styles
+#
+
+Style *			HandleWidth 4, SloppyFocus, !Icon, StippledTitle, SmartPlacement, Colorset 3, HilightColorset 2, MiniIcon jwindow.xpm
+Style Audacious         !Title, Sticky, WindowListSkip
+Style Fvwm*	        !Title, BorderWidth 0, HandleWidth 0	
+Style FvwmB*            NeverFocus, Sticky, WindowListSkip
+Style FvwmIconMan       NeverFocus, Sticky, WindowListSkip
+Style FvwmPager         NeverFocus, Sticky, WindowListSkip
+Style MPlayer		!Title
+Style XMMS              !Title, Sticky, WindowListSkip
+Style fvwm-run-dialog	FPGrabFocus, FPReleaseFocus
+Style micro		!Title, !Handles, BorderWidth 0, Sticky, WindowListSkip
+Style urxvt		MiniIcon mini-display.xpm
+Style xbiff		Sticky, !Title, WindowListSkip
+Style xclock		Sticky, WindowListSkip, NeverFocus, !Button 1, !Button 2, !Button 3, !Button 4
+
+#========================================================================#
+#
+# Cursors. I did my own for the root window.
+
+CursorStyle DEFAULT left_ptr
+CursorStyle MENU hand1
+CursorStyle ROOT newxcursor.xpm
+CursorStyle TITLE left_ptr
+
+#========================================================================#
+#
+# Button decorations
+#
+
+ButtonStyle 1 4 50x75@0 25x25@0 75x25@0 50x75@3
+ButtonStyle 3 5 40x40@0 60x40@0 60x60@3 40x60@3 40x40@0
+ButtonStyle 4 4 50x25@0 75x75@3 25x75@3 50x25@0
+
+BorderStyle Active   Colorset 3 -- flat
+BorderStyle Inactive Colorset 2 -- flat
+ButtonStyle All -- UseTitleStyle flat
+TitleStyle AllActive   Colorset 3 -- flat
+TitleStyle AllInactive Colorset 2 -- flat
+
+#========================================================================#
+#
+# Some complex functions
+#
+#
+
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I Iconify off
++ I FlipFocus
++ I Raise
++ I WarpToWindow 50 50
+
+# This one moves and then raises the window if you drag the mouse,
+# only raises the window if you click, and shades or unshades if
+# you double click
+#
+DestroyFunc "Move-or-Raise"
+AddToFunc "Move-or-Raise" M Move
++                         M Raise
++                         C Raise
++                         D WindowShade $0
+
+#
+# This one moves or (de)iconifies:
+#
+DestroyFunc "Move-or-Iconify"
+AddToFunc "Move-or-Iconify" M Move
++                           D Iconify
+
+#
+# This one resizes and then raises the window if you drag the mouse,
+# only raises the window if you click,  or does a RaiseLower if you double 
+# click
+#
+
+DestroyFunc "Resize-or-Raise"
+AddToFunc "Resize-or-Raise" M Resize
++                           M Raise
++                           C Raise
++                           D RaiseLower
+
+# Useful for the icon manager - makes cursor go to window
+DestroyFunc "IconoWarp"
+AddToFunc "IconoWarp"
++ I Iconify False
++ I WarpToWindow 50 50
+ 
+#
+# The point of the next three is to have sound effects when windows
+# are maximized.
+
+DestroyFunc "WinMax"
+AddToFunc "WinMax"
+
++ I Maximize 100 100
++ I Exec exec play -v 0.1 $FVWM_USERDIR/sounds/cash_register.au
+ 
+DestroyFunc "VertWinMax"
+AddToFunc "VertWinMax"
+
++ I Maximize 0 100
++ I Exec exec play -v 0.1 $FVWM_USERDIR/sounds/cash_register.au
+
+DestroyFunc "HalfWinMax"
+AddToFunc "HalfWinMax"
+
++ I Maximize 50 100
++ I Exec exec play -v 0.1 $FVWM_USERDIR/sounds/cash_register.au
+
+# A terminal window that's sticky across desks and has uptime info
+# in the titlebar (see use of Schedule and wmctrl below).
+
+DestroyFunc "SpiffyUrxvt"
+AddToFunc "SpiffyUrxvt"
++ I EwmhBaseStruts 440 180 420 200
++ I Exec exec urxvt -T 'QuickTerm'
++ I Wait urxvt
++ I All ("QuickTerm") StickAcrossDesks
++ I EwmhBaseStruts 0 0 0 0
+
+#
+# Menu directory function. Search directories as part of the menu
+# function
+#
+
+DestroyFunc FuncFvwmMenuDirectory
+AddToFunc FuncFvwmMenuDirectory
++ I PipeRead "fvwm-menu-directory -d '$0' -x 'urxvt -e' -a -l -o 6 --exec-app --exec-title 'zsh -l' --exec-file 'emacsclient -t' -t 'Go to: %d'"
+
+#
+#
+#
+#========================================================================#
+#
+#
+# Now define the menus - defer bindings until later
+#
+
+DestroyMenu Shells
+AddToMenu Shells				Shells Title
++ "SpiffyUrxvt"		        Function SpiffyUrxvt
++ "&urxvt"		        Exec exec urxvt
++ "&xterm"					Exec exec xterm
++ "&rxvt"		        Exec exec rxvt
++ &Terminal                                     Exec exec Terminal
++ ""					    	Nop
++ Root				Exec exec urxvt -e sudo -H zsh
+
+DestroyMenu Modules
+AddToMenu Modules			Modules Title
++ "&Icon Manager"		Module  FvwmIconMan
++ &Talk		Module  FvwmTalk
++ &Identify	Module  FvwmIdent
++ &Rearrange	Module  FvwmRearrange
++ &Scroll        Module  FvwmScroll
++ &Console	Module	FvwmConsole
+
+DestroyMenu Accessories
+AddToMenu Accessories				Accessories Title
++ "&Manual pages" 	        Exec exec xman -pagesize 975x950
++ &nvidia-settings                               Exec exec nvidia-settings
++ "&Reload .Xresources"	Exec exec xrdb -load $HOME/.Xresources
++ &Calculator		        Exec exec xcalc
++ "&Vncviewer"                 Exec exec vncviewer -quality 9
++ &Gkrellm			Exec exec gkrellm
++ gtk-chtheme					Exec exec gtk-chtheme
++ editres					Exec exec editres
++ viewres					Exec exec viewres
++ xfig                                          Exec exec xfig
++ "xev (event tester)"                          Exec exec urxvt -e xev
++ zenmap                                        Exec exec sudo zenmap
++ "&Font viewer (xfontsel)"	Exec exec xfontsel
++ "System &load"			Exec exec xload
++ X&clipboard		Exec exec xclipboard
++ gpa						Exec exec gpa
++ gucharmap					Exec exec gucharmap
++ distccmon-gnome				Exec exec distccmon-gnome
++ xxgdb						Exec exec xxgdb
++ "xbiff"	Exec exec xbiff
++ "xclock"	Exec exec xclock
++ "Screenshot - JPG" Exec exec import screenshot.jpg && display -resize 50% screenshot.jpg
++ "Screenshot - PNG" Exec exec import screenshot.png && display -resize 50% screenshot.png
++ "xscreensaver-demo"	Exec exec xscreensaver-demo
+
+DestroyMenu "Text Applications"
+AddToMenu "Text Applications"	"Text Applications" Title
++ &emacsclient	Exec exec emacsclient -c
++ "emacs daemon"	Exec exec emacs --daemon
++ emacs		Exec exec emacs
++ "&gvim"  Exec exec gvim
++ "&xedit" Exec exec xedit
++ X&pdf		Exec exec xpdf
++ &OpenOffice	Exec exec soffice
+# + &Word          Exec exec  wine "~/.wine/drive_c/Program Files/Microsoft Office/Office/WINWORD.EXE"
++ &xdvi		Exec exec xdvi
++ &Gv		Exec exec gv
+
+DestroyMenu Internet
+AddToMenu Internet		Internet Title
++ &aMule		Exec exec amule
++ "aMule &daemon"		Exec exec amuled
++ "aMule &gui"		Exec exec amulegui
++ transmission		Exec exec transmission
++ transmission-daemon   Exec exec transmission-daemon -g ~/.config/transmission
++ "Google &Earth"                Exec exec googleearth
++ &thunderbird	Exec exec thunderbird
++ g&ftp		Exec exec gftp
++ &Pan		Exec exec pan
++ pidgin		Exec exec pidgin
++ &xchat		Exec exec xchat
++ "x&nmap" Exec exec xnmap
++ "n&mapfe"     Exec exec nmapfe
++ "x&3270"	Exec exec x3270
++ "&wpa_gui"	Exec exec wpa_gui
+
+DestroyMenu "File Browsers"
+AddToMenu "File Browsers"	"File Browsers" Title
++ &Thunar                        Exec exec Thunar
++ &Geeqie			 Exec exec geeqie
++ MissingSubmenuFunction	FuncFvwmMenuDirectory
++ "&Projects Directory"	Popup ~/projects
++ &Filesystem			Popup /
+
+DestroyMenu "Net Browsers"
+AddToMenu "Net Browsers"	"Net Browsers" Title
++ &Firefox	Exec exec firefox
++ &Seamonkey	Exec exec seamonkey
+
+DestroyMenu AudioVisual
+AddToMenu AudioVisual		AudioVisual Title
++ &Gmplayer	Exec exec gmplayer
++ &Xine		Exec exec xine
++ G&xine		Exec exec gxine
++ &Audacious		Exec exec audacious
++ &Xmms		Exec exec xmms
++ "a&umix"			Exec exec aumix
++ G&IMP	Exec exec gimp
++ X&v		Exec exec xv
++ X&fig		Exec exec xfig
++ X&paint	Exec exec xpaint
++ &Bitmap			Exec exec bitmap
++ G&nuplot	Exec exec urxvt -e gnuplot
+
+DestroyMenu Amusements
+AddToMenu Amusements		Amusements Title
++ "&Magnifying glass" 	Exec exec xmag
++ &wmagnify		Exec exec wmagnify
++ X&eyes		Exec exec xeyes
++ X&fractint	Exec exec urxvt -fn 6x10 -g 76x24+0+495 -e xfractint -onroot -fixcolors 256
++ X&logo		Exec exec xlogo
++ X&roach	Exec exec xroach
++ X&snow	Exec exec xsnow
++ "S&top Xsnow"	Exec exec killall xsnow
++ &eboard			Exec exec eboard
++ &xboard			Exec exec xboard
++ xmaze		Exec exec xmaze
++ spider			Exec exec spider
++ xlander	Exec exec xlander
++ xneko				Exec exec xneko
++ ""				Nop
++ adventure			Exec exec urxvt -e adventure
++ arithmetic			Exec exec urxvt -e arithmetic
++ atc				Exec exec urxvt -e atc
++ backgammon			Exec exec urxvt -e backgammon
++ banner			Exec exec urxvt -e banner
++ battlestar			Exec exec urxvt -e battlestar
++ bcd				Exec exec urxvt -e bcd
++ caesar			Exec exec urxvt -e caesar
++ canfield			Exec exec urxvt -e canfield
++ cfscores			Exec exec urxvt -e cfscores
++ countmail			Exec exec urxvt -e countmail
++ cribbage			Exec exec urxvt -e cribbage
++ factor			Exec exec urxvt -e factor
++ fish				Exec exec urxvt -e fish
++ gomoku			Exec exec urxvt -e gomoku
++ hangman			Exec exec urxvt -e hangman
++ hunt				Exec exec urxvt -e hunt
++ mille				Exec exec urxvt -e mille
++ monop				Exec exec urxvt -e monop
++ morse				Exec exec urxvt -e morse
++ number			Exec exec urxvt -e number
++ phantasia			Exec exec urxvt -e phantasia
++ pig				Exec exec urxvt -e pig
++ pom				Exec exec urxvt -e pom
++ ppt				Exec exec urxvt -e ppt
++ primes			Exec exec urxvt -e primes
++ quiz				Exec exec urxvt -e quiz
++ rain				Exec exec urxvt -e rain
++ random			Exec exec urxvt -e random
++ robots			Exec exec urxvt -e robots
++ rot13				Exec exec urxvt -e rot13
++ sail				Exec exec urxvt -e sail
++ snake				Exec exec urxvt -e snake
++ snscore			Exec exec urxvt -e snscore
++ teachgammon			Exec exec urxvt -e teachgammon
++ trek				Exec exec urxvt -e trek
++ wargames			Exec exec urxvt -e wargames
++ worm				Exec exec urxvt -e worm
++ worms				Exec exec urxvt -e worms
++ wump				Exec exec urxvt -e wump
+
+#
+# Quit or restart, or switch to another WM.
+#
+
+DestroyMenu WMs
+AddToMenu WMs				"Other WMs"	Title
++ &Windowmaker				Restart /usr/bin/wmaker
++ &Fluxbox				Restart /usr/bin/fluxbox
++ &Twm					Restart /usr/bin/twm
++ &Mwm					Restart /usr/bin/mwm
++ &Blackbox				Restart /usr/bin/blackbox
++ &Xfce					Restart startxfce4
++ Xf&wm4					Restart xfwm4
+
+DestroyMenu login
+AddToMenu login				"Login to..."	Title
++ &Freeshell				Exec exec urxvt -T Freeshell -e slogin jkalb@freeshell.org
++ &Nyx					Exec exec urxvt -T Nyx -e slogin jkalb@nyx1.nyx.net
+
+#
+# Invoked as a submenu
+#
+DestroyMenu "Move to..."
+AddToMenu "Move to..."		"Move to..."	Title
++ "&Top Page"                    MovetoPage 0 0
++ "&Middle Page"                 MovetoPage 0 1
++ "&Bottom Page"                 MovetoPage 0 2
++ "&Lower Desk"                  MovetoDesk -1
++ "&Higher Desk"                 MovetoDesk +1
+#
+# This menu will start some common utilities and applications
+#
+DestroyMenu Utilities
+AddToMenu Utilities                     Utilities Title
++ "Run"		Exec exec $FVWM_USERDIR/run.sh
++ &Shells		Popup Shells
++ &Accessories		Popup Accessories
++ "&File Browsers"	Popup "File Browsers"
++ "&Net Browsers"	Popup "Net Browsers"
++ "&Text Applications"	Popup "Text Applications"
++ A&udioVisual         Popup AudioVisual
++ &Internet		Popup Internet
+# + "KDE Menu"		Popup xdg_menu
++ &Modules		Popup Modules
++ A&musements		Popup Amusements
++ ""					Nop
++ "&Go to Desk"                         FvwmForm FvwmForm-GoDesk
++ ""					Nop
++ "&Other WMs"				Popup WMs
++ "&Login to ..."			Popup login
++ ""					Nop
++ &Restart		Restart
++ &Lock			Exec exec xlock -nice 19 -mode random
++ &Quit        	Quit
+
+#
+# This defines the most common window operations
+#
+DestroyMenu "Window Ops"
+AddToMenu "Window Ops"		"Window Ops"	Title
++ &Close	Close
++ &Delete	Delete
++ &Kill		Destroy
++ &StickAcrossDesks		StickAcrossDesks
++ Sc&roll	                Module  FvwmScroll
++ ""                            Nop
++ &Move		Function Move-or-Raise
++ "M&ove to Desk" FvwmForm FvwmForm-MoveDesk
++ &Resize	Function Resize-or-Raise
++ &DemiScreen	Function HalfWinMax
++ R&aise	Raise
++ &Lower	Lower
++ (De)&Iconify			Iconify
++ (Un)S&tick			Stick
++ ""                            Nop
++ "&Refresh Screen" Refresh
+
+#
+# A minimal version of "Window Ops", good for binding to titlebar
+#
+DestroyMenu Window-Ops2
+AddToMenu Window-Ops2
++ &Close	Close
++ &Kill         Destroy
++ &StickAcrossDesks		StickAcrossDesks
++ &Scroll	Module  FvwmScroll
++ &DemiScreen   Function HalfWinMax
++ "&Move to..." Popup "Move to..."
+
+#========================================================================#
+
+#
+# Mouse bindings
+#
+
+# First, for the mouse in the root window
+# Button 1 gives the Utilities menu
+# Button 2 gives the Window Ops menu
+# Button 3 gives the WindowList (like TwmWindows)
+# I use the AnyModifier (A) option for the modifier field, so you
+# can hold down any shift-control-whatever combination you want.
+
+#     Button	Context Modifi 	Function
+Mouse 1		R   	A       Menu Utilities Nop
+Mouse 2		R    	A       Menu "Window Ops" Nop
+Mouse 3         R       A       WindowList
+
+# Now the title bar buttons. Note the use of "Mouse 0" for
+# AnyButton.
+
+#     Button	Context Modif 	Function
+Mouse 0 	1       A       Iconify
+Mouse 0 	2       A       WinMax
+Mouse 0		3	A	Delete
+Mouse 0 	4       A       VertWinMax
+
+# Now the rest of the frame
+# Here I invoke my complex functions for Move-or-lower, Move-or-raise,
+# and Resize-or-Raise. 
+#
+# Button 1 in the corner pieces, with any modifiers, gives resize or raise
+Mouse 1		F	A	Function Resize-or-Raise
+
+# Button 1 in the title, sides, or icon, w/ any modifiers, gives move or raise
+Mouse 1		TS	A	Function Move-or-Raise
+
+# Button 1 in an icon gives move for a drag, de-iconify for a double-click,
+# nothing for a single click
+# Button 2 in an icon, w/ any modifiers, gives de-iconify
+Mouse 1		I	A	Function Move-or-Iconify
+Mouse 2		I	A	Iconify
+
+# Button 2 in the corners, sides, or title-bar gives the window ops menu
+Mouse 2		FST	A	Popup Window-Ops2 
+
+# Button 3 anywhere in the decoration (except the title-bar buttons)
+# does a raise-lower
+Mouse 3		TSIF	A	RaiseLower
+
+#========================================================================#
+
+# Now some keyboard shortcuts. "C" is control, "M" is meta (alt or
+# esc), "S" is shift, and "4" is the Windows key.
+
+# Arrow Keys
+
+# press arrow + meta key anywhere, and scroll by 1 page
+Key Left	A	M	Scroll -100000 0
+Key Right	A	M	Scroll +100000 +0
+Key Up		A	M	Scroll +0   -100000
+Key Down	A	M	Scroll +0   +100000
+
+# press arrow + control + meta key, and scroll by 1/10 of a page
+Key Left	A	CM	Scroll -10 +0
+Key Right	A	CM	Scroll +10 +0
+Key Up		A	CM	Scroll +0   -10
+Key Down	A	CM	Scroll +0   +10
+
+# press arrow + shift + control anywhere, and move the pointer by
+# 1% of a page
+Key Left	A	SC	CursorMove -1 0
+Key Right	A	SC	CursorMove +1 +0
+Key Up		A	SC	CursorMove +0   -1
+Key Down	A	SC	CursorMove +0   +1
+
+# press arrow + shift + control + meta key, and move the pointer by
+# 1/10 of a page
+Key Left	A	SCM	CursorMove -10 +0
+Key Right	A	SCM	CursorMove +10 +0
+Key Up		A	SCM	CursorMove +0   -10
+Key Down	A	SCM	CursorMove +0   +10
+
+# Keyboard accelerators
+
+Key F1		A	M	Popup Utilities
+Key F2		A	M	Popup "Window Ops"
+Key F3		A	M	WindowList
+Key F4		A	M	Iconify
+
+Key Tab         A       C       WindowList
+Key Tab         A       M       Prev Focus
+Key Tab         A       MS      Next Focus
+
+Key 1		A	M	GotoDesk -1
+Key 2		A	M	GotoDesk +1
+
+Key 1		A	4	Scroll +0   +100000
+Key 2		A	4	Scroll +0   -100000
+
+Key 1           A       MS      MovetoDesk -1
+Key 2           A       MS      MovetoDesk +1
+
+Key 1           A       MC      MovetoPage 0 0
+Key 2           A       MC      MovetoPage 0 1
+Key 3           A       MC      MovetoPage 0 2
+
+Key KP_Add A M Next (AcceptsFocus, CurrentDesk, !Iconic) Focus
+Key KP_Subtract A M Prev (AcceptsFocus, CurrentDesk, !Iconic) Focus
+
+Key Home	A	M	Exec exec bash -c 'wmsetbg -a $FVWM_USERDIR/background/$[RANDOM %38].jpg'
+Key Home	A	MC      Exec exec xlock -nice 19 -mode random
+
+# Sometimes changing background images nukes a transparent
+# FvwmIconMan. Alt-End restores it.
+
+Key End		A	M       Module FvwmIconMan
+
+Key Delete	A	MC      Restart
+
+Key R		A 	4	Exec exec $$FVWM_USERDIR/run.sh
+
+# Going to and from the hidden terminal
+
+Key W		A 	4	Next ("micro*") WarpToWindow 50 50
+
+Key W		A 	4C	Next ("micro*") Lower
+
+#========================================================================#
+#
+# Definitions used by the modules
+#
+
+#
+# If activated, get a randomly-chosen background every time you
+# change desktop
+#
+
+DestroyModuleConfig FvwmBacker*
+*FvwmBacker: Command (Desk *) Exec exec bash -c 'wmsetbg -a $FVWM_USERDIR/background/$[RANDOM %38].jpg'
+*FvwmBacker: RetainPixmap 
+
+#
+# Call applications by clicking the right-hand edge of the screen.
+#
+
+# Top right-hand edge
+
+DestroyModuleConfig *FirstHiddenButtonBox
+*FirstHiddenButtonBox: (Action 'Function SpiffyUrxvt', Action (Mouse 2) 'Exec exec xterm', Action (Mouse 3) 'Exec exec emacsclient -c')
+*FirstHiddenButtonBox: Geometry 1x500-0+0
+
+# Middle right-hand edge
+
+DestroyModuleConfig *SecondHiddenButtonBox
+*SecondHiddenButtonBox: (Action 'Exec exec thunar', Action (Mouse 2) 'Exec exec nvidia-settings', Action (Mouse 3) 'Exec exec gimp')
+*SecondHiddenButtonBox: Geometry 1x500-0+518
+
+# Lower right-hand edge
+
+DestroyModuleConfig *ThirdHiddenButtonBox
+*ThirdHiddenButtonBox: (Action 'Exec exec firefox', Action (Mouse 2) 'Exec exec opera', Action (Mouse 3) 'Exec exec seamonkey')
+*ThirdHiddenButtonBox: Geometry 1x500-0-0
+
+#
+# Sound effects
+#
+
+DestroyModuleConfig FvwmEvent*
+*FvwmEvent: Cmd "Exec exec play -v .1"
+*FvwmEvent: StartDelay 5
+*FvwmEvent: add_window $FVWM_USERDIR/sounds/bong.au
+*FvwmEvent: deiconify $FVWM_USERDIR/sounds/bong.au
+*FvwmEvent: destroy_window $FVWM_USERDIR/sounds/Explosion.au
+*FvwmEvent: dewindowshade $FVWM_USERDIR/sounds/twang.au
+*FvwmEvent: error $FVWM_USERDIR/sounds/wipe.au
+*FvwmEvent: iconify $FVWM_USERDIR/sounds/fwop.au
+*FvwmEvent: new_desk $FVWM_USERDIR/sounds/gong.au
+*FvwmEvent: new_page $FVWM_USERDIR/sounds/clink.au
+*FvwmEvent: shutdown $FVWM_USERDIR/sounds/beaming.au
+*FvwmEvent: startup $FVWM_USERDIR/sounds/beam_trek.au
+*FvwmEvent: windowshade $FVWM_USERDIR/sounds/ploop.au
+
+DestroyModuleConfig FvwmIconMan*
+*FvwmIconMan: NumManagers 2
+*FvwmIconMan: Action Mouse 1 N sendcommand Iconowarp
+*FvwmIconMan: Action Mouse 1 C sendcommand StickAcrossDesks
+*FvwmIconMan: Action Mouse 1 M sendcommand "FvwmForm FvwmForm-MoveDesk"
+*FvwmIconMan: Action Mouse 2 N sendcommand Iconify
+*FvwmIconMan: Action Mouse 2 CM sendcommand Delete
+*FvwmIconMan: Action Mouse 3 N sendcommand "Module FvwmIdent FvwmIdent"
+*FvwmIconMan: ButtonGeometry 200x38
+*FvwmIconMan: Colorset 1
+*FvwmIconMan: DrawIcons always
+*FvwmIconMan: Font -*-lucida-medium-r-*-*-22-*-*-*-*-*-*-*
+*FvwmIconMan: IconColorset 3
+*FvwmIconMan: PlainButton flat
+
+*FvwmIconMan: 1 ManagerGeometry 1x0+20+620
+*FvwmIconMan: 1 Resolution desk
+*FvwmIconMan: 1 Title "nothing here"
+*FvwmIconMan: 2 ManagerGeometry 1x0+20+35
+*FvwmIconMan: 2 Resolution !desk
+*FvwmIconMan: 2 Title ""
+
+DestroyModuleConfig *FvwmIdent*
+*FvwmIdent: Font  -*-lucida-medium-r-*-*-20-*-*-*-*-*-*-*
+
+DestroyModuleConfig FvwmPager*
+*FvwmPager: BalloonFont 10x20
+*FvwmPager: Balloons All
+*FvwmPager: Columns 1
+*FvwmPager: MiniIcons
+*FvwmPager: Geometry 100x300+1860+720
+*FvwmPager: WindowColors Whitesmoke Gray25 White Gray40
+*FvwmPagerBack Gray20
+*FvwmPagerFont -*-lucida-bold-r-*-*-20-*-*-*-*-*-*-*
+*FvwmPagerFore Gray90
+*FvwmPagerHilight Gray30
+*FvwmPagerLabel -1 Cellar
+*FvwmPagerLabel -2 Cave
+*FvwmPagerLabel -3 Tartarus
+*FvwmPagerLabel 0 Earth
+*FvwmPagerLabel 1 Space
+*FvwmPagerLabel 2 Ether
+*FvwmPagerLabel 3 "Cloud 9"
+*FvwmPagerSmallFont 10x20
+
+#------------------ Define forms
+
+DestroyModuleConfig  FvwmForm-GoDesk*
+*FvwmForm-GoDesk: WarpPointer
+*FvwmForm-GoDesk: Line          Left
+*FvwmForm-GoDesk: Text          "Up or down:"
+*FvwmForm-GoDesk: Input         UpDown 4
+*FvwmForm-GoDesk: Button        quit    "Go"    ^M
+*FvwmForm-GoDesk: Command       GotoDesk $(UpDown)
+*FvwmForm-GoDesk: Colorset      0
+
+DestroyModuleConfig  FvwmForm-MoveDesk*
+*FvwmForm-Desk: WarpPointer
+*FvwmForm-MoveDesk: Line        Left
+*FvwmForm-MoveDesk: Text        "Up or down:"
+*FvwmForm-MoveDesk: Input       UpDown 4
+*FvwmForm-MoveDesk: Button      quit    "Move"  ^M
+*FvwmForm-MoveDesk: Command     MovetoDesk $(UpDown)
+*FvwmForm-MoveDesk: Colorset    0
+
+#------------------ Startup etc.
+
+DestroyFunc StartFunction
+AddToFunc StartFunction
+# + I Module FvwmBacker
++ I Exec exec bash -c 'wmsetbg -a $FVWM_USERDIR/background/$[RANDOM %38].jpg'
++ I Module FvwmBanner
++ I Module FvwmButtons FirstHiddenButtonBox
++ I Module FvwmButtons SecondHiddenButtonBox
++ I Module FvwmButtons ThirdHiddenButtonBox
++ I Module FvwmEvent
++ I Module FvwmIconMan
++ I Module FvwmPager *
++ I Schedule Periodic 1000 Exec exec wmctrl -r "QuickTerm" -N "QuickTerm - `uptime`"
++ I Schedule Periodic 150000 Exec exec wmctrl -r "Firefox" -N "Firefox - `perl $[FVWM_USERDIR]/todo.pl`"
++ I Schedule Periodic 60000 Exec exec wmctrl -r "utility" -N "Utility - `fortune $FVWM_USERDIR/fortunes`"
++ I Schedule Periodic 600000 Exec exec wmctrl -r " :: " -N " :: `date "+%B %e"` :: "
+
+DestroyFunc InitFunction
+AddToFunc InitFunction
+
++ I Exec exec xclock
++ I Exec exec xbiff
++ I Exec exec rxvt -name micro -e bash
++ I Exec exec xscreensaver
++ I EwmhBaseStruts 420 0 100 0
++ I Exec exec urxvt -T 'utility urxvt' -g 80x48
++ I Wait urxvt
++ I EwmhBaseStruts 410 0 0 0
++ I GotoPage 0 1
++ I Exec exec firefox
++ I Wait Firefox
++ I EwmhBaseStruts 0 0 0 0
++ I GotoPage 0 0
++ I Next ("urxvt") Raise
++ I Exec exec wmctrl -r "xclock" -N " :: `date "+%B %e"` :: "

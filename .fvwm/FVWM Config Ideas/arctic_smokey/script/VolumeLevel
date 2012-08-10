@@ -1,0 +1,32 @@
+WindowTitle		{VolumeLevel}
+WindowSize 		36 40
+WindowPosition		0 0
+
+Init
+Begin
+	Set $volume4 = (GetScriptArgument 1)
+	Set $volume3 = (GetScriptArgument 2)
+	Set $volume2 = (GetScriptArgument 3)
+	Set $volume1 = (GetScriptArgument 4)
+	Set $volume0 = (GetScriptArgument 5)
+	Set $animate = 0
+	ChangeIcon 1 $volume4
+	Set $volume_animate = 0
+End
+
+Widget 			1
+Property
+    Type		ItemDraw
+    Size		36 40
+    Position		0 0
+    Colorset		70
+    Flags 		NoFocus NoReliefString
+
+Main
+Case message of
+
+    SingleClic:
+    Begin
+	Do {Exec exec gnome-volume-control}
+    End
+End

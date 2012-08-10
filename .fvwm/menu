@@ -1,0 +1,177 @@
+## Menus
+# Menu Styles
+MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
+MenuStyle * PopupOffset -5 100, TitleWarpOff
+MenuStyle * TitleUnderlines2, SeparatorsLong, TrianglesSolid
+MenuStyle * AnimationOff, AutomaticHotkeysOff
+MenuStyle * BorderWidth 2
+MenuStyle * PopupAsSubmenu, HoldSubmenus, SubmenusRight
+MenuStyle * ItemFormat "%|%5.5i%1.3l%2.3>%|"
+MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
+MenuStyle * MenuColorset 0
+MenuStyle * ActiveFore, Hilight3DOff
+MenuStyle * ActiveColorset 0
+
+# Root Menu
+DestroyMenu RootMenu
+AddToMenu   RootMenu "Root Menu" Title
++ "&Terminal"  Exec exec x-terminal-emulator
++ "&Browser"  Exec exec x-www-browser
++ "" Nop
++ "&Programs"  Popup ProgramsMenu
++ "" Nop
++ "Configure &FVWM" Exec exec gvim ~/.fvwm/config
++ "Edit &Menus" Exec exec gvim ~/.fvwm/menu
++ "Edit &xsession" Exec exec gvim ~/.xsession
++ "FVWM &Console"  Module FvwmConsole
++ "" Nop
++ "&Help"  Popup FvwmManPagesMenu
++ "" Nop
++ "Change &WM" Popup WMMenu
++ "&Restart/Quit" Popup RestartQuit
+
+# Programs Menu
+DestroyMenu ProgramsMenu
+AddToMenu   ProgramsMenu "Programs" Title
++ "&Editors" Popup EditorsMenu
++ "&File Management" Popup FMMenu
++ "&Graphics" Popup GraphicsMenu
++ "&Office" Popup OfficeMenu
++ "&Terminal Emulators" Popup TermMenu
++ "&Utilities" Popup Utilities
++ "&Web" Popup WebMenu
++ "G&ames" Popup GamesMenu
+
+DestroyMenu GamesMenu
+AddToMenu GamesMenu
++ "&Dungeon Crawl Stone Soup" Exec exec mrxvt -e crawl
++ "&Slash'EM" Exec exec mrxvt -g 80x24 -e slashem
++ "&TOME" Exec exec mrxvt -e tome
+
+DestroyMenu WebMenu
+AddToMenu WebMenu
++ "&elinks" Exec exec urxvt -g 80x48 -e elinks
++ "&Iceweasel" Exec exec iceweasel
+
+DestroyMenu EditorsMenu
+AddToMenu EditorsMenu
++ "&GVim" Exec exec gvim
++ "&nano" Exec exec urxvt -e nano
++ "&vim" Exec exec -urxvt -e vim
+
+DestroyMenu FMMenu
+AddToMenu FMMenu
++ "&MC" Exec exec urxvt -e mc
++ "&PCmanFM" Exec exec pcmanfm
++ "&vifm" Exec exec urxvt -e vifm
+
+DestroyMenu TermMenu
+AddToMenu TermMenu
++ "&MRxvt" Exec exec mrxvt
++ "&Tilda" Exec exec tilda
++ "&URxvt" Exec exec urxvt
+
+DestroyMenu OfficeMenu
+AddToMenu OfficeMenu
++ "&OpenOffice" Exec exec ooffice
++ "Z&athura" Exec exec zathura
++ "&Zim" Exec exec zim
+
+DestroyMenu GraphicsMenu
+AddToMenu GraphicsMenu
++ "&Inkscape" Exec exec inkscape
++ "&Mirage" Exec exec mirage
+
+DestroyMenu Utilities
+AddToMenu Utilities
++ "Alsa&Mixer" Exec exec urxvt -e alsamixer
++ "&Aptitude" Exec exec urxvt -e sudo aptitude
++ "&Bum" Exec exec bum
++ "&df" Exec exec urxvt -hold -e df -h
++ "&Free" Exec exec urxvt -hold -e free
++ "&Htop" Exec exec urxvt -e htop
++ "&PsTree" Exec exec urxvt -e pstree
++ "&Top" Exec exec urxvt -e top
+
+# WM Menu
+DestroyMenu WMMenu
+AddToMenu WMMenu
++ "&Awesome" Restart /usr/bin/awesome
++ "&DWM" Restart /usr/bin/dwm
++ "&EvilWM" Restart /usr/bin/evilwm
++ "&i3" Restart /usr/bin/i3
++ "&LarsWM" Restart /usr/bin/larswm
++ "&ScrotWM" Restart /usr/bin/scrotwm
++ "&TWM"  Restart /usr/bin/twm
+
+# Restart/Quit Menu
+DestroyMenu RestartQuit
+AddToMenu RestartQuit
++ "&Restart" Restart
++ "&Quit" Quit
+
+# ManPage Menu
+DestroyMenu FvwmManPagesMenu
+AddToMenu   FvwmManPagesMenu
++ "&fvwm"           FvwmViewManPage fvwm
++ "Animate"         FvwmViewManPage FvwmAnimate
++ "Auto"            FvwmViewManPage FvwmAuto
++ "Backer"          FvwmViewManPage FvwmBacker
++ "Banner"          FvwmViewManPage FvwmBanner
++ "B&uttons"         FvwmViewManPage FvwmButtons
++ "Command"         FvwmViewManPage FvwmCommand
++ "Console"         FvwmViewManPage FvwmConsole
++ "ConsoleC.pl"     FvwmViewManPage FvwmConsoleC.pl
++ "Cpp"             FvwmViewManPage FvwmCpp
++ "Debug"           FvwmViewManPage FvwmDebug
++ "DragWell"        FvwmViewManPage FvwmDragWell
++ "Event"           FvwmViewManPage FvwmEvent
++ "Form"            FvwmViewManPage FvwmForm
++ "Gtk"             FvwmViewManPage FvwmGtk
++ "GtkDebug"        FvwmViewManPage FvwmGtkDebug
++ "IconBox"         FvwmViewManPage FvwmIconBox
++ "IconMan"         FvwmViewManPage FvwmIconMan
++ "&Ident"          FvwmViewManPage FvwmIdent
++ "M4"              FvwmViewManPage FvwmM4
++ "&Pager"          FvwmViewManPage FvwmPager
++ "Perl"            FvwmViewManPage FvwmPerl
++ "Proxy"           FvwmViewManPage FvwmProxy
++ "Rearrange"       FvwmViewManPage FvwmRearrange
++ "Save"            FvwmViewManPage FvwmSave
++ "SaveDesk"        FvwmViewManPage FvwmSaveDesk
++ "Script"          FvwmViewManPage FvwmScript
++ "Scroll"          FvwmViewManPage FvwmScroll
++ "Task&Bar"        FvwmViewManPage FvwmTaskBar
++ "&Theme"          FvwmViewManPage FvwmTheme
++ "Wharf"           FvwmViewManPage FvwmWharf
++ "WinList"         FvwmViewManPage FvwmWinList
++ "WindowMenu"      FvwmViewManPage FvwmWindowMenu
++ "" Nop
++ "fvwm-config"         FvwmViewManPage fvwm-config
++ "fvwm-perllib"        FvwmViewManPage fvwm-perllib
++ "fvwm-root"           FvwmViewManPage fvwm-root
++ "fvwm-bug"            FvwmViewManPage fvwm-bug
++ "fvwm-convert-2.2"    FvwmViewManPage fvwm-convert-2.2
++ "fvwm-convert-2.4"    FvwmViewManPage fvwm-convert-2.4
++ "" Nop
++ "fvwm-menu-desktop"   FvwmViewManPage fvwm-menu-desktop
++ "fvwm-menu-directory" FvwmViewManPage fvwm-menu-directory
++ "fvwm-menu-headlines" FvwmViewManPage fvwm-menu-headlines
++ "fvwm-menu-xlock"     FvwmViewManPage fvwm-menu-xlock
+
+# Window Operations Menu
+DestroyMenu FvwmWindowOpsMenu
+AddToMenu   FvwmWindowOpsMenu "Window Operations" Title
++ "&Move"  Move
++ "&Resize"  Resize
++ "&Iconify"  Iconify
++ "M&aximize"  Maximize
++ "&Omnipresent"  Stick
++ "" Nop
++ "&Close"  Close
++ "&Delete"  Delete
++ "&Kill"  Destroy
++ "" Nop
++ "Ide&ntify"  Module FvwmIdent
+
+

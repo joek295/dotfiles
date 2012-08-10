@@ -1,0 +1,173 @@
+## FVWM Config File
+# Joe's FVWM Config
+# This configuration is intended to be usable in both moused and mouseless environments.
+# To that end it makes heavy use of keyboard-commands, including vim-like movement.
+#
+# Global Settings
+# Virtual Desktops are each the size of a single screen. No viewporting.
+DesktopSize 1x1
+EwmhNumberOfDesktops 4
+EdgeThickness 1
+ClickTime 400
+MoveThreshold 10
+Style * SloppyFocus, MouseFocusClickRaises
+Style * PositionPlacement UnderMouse
+# screen edges in form lrtb
+EwmhBaseStruts 0 0 0 0
+SnapAttraction 10 Screen
+Style * NoTitle
+Style * DontRaiseTransient, DontLowerTransient, StackTransientParent
+Style * GrabFocusOff
+Style * BorderWidth 1, HandleWidth 1
+
+# Coloursets - defined colours can be found with '''showrgb | less'''
+# Colorset 0 fg Contrast, bg 383838
+Colorset 0 fg Contrast, bg grey30
+
+Style * NoIconTitle
+
+# Other Files called by this configuration
+Read menu
+
+## Functions
+# Startup Functions - currently there is no startup function
+#DestroyFunc StartFunction
+#AddToFunc   StartFunction
+#+ I Test (Init) Exec exec xscreensaver
+
+# Complex Functions
+DestroyFunc ShowDesktop
+AddToFunc   ShowDesktop
++ I All (CurrentPage, Iconic, State 1) RestoreDesktop
++ I TestRc (Match) Break
++ I All (CurrentPage, !Iconic, !State 1) ThisWindow State 1 True
++ I All (CurrentPage, !Iconic, State 1) Iconify
+
+DestroyFunc RestoreDesktop
+AddToFunc   RestoreDesktop
++ I All (CurrentPage, Iconic, State 1) Iconify off
++ I All (CurrentPage, State 1) ThisWindow State 1 False
+
+DestroyFunc FvwmTileHorz
+AddToFunc   FvwmTileHorz
++ I Maximize false
++ I Maximize 100 50
++ I Move keep 0
+
+DestroyFunc FvwmTileVert
+AddToFunc   FvwmTileVert
++ I Maximize false
++ I Maximize 50 100
++ I Move 0 keep
+
+DestroyFunc FvwmCentre
+AddToFunc   FvwmCentre
++ I Maximize 50 50
++ I Move 50-50w 50-50w
+
+DestroyFunc MoveNorth
+AddToFunc MoveNorth
++ I Move keep 0
++ I WarpToWindow 50 50
+
+DestroyFunc MoveSouth
+AddToFunc MoveSouth
++ I Move keep -20p
++ I WarpToWindow 50 50
+
+DestroyFunc MoveEast
+AddToFunc MoveEast
++ I Move -0 keep
++ I WarpToWindow 50 50
+
+DestroyFunc MoveWest
+AddToFunc MoveWest
++ I Move 0 keep
++ I WarpToWindow 50 50
+
+DestroyFunc NextRaise
+AddToFunc NextRaise
++ I Next (CurrentPage !ButtonDocks) Focus
++ I Current (*) Raise
++ I Iconify false
+
+DestroyFunc NextRaise
+AddToFunc NextRaise
++ I Prev (CurrentPage !ButtonDocks) Focus
++ I Current (*) Raise
++ I Iconify false
+
+DestroyFunc HoldToMove
+AddToFunc HoldToMove
++ M Move
++ H Move
++ C Move
+
+DestroyFunc HoldToResize
+AddToFunc HoldToResize
++ M Resize
++ H Resize
++ C Resize
+
+# Launching Programs
+DestroyFunc FvwmViewManPage
+AddToFunc   FvwmViewManPage
++ I Exec exec x-terminal-emulator -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+
+## Key- and Mouse-Bindings
+# Keys - Menus:
+Key Menu A N Menu RootMenu
+Key Menu A 1 Menu FvwmWindowOpsMenu 
+Key Tab A 1 NextRaise
+Key Tab A S1 PrevRaise
+Key Menu A 4 WindowList Root c c 
+Key p A 1 Exec exec /usr/bin/dmenu_run
+
+# Keys - FVWM
+Key q A S1 Quit
+Key r A S1 Restart
+
+# Keys - Virtual Desktops
+Key Right A 1 GotoDesk 1 0 3
+Key Left A 1 GotoDesk -1 0 3
+Key 1 A 1 GotoDesk 0 0
+Key 2 A 1 GotoDesk 0 1
+Key 3 A 1 GotoDesk 0 2
+Key 4 A 1 GotoDesk 0 3
+Key 1 A S1 MovetoDesk 0 0
+Key 2 A S1 MovetoDesk 0 1
+Key 3 A S1 MovetoDesk 0 2
+Key 4 A S1 MovetoDesk 0 3
+
+# Keys - WM
+Key c WFS S1 Close
+Key n WTFS 1 Maximize
+Key m A 1 Iconify
+Key d A 1 ShowDesktop
+Key minus WTFS 1 FvwmTileHorz
+Key semicolon WTFS 1 FvwmTileVert
+Key h WFS 1 MoveWest
+Key j WFS 1 MoveSouth
+Key k WFS 1 MoveNorth
+Key l WFS 1 MoveEast
+Key Home WFS 1 FvwmCentre
+
+# Keys - Applications
+Key Return A 1 Exec exec x-terminal-emulator
+Key w A 4 Exec exec urxvt -g 80x48 -e elinks
+Key e A 4 Exec exec gvim
+Key f A 4 Exec exec pcmanfm
+Key t A 4 Exec exec x-terminal-emulator
+Key F1 A 4 Exec exec tilda
+
+# Mouse:
+Mouse 3 R A Menu RootMenu
+Mouse 1 R A Menu FvwmWindowOpsMenu
+Mouse 2 R A WindowList
+Mouse 1 WFS 1 HoldToMove
+Mouse 1 I A Iconify
+Mouse 2 I A HoldToMove
+Mouse 3 I A Close
+Mouse 3 WFS 1 HoldToResize
+Mouse 4 R A Desk 1
+Mouse 5 R A Desk -1

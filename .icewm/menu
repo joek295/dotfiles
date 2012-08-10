@@ -1,0 +1,19 @@
+# This is an example for IceWM's menu definition file.
+#
+# Place your variants in /etc/X11/icewm or in $HOME/.icewm
+# since modifications to this file will be discarded when you
+# (re)install icewm.
+#
+prog xterm xterm xterm
+prog rxvt xterm rxvt -rv -C -fn 9x15 -sl 500
+prog fte fte fte
+prog NEdit nedit nedit
+prog "Iceweasel" iceweasel iceweasel
+prog XChat xchat xchat
+prog Gimp gimp gimp
+separator
+menuprog Gnome folder icewm-menu-gnome1 --list 
+menuprog Gnome folder icewm-menu-gnome2 --list /usr/share/desktop-directories/
+menuprog KDE folder icewm-menu-gnome2 --list /usr/share/applnk/
+menufile Programs folder programs
+menufile Tool_bar folder toolbar

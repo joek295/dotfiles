@@ -1,0 +1,11 @@
+# This is an example for IceWM's toolbar definition file.
+#
+# Place your variants in /etc/X11/icewm or in $HOME/.icewm
+# since modifications to this file will be discarded when you
+# (re)install icewm.
+#
+prog XTerm xterm x-terminal-emulator
+#prog FTE fte fte
+#prog Netscape netscape netscape
+prog    "gvim" /usr/X11R6/include/X11/pixmaps/vim.xpm /usr/bin/gvim -f
+prog    "Iceweasel" /usr/share/pixmaps/iceweasel.xpm iceweasel

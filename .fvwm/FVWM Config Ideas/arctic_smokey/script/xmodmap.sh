@@ -1,0 +1,12 @@
+#!/bin/bash
+xmodmap -e "pointer = 1 2 3 6 7 4 5"
+xmodmap -e "keycode 234 = XF86Back"
+xmodmap -e "keycode 233 = XF86Forward"
+xmodmap -e "keycode 232 = XF86Stop"
+xmodmap -e "keycode 236 = XF86Mail"
+xmodmap -e "keycode 229 = XF86Search"
+xmodmap -e "keycode 230 = XF86Favorites"
+xmodmap -e "keycode 178 = XF86WWW"
+xmodmap -e "keycode 235 = XF86MyComputer"
+xmodmap -e "keycode 161 = XF86Calculater"
+xmodmap -e "keycode 223 = XF86LogOff"

@@ -1,0 +1,3 @@
+# ~/.fvwm/run-dialog.bash-init
+source $HOME/.profile
+export HISTCONTROL="ignorespace"
