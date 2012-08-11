@@ -1,8 +1,8 @@
 ## set wallpaper 
-#feh --bg-scale ~/images/wallpapers/Linux_Wallpapers/debian_metal_wallpaper.jpg 
+wallpaper
 #xmodmap .xmodmaprc 
+##For evilwm
 #xbindkeys 
-#exec xmodmap .xmodmaprc 
 
 ## Window Managers.  
 # Debian: awesome, dwm, evilwm, fvwm, i3, larswm, scrotwm, twm; #!: fluxbox, jwm, openbox, pekwm, ratpoison, wmii, xfce 
