@@ -1,0 +1,8 @@
+#Joe's Slash'Em config
+OPTIONS=pickup_types:$
+OPTIONS=autopickup,autodig
+OPTIONS=!cmdassist
+OPTIONS=color,hilite_pet
+OPTIONS=showexp,showweight
+OPTIONS=menucolors
+#OPTIONS=nopet

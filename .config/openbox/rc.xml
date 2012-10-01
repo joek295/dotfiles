@@ -215,7 +215,7 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
-    <!-- FOR OB 3.5+
+    <!-- FOR OB 3.5+    -->
     <keybind key="A-semicolon">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
@@ -234,7 +234,7 @@
         <height>50%</height>
       </action>
     </keybind>
-    -->
+<!-- FOR OB <3.5 
     <keybind key="A-semicolon">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
@@ -253,6 +253,7 @@
       </action>
       <action name="MaximizeHorz"/>
     </keybind>
+    -->
     <!-- applications -->
     <keybind key="W-e">
       <action name="Execute">
@@ -271,7 +272,7 @@
     </keybind>
     <keybind key="W-m">
       <action name="Execute">
-        <execute>vlc</execute>
+        <execute>gnome-mplayer</execute>
       </action>
     </keybind>
     <keybind key="W-t">
@@ -286,12 +287,12 @@
     </keybind>
     <keybind key="A-p">
       <action name="Execute">
-        <execute>/home/joe/bin/dmenu_customise</execute>
+        <execute>/home/joe/scripts/dmenu_customise</execute>
       </action>
     </keybind>
     <keybind key="A-F2">
       <action name="Execute">
-        <execute>fbrun</execute>
+        <execute>gmrun</execute>
       </action>
     </keybind>
     <!-- miscellaneous -->

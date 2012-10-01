@@ -1,7 +1,0 @@
-Style FvwmIdent	EWMHMiniIconOverride, \
-		Icon $[fvwm_icon]/64x64/apps/gnome-help.png, \
-		MiniIcon $[fvwm_icon]/16x16/apps/gnome-help.png
-
-DestroyModuleConfig FvwmIdent: *
-*FvwmIdent: Colorset 21
-*FvwmIdent: Font "Shadow=1 1 >:xft:Monospace:Bold:pixelsize=12"

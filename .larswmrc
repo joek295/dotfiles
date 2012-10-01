@@ -1,0 +1,227 @@
+!!!!!!!!!!!!!!!!!!!!!!!!
+! larswm configuration !
+!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! Version: larswm 7.5.3+patches [22-JAN-2006] by Lars Bernhardsson <lab@fnurt.net>
+!
+! Status bar and window border colors:
+!
+! larswm.foreground: black
+! larswm.background: white
+!
+! Status bar font:
+!
+! larswm.font: fixed
+!
+! Number of virtual desktops per physical screen: (1 - 16)
+!
+! larswm.desktops: 4
+!
+! Virtual desktop names:
+!
+! larswm.?.0.dtname: [A---]
+! larswm.?.1.dtname: [-B--]
+! larswm.?.2.dtname: [--C-]
+! larswm.?.3.dtname: [---D]
+!
+! Resize windows when tiling? (If not, move to and stack in right track)
+!
+! larswm.?.?.tile_resize: True
+!
+! Width of left track in percent: (5-95)
+!
+! larswm.?.?.left_track_width: 60
+!
+! Don't retile on focus change?
+!
+! larswm.?.?.skip_focus: True
+!
+! When clicking to focus, also pass click on to client?
+!
+! larswm.?.?.clickthru: True
+!
+! Application commands for shortcuts:
+! Add one line for each application. Must have different numbers between 0 and 63.
+!
+larswm.application.0: x-terminal-emulator
+larswm.application_key.0: Return
+larswm.application_mod.0: Alt
+larswm.application.1: x-www-browser
+larswm.application_key.1: w
+larswm.application_mod.1: Mod4
+larswm.application.2: pcmanfm
+larswm.application_key.2: f
+larswm.application_mod.2: Mod4
+larswm.application.3: gvim
+larswm.application_key.3: e
+larswm.application_mod.3: Mod4
+larswm.application.4: gvim
+larswm.application_key.4: e
+larswm.application_mod.4: Mod4
+larswm.application.5: larsremote restart
+larswm.application_key.5: r
+larswm.application_mod.5: Alt-Shift
+larswm.application.6: larsremote exit
+larswm.application_key.6: q
+larswm.application_mod.6: Alt-Shift
+larswm.application.7: exec dmenu_run
+larswm.application_key: p
+larswm.application_mod: Alt
+!
+! Application commands for mouse clicks:
+!
+! larswm.button1.application: command
+! larswm.button2.application: command
+! larswm.button3.application: command
+!
+! * In all the class lists, the Instance is optional *
+!
+! Tool applications: (Will NOT be tiled, will be tiled around and will be sticky)
+! Add one line for each class. Must have different numbers between 0 and 63.
+!
+! larswm.toolclass.0: Class~Instance
+!
+! Floating applications: (Will always stay on top of other applications)
+! Add one line for each class. Must have different numbers between 0 and 63.
+!
+! larswm.floatclass.0: Class~Instance
+!
+! Sticky applications: (Will be visible on all virtual desktops)
+! Add one line for each class. Must have different numbers between 0 and 63.
+!
+! larswm.stickyclass.0: Class~Instance
+!
+! Applications to include in tiling: (Will be put in the tiled subdesktop)
+! Add one line for each class. Must have different numbers between 0 and 63.
+!
+! larswm.dotileclass.0: Class~Instance
+larswm.dotileclass.0: URxvt~x-terminal-emulator
+larswm.dotileclass.1: MRxvt
+larswm.dotileclass.2: Iceweasel~navigator
+larswm.dotileclass.3: Gvim~gvim
+!
+! Associate a window class with a desktop number:
+! Must provide both class and desktop number.
+!
+! larswm.dtclass.0: Class~Instance
+! larswm.dtnum.0: 0
+!
+! Key bindings: (Modifiers: Shift, Lock, Control, Mod1 or Alt, Mod2, Mod3, Mod4 and Mod5)
+!
+! larswm.prev_screen_key: Prior
+! larswm.prev_screen_mod: Shift+Control
+!
+! larswm.next_screen_key: Next
+! larswm.next_screen_mod: Shift+Control
+!
+larswm.prev_desktop_key: Left
+larswm.prev_desktop_mod: Alt
+larswm.next_desktop_key: Right
+larswm.next_desktop_mod: Alt
+larswm.prev_desktop_drag_key: Left
+larswm.prev_desktop_drag_mod: Shift+Alt
+larswm.next_desktop_drag_key: Right
+larswm.next_desktop_drag_mod: Shift+Alt
+!
+larswm.prev_window_key: Tab
+larswm.prev_window_mod: Shift+Alt
+larswm.next_window_key: Tab
+larswm.next_window_mod: Alt
+!
+! Alt-Space: toggle focus between tiling and stacking layers.
+! A-S-space: toggle focused window between tiling and stacking layers.
+larswm.raise_notile_key: space
+larswm.raise_notile_mod: Alt
+larswm.move_sd_key: space
+larswm.move_sd_mod: Shift+Alt
+!
+larswm.move_northwest_key: y
+larswm.move_northwest_mod: Alt
+larswm.move_north_key: k
+larswm.move_north_mod: Alt
+larswm.move_northeast_key: u
+larswm.move_northeast_mod: Alt
+larswm.move_west_key: h
+larswm.move_west_mod: Alt
+larswm.move_center_key: Home
+larswm.move_center_mod: Alt
+larswm.move_east_key: l
+larswm.move_east_mod: Alt
+larswm.move_southwest_key: b
+larswm.move_southwest_mod: Alt
+larswm.move_south_key: j
+larswm.move_south_mod: Alt
+larswm.move_southeast_key: n
+larswm.move_southeast_mod: Alt
+!
+! larswm.toggle_inc_key: KP_Insert
+! larswm.toggle_inc_mod: Shift+Alt
+!
+! larswm.move_up_key: KP_Up
+! larswm.move_up_mod: Shift+Alt
+!
+! larswm.move_down_key: KP_Down
+! larswm.move_down_mod: Shift+Alt
+!
+! larswm.move_left_key: KP_Left
+! larswm.move_left_mod: Shift+Alt
+!
+! larswm.move_right_key: KP_Right
+! larswm.move_right_mod: Shift+Alt
+!
+! larswm.move_select_key: space
+! larswm.move_select_mod: Shift+Control
+!
+! larswm.move_aside_key: space
+! larswm.move_aside_mod: Control+Alt
+!
+! larswm.move_aside_other_key: 0
+! larswm.move_aside_other_mod: Shift+Control
+!
+larswm.grow_vert_key: k
+larswm.grow_vert_mod: Shift+Alt
+larswm.shrink_vert_key: j
+larswm.shrink_vert_mod: Shift+Alt
+larswm.grow_horiz_key: l
+larswm.grow_horiz_mod: Shift+Alt
+larswm.shrink_horiz_key: h
+larswm.shrink_horiz_mod: Shift+Alt
+! larswm.grow_both_key: KP_Home
+! larswm.grow_both_mod: Shift+Control+Alt
+! larswm.shrink_both_key: KP_End
+! larswm.shrink_both_mod: Shift+Control+Alt
+!
+! larswm.zoom_vert_key: KP_Home
+! larswm.zoom_vert_mod: Shift+Alt
+! larswm.zoom_horiz_key: KP_End
+! larswm.zoom_horiz_mod: Shift+Alt
+larswm.zoom_full_key: f
+larswm.zoom_full_mod: Alt
+larswm.zoom_full2_key: f
+larswm.zoom_full2_mod: Shift+Alt
+!
+larswm.hide_key: m
+larswm.hide_mod: Control+Alt
+larswm.unhide_key: s
+larswm.unhide_mod: Control+Alt
+!
+larswm.close_key: c
+larswm.close_mod: Shift+Alt
+!
+larswm.goto_desktop_key.0: 1
+larswm.goto_desktop_mod.0: Alt
+larswm.goto_desktop_key.1: 2
+larswm.goto_desktop_mod.1: Alt
+larswm.goto_desktop_key.2: 3
+larswm.goto_desktop_mod.2: Alt
+larswm.goto_desktop_key.3: 4
+larswm.goto_desktop_mod.3: Alt
+!
+! Shortcuts to switch (focus) to window with defined name or class.
+!
+! larswm.switchclass.0: XTerm
+! larswm.switchclass_app.0: xterm
+! larswm.switchclass_key.0: KeySym
+! larswm.switchclass_mod.0: Modifier
+!
+! End of larswm configuration.
