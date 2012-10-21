@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Joe's Openbox rc.xml file
+     Compatible with openbox v. >= 3.5
+     -->
 <openbox_config xmlns="http://openbox.org/3.4/rc">
   <resistance>
     <strength>10</strength>
@@ -6,7 +9,6 @@
   </resistance>
   <focus>
     <focusNew>yes</focusNew>
-    <!-- try to focus new windows when they appear. -->
     <followMouse>yes</followMouse>
     <focusLast>yes</focusLast>
     <!-- focus the last used window when changing desktops instead of the one
@@ -20,12 +22,10 @@
     <policy>Smart</policy>
     <!-- 'Smart' or 'UnderMouse' -->
     <center>yes</center>
-    <!-- whether to place windows in the center of the free area found or
-       the top left corner -->
+    <!-- place windows in the center of free area or top left corner -->
     <monitor>Active</monitor>
-    <!-- on a multi-monitor system, try to place new windows on: 
-    	 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
-       the active window is -->
+    <!-- on multi-monitor system, place new windows on: 
+    	 'Any' - any monitor, 'Mouse' - with mouse, 'Active' - with active window -->
     <primaryMonitor>1</primaryMonitor>
     <!-- Can be a number from 1, specifying a particular monitor, or:
   		 'Mouse' - where the mouse is, or 'Active' - where the active window is -->
@@ -81,12 +81,12 @@
     <popupFixedPosition>
       <x>10</x>
       <y>10</y>
-      <!-- positive number for distance from top|left edge, negative number for
-         distance from bottom|right edge, or 'Center' -->
+      <!-- positive: distance from top|left edge; negative:
+         distance from bottom|right edge; or 'Center' -->
     </popupFixedPosition>
   </resize>
   <margins>
-    <top>18</top>
+    <top>16</top>
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -121,6 +121,16 @@
     <keybind key="A-S-q">
       <action name="Exit">
         <prompt>no</prompt>
+      </action>
+    </keybind>
+    <keybind key="A-q">
+      <action name='Execute'>
+        <execute>slock</execute>
+      </action>
+    </keybind>
+    <keybind key="A-x">
+      <action name='Execute'>
+        <execute>cb-exit</execute>
       </action>
     </keybind>
     <!-- desktop -->
@@ -254,6 +264,12 @@
       <action name="MaximizeHorz"/>
     </keybind>
     -->
+    <!-- toggle trackpad -->
+    <keybind key="W-q">
+      <action name="Execute">
+        <execute>touchpad_toggle</execute>
+      </action>
+    </keybind>
     <!-- applications -->
     <keybind key="W-e">
       <action name="Execute">
@@ -267,12 +283,17 @@
     </keybind>
     <keybind key="W-f">
       <action name="Execute">
-        <execute>thunar</execute>
+        <execute>pcmanfm</execute>
+      </action>
+    </keybind>
+    <keybind key="W-v">
+      <action name="Execute">
+        <execute>gnome-mplayer</execute>
       </action>
     </keybind>
     <keybind key="W-m">
       <action name="Execute">
-        <execute>gnome-mplayer</execute>
+        <execute>rhythmbox</execute>
       </action>
     </keybind>
     <keybind key="W-t">
@@ -287,7 +308,22 @@
     </keybind>
     <keybind key="A-p">
       <action name="Execute">
-        <execute>/home/joe/scripts/dmenu_customise</execute>
+        <execute>dmenu_run -nb '#000000' -nf '#9999CC'</execute>
+      </action>
+    </keybind>
+    <keybind key="A-S-p">
+      <action name="Execute">
+        <execute>/home/joe/scripts/dmenufm</execute>
+      </action>
+    </keybind>
+    <keybind key="W-S-f">
+      <action name="Execute">
+        <execute>/home/joe/scripts/dmenfm</execute>
+      </action>
+    </keybind>
+    <keybind key="W-c">
+      <action name="Execute">
+        <execute>/home/joe/scripts/dcalc</execute>
       </action>
     </keybind>
     <keybind key="A-F2">
@@ -298,12 +334,12 @@
     <!-- miscellaneous -->
     <keybind key="Print">
       <action name="Execute">
-        <execute>gnome-screenshot</execute>
+        <execute>scrot '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'</execute>
       </action>
     </keybind>
     <keybind key="A-Print">
       <action name="Execute">
-        <execute>gnome-screenshot -w</execute>
+        <execute>scrot -s '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'</execute>
       </action>
     </keybind>
     <keybind key="Menu">
@@ -312,17 +348,27 @@
       </action>
     </keybind>
     <keybind key="XF86AudioRaiseVolume">
-      <action name="Excecute">
+      <action name="Execute">
         <command>amixer sset Master,0 5+</command>
       </action>
     </keybind>
     <keybind key="XF86AudioLowerVolume">
-      <action name="Excecute">
+      <action name="Execute">
+        <command>amixer sset Master,0 5-</command>
+      </action>
+    </keybind>
+    <keybind key="A-period">
+      <action name="Execute">
+        <command>amixer sset Master,0 5+</command>
+      </action>
+    </keybind>
+    <keybind key="A-comma">
+      <action name="Execute">
         <command>amixer sset Master,0 5-</command>
       </action>
     </keybind>
     <keybind key="XF86AudioMute">
-      <action name="Excecute">
+      <action name="Execute">
         <command>amixer sset Master,0 toggle</command>
       </action>
     </keybind>
@@ -425,7 +471,6 @@
   <menu>
     <!-- You can specify more than one menu file in here and they are all loaded -->
     <file>/var/lib/openbox/debian-menu.xml</file>
-    <file>debian-menu.xml</file>
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
     <!-- if a press-release lasts longer than this setting (in milliseconds), the

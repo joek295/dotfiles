@@ -21,8 +21,8 @@ Style * GrabFocusOff
 Style * BorderWidth 1, HandleWidth 1
 
 # Coloursets - defined colours can be found with '''showrgb | less'''
-# Colorset 0 fg Contrast, bg 383838
-Colorset 0 fg Contrast, bg grey30
+# Colours taken from the solarized theme be E. Schoonover
+Colorset 0 fg rgb:26/8b/d2, bg rgb:07/36/42
 
 Style * NoIconTitle
 
@@ -33,7 +33,6 @@ Read menu
 # Startup Functions - currently there is no startup function
 #DestroyFunc StartFunction
 #AddToFunc   StartFunction
-#+ I Test (Init) Exec exec xscreensaver
 
 # Complex Functions
 DestroyFunc ShowDesktop
@@ -53,15 +52,22 @@ AddToFunc   FvwmTileHorz
 + I Maximize false
 + I Maximize 100 50
 + I Move keep 0
++ I Next Maximize false
++ I Next Maximize 100 50
++ I Next Move keep -0
 
 DestroyFunc FvwmTileVert
 AddToFunc   FvwmTileVert
 + I Maximize false
 + I Maximize 50 100
 + I Move 0 keep
++ I Next Maximize false
++ I Next Maximize 50 100
++ I Next Move -0 keep
 
 DestroyFunc FvwmCentre
 AddToFunc   FvwmCentre
++ I Maximize false
 + I Maximize 50 50
 + I Move 50-50w 50-50w
 
@@ -103,6 +109,16 @@ AddToFunc HoldToMove
 + H Move
 + C Move
 
+DestroyFunc AeroSnapVert
+AddToFunc AeroSnapVert
++ I Maximize False
++ I Maximize 50 100
+
+DestroyFunc AeroSnapHorz
+AddToFunc AeroSnapHorz
++ I Maximize False
++ I Maximize 100 50
+
 DestroyFunc HoldToResize
 AddToFunc HoldToResize
 + M Resize
@@ -122,10 +138,13 @@ Key Tab A 1 NextRaise
 Key Tab A S1 PrevRaise
 Key Menu A 4 WindowList Root c c 
 Key p A 1 Exec exec /usr/bin/dmenu_run
+Key p A S1 Exec exec /home/joe/scripts/dmenufm
 
 # Keys - FVWM
 Key q A S1 Quit
 Key r A S1 Restart
+Key q A Exec exec slock
+Key x A Exec exec cb-exit
 
 # Keys - Virtual Desktops
 Key Right A 1 GotoDesk 1 0 3
@@ -154,20 +173,26 @@ Key Home WFS 1 FvwmCentre
 
 # Keys - Applications
 Key Return A 1 Exec exec x-terminal-emulator
-Key w A 4 Exec exec urxvt -g 80x48 -e elinks
+Key w A 4 Exec exec iceweasel
 Key e A 4 Exec exec gvim
 Key f A 4 Exec exec pcmanfm
 Key t A 4 Exec exec x-terminal-emulator
-Key F1 A 4 Exec exec tilda
+Key m A 4 Exec exec rhythmbox
+Key v A 4 Exec exec gnome-mplayer
+Key q A 4 Exec exec slock
 
 # Mouse:
 Mouse 3 R A Menu RootMenu
 Mouse 1 R A Menu FvwmWindowOpsMenu
 Mouse 2 R A WindowList
-Mouse 1 WFS 1 HoldToMove
+Mouse 1 WFS 1 pick HoldToMove
 Mouse 1 I A Iconify
 Mouse 2 I A HoldToMove
 Mouse 3 I A Close
 Mouse 3 WFS 1 HoldToResize
 Mouse 4 R A Desk 1
 Mouse 5 R A Desk -1
+Mouse 1 WFS EdgeCommand West AeroSnapVert
+Mouse 1 WFS EdgeCommand East AeroSnapVert
+Mouse 1 WFS EdgeCommand North AeroSnapHorz
+Mouse 1 WFS EdgeCommand South AeroSnapHorz
