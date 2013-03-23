@@ -1,25 +1,20 @@
-double_buffer yes
-no_buffers yes
-own_window no
-own_window_transparent yes
-own_window_type normal
-own_window_hints undecorate,sticky,above,skip_taskbar,skip_pager
-
-border_margin 1
-draw_shades no
-gap_x 1
-gap_y 4
 alignment top_middle
-update_interval 1
-
 default_color D6D6D6
-own_window_colour 202020
-
+double_buffer yes
+draw_shades none
+gap_x 0
+gap_y 2
+if_up_strictness link
+minimum_size 1366
+no_buffers yes
+own_window yes
+own_window_transparent yes
+own_window_type panel
+update_interval 1
+use_spacer right
+use_spacer left
 use_xft yes
 xftfont mono:pixelsize=10
 
-use_spacer no
-minimum_size 1020 10
-
 TEXT
-${voffset -1} ${time  %H:%M:%S %d-%m-%y} | / ${fs_bar 8,60 /} | /home ${fs_bar 8,60 /home} | RAM: ${membar 8,60} | SWAP: ${swapbar 8,60} | CPU: ${cpubar 8,60} | TEMP: ${acpitemp}°C | UPTIME: ${uptime_short} | ${downspeed eth0} | ${upspeed eth0} ${voffset +1}
+${offset 5}/ ${fs_bar 9,100 /} | /home ${fs_bar 9,100 /home} | CPU ${cpugraph 9,100 859900 dc322f -t} | RAM ${mem} ${if_up eth0}| PROC ${processes}:${running_processes} | UP ${totalup eth0} | DN ${totaldown eth0} ${endif}${if_up wlan0}| UP ${totalup wlan0} | DN ${totaldown wlan0} | WIFI ${wireless_link_qual_perc wlan0} ${endif} ${alignr} ${acpitemp}°C | BAT ${battery_percent} | ${uptime_short} | ${time  %H:%M %d-%m} 

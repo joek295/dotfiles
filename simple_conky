@@ -1,0 +1,33 @@
+alignment top_middle
+background no
+border_margin 5
+border_width 5
+default_color 6d6d6d  #413536 5f5f5f 3F3F3F 183149 3B3B3B 26211F
+double_buffer yes
+gap_x 0
+gap_y 80
+maximum_width 1000
+minimum_size 300 
+no_buffers yes
+override_utf8_locale yes
+own_window yes
+own_window_title conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent true
+own_window_type normal
+text_buffer_size 80000
+total_run_times 0
+update_interval 10
+use_xft yes
+xftalpha 1
+xftfont Source Sans:pixelsize=9
+own_window_argb_visual false
+
+TEXT
+${color #dbdbdb}${font Dream Orphanage:pixelsize=55}${alignc}${time %H:%M}${font}
+${color #5f5f5f}
+${font Dream Orphanage:pixelsize=25}${alignc}${time %Y, %B %d. %A}${font}
+${color #dbdbdb}
+
+${font Geosans Light:pixelsize=14} $alignc${exec mocp -Q %artist}     ${exec mocp -Q %song}
+$alignc${exec mocp -Q %album}

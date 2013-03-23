@@ -5,7 +5,7 @@
 #
 # Global Settings
 # Virtual Desktops are each the size of a single screen. No viewporting.
-DesktopSize 1x1
+DesktopSize 2x2
 EwmhNumberOfDesktops 4
 EdgeThickness 1
 ClickTime 400
@@ -13,26 +13,31 @@ MoveThreshold 10
 Style * SloppyFocus, MouseFocusClickRaises
 Style * PositionPlacement UnderMouse
 # screen edges in form lrtb
-EwmhBaseStruts 0 0 0 0
+EwmhBaseStruts 0 0 18 0
 SnapAttraction 10 Screen
 Style * NoTitle
 Style * DontRaiseTransient, DontLowerTransient, StackTransientParent
 Style * GrabFocusOff
 Style * BorderWidth 1, HandleWidth 1
+Style * !IconTitle
 
 # Coloursets - defined colours can be found with '''showrgb | less'''
-# Colours taken from the solarized theme be E. Schoonover
-Colorset 0 fg rgb:26/8b/d2, bg rgb:07/36/42
-
-Style * NoIconTitle
+Colorset 0 fg Contrast bg 2e/34/36
 
 # Other Files called by this configuration
 Read menu
+Read modules
 
 ## Functions
 # Startup Functions - currently there is no startup function
-#DestroyFunc StartFunction
-#AddToFunc   StartFunction
+DestroyFunc InitFunction
+AddToFunc   InitFunction
++ I Exec exec conky
+#+ I Exec exec tint2
++ I Module FvwmIconMan
++ I Module FvwmPager 0 3
++ I Exec exec hsetroot -solid "#2e3436"
+#+ I Exec exec nm-applet
 
 # Complex Functions
 DestroyFunc ShowDesktop
@@ -93,58 +98,46 @@ AddToFunc MoveWest
 
 DestroyFunc NextRaise
 AddToFunc NextRaise
-+ I Next (CurrentPage !ButtonDocks) Focus
++ I Next (CurrentPage !ButtonDocks) FlipFocus
 + I Current (*) Raise
 + I Iconify false
 
-DestroyFunc NextRaise
-AddToFunc NextRaise
-+ I Prev (CurrentPage !ButtonDocks) Focus
+DestroyFunc PrevRaise
+AddToFunc PrevRaise
++ I Prev (CurrentPage !ButtonDocks) FlipFocus
 + I Current (*) Raise
 + I Iconify false
 
-DestroyFunc HoldToMove
-AddToFunc HoldToMove
-+ M Move
+DestroyFunc MouseMove
+AddToFunc MouseMove
 + H Move
-+ C Move
++ M Move
 
-DestroyFunc AeroSnapVert
-AddToFunc AeroSnapVert
-+ I Maximize False
-+ I Maximize 50 100
+DestroyFunc MouseResize
+AddToFunc MouseResize
++ H Resize bottomright
++ M Resize bottomright
 
-DestroyFunc AeroSnapHorz
-AddToFunc AeroSnapHorz
-+ I Maximize False
-+ I Maximize 100 50
-
-DestroyFunc HoldToResize
-AddToFunc HoldToResize
-+ M Resize
-+ H Resize
-+ C Resize
-
-# Launching Programs
-DestroyFunc FvwmViewManPage
-AddToFunc   FvwmViewManPage
-+ I Exec exec x-terminal-emulator -n "Manual Page - $0" -T "Manual Page - $0" -e man "$0"
+DestroyFunc SelectWindow
+AddToFunc SelectWindow
++ I FlipFocus
++ I Raise
++ I WarpToWindow 50 50
 
 ## Key- and Mouse-Bindings
 # Keys - Menus:
 Key Menu A N Menu RootMenu
-Key Menu A 1 Menu FvwmWindowOpsMenu 
+Key Menu A 1 Menu WindowOps
 Key Tab A 1 NextRaise
 Key Tab A S1 PrevRaise
 Key Menu A 4 WindowList Root c c 
-Key p A 1 Exec exec /usr/bin/dmenu_run
+Key p A 1 Exec exec /usr/bin/dmenu_run -nb #2e3436
 Key p A S1 Exec exec /home/joe/scripts/dmenufm
 
 # Keys - FVWM
 Key q A S1 Quit
 Key r A S1 Restart
-Key q A Exec exec slock
-Key x A Exec exec cb-exit
+Key x A 1 Exec exec cb-exit
 
 # Keys - Virtual Desktops
 Key Right A 1 GotoDesk 1 0 3
@@ -170,6 +163,10 @@ Key j WFS 1 MoveSouth
 Key k WFS 1 MoveNorth
 Key l WFS 1 MoveEast
 Key Home WFS 1 FvwmCentre
+Key h WFS S1 Direction West (CurrentDesk, CurrentPage, !Transient) SelectWindow
+Key j WFS S1 Direction South (CurrentDesk, CurrentPage, !Transient) SelectWindow
+Key k WFS S1 Direction North (CurrentDesk, CurrentPage, !Transient) SelectWindow
+Key l WFS S1 Direction East (CurrentDesk, CurrentPage, !Transient) SelectWindow
 
 # Keys - Applications
 Key Return A 1 Exec exec x-terminal-emulator
@@ -179,20 +176,17 @@ Key f A 4 Exec exec pcmanfm
 Key t A 4 Exec exec x-terminal-emulator
 Key m A 4 Exec exec rhythmbox
 Key v A 4 Exec exec gnome-mplayer
-Key q A 4 Exec exec slock
+Key q A 1 Exec exec slock
 
 # Mouse:
+# Buttons 1,2,3 are L,M,R respectively
 Mouse 3 R A Menu RootMenu
-Mouse 1 R A Menu FvwmWindowOpsMenu
+Mouse 1 R A Menu WindowOps
 Mouse 2 R A WindowList
-Mouse 1 WFS 1 pick HoldToMove
 Mouse 1 I A Iconify
-Mouse 2 I A HoldToMove
 Mouse 3 I A Close
-Mouse 3 WFS 1 HoldToResize
 Mouse 4 R A Desk 1
 Mouse 5 R A Desk -1
-Mouse 1 WFS EdgeCommand West AeroSnapVert
-Mouse 1 WFS EdgeCommand East AeroSnapVert
-Mouse 1 WFS EdgeCommand North AeroSnapHorz
-Mouse 1 WFS EdgeCommand South AeroSnapHorz
+Mouse 1 WFST M MouseMove
+Mouse 3 WFST M MouseResize
+

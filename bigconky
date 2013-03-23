@@ -1,21 +1,24 @@
 alignment middle_left
 double_buffer yes
 minimum_size 150
+max_text_width 200
+maximum_width 200
 update_interval 1
 use_xft yes
 xftfont mono:pixelsize=11
 
 
 TEXT
-${time %H:%M %d-%m} 
+${time %H:%M} ${alignr}${time %d-%m} 
 
 SYSTEM$hr
-${sysname} ${kernel} ${alignr}${nodename}
+${sysname} ${alignr}${nodename}
+${kernel}
 ${uptime_short}
 
 CPU ${freq}MHz ${cpu}% ${acpitemp}°C
 ${cpugraph 20,150}
-PROCESSES ${processes} ${alignr}${running_processes} RUNNING 
+PROCESSES ${processes} ${alignr}${running_processes} RUNNING
 ${top name 1} ${top pid 1} ${top cpu 1}
 ${top name 2} ${top pid 2} ${top cpu 2}
 ${top name 3} ${top pid 3} ${top cpu 3}
@@ -45,3 +48,9 @@ ${downspeedgraph 20,150}
 
 ${if_up wlan0}
 SIGNAL STRENGTH ${alignr}${wireless_link_qual_perc wlan0}${endif}
+
+${if_running mocp}NOW PLAYING${hr}
+${exec mocp -Q %artist}
+${exec mocp -Q %song}
+${exec mocp -Q %album}
+${endif}
