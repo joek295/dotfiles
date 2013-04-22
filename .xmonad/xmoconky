@@ -9,7 +9,7 @@ minimum_size 1366
 no_buffers yes
 own_window yes
 own_window_transparent yes
-own_window_type desktop
+own_window_type panel
 update_interval 1
 use_spacer right
 use_spacer left
