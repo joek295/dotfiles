@@ -1,40 +1,47 @@
 import XMonad
+import XMonad.Actions.CycleWindows
+import XMonad.Actions.DwmPromote
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig
 import XMonad.Layout.Circle
-import XMonad.Layout.ResizableTile
+import XMonad.Layout.NoBorders
 
 myTerminal = "/usr/bin/urxvt"
 
 myManageHook = composeAll
   [ className =? "Gimp" --> doFloat
   , className =? "Skype" --> doFloat
+  , className =? "Vlc" --> doFloat
   ]
 
-myLayout = avoidStruts (
-  -- ResizableTall: 1/2 vertical 1 window/ other windows split
-  ResizableTall 1 (3/100) (1/2) [] |||
-  Full |||
-  Circle )
+myStartupHook = spawn "conky -c ~/.xmonad/xmoconky"
+
+myLayout = avoidStruts $ smartBorders (
+  Tall 1 (3/100) (1/2) ||| Full ||| Circle )
 
 main = do
   xmonad $ defaultConfig
-    { manageHook = manageDocks <+> manageHook myManageHook 
+    { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook = myLayout
-    , startupHook = spawn "conky -c ~/.xmonad/xmoconky"
+    , startupHook = myStartupHook
     , terminal = myTerminal
-    } `additionalKeys`
+    } 
+    `additionalKeysP` myKeys
+
+
     -- list of additional custom keybindings:
-    [ ((mod1Mask, xK_q), spawn "slock")
-    , ((mod1Mask .|. shiftMask, xK_x), spawn "cb-exit")
-    , ((mod4Mask, xK_w), spawn "iceweasel")
-    , ((mod4Mask, xK_m), spawn "rhythmbox")
-    , ((mod4Mask, xK_f), spawn "pcmanfm")
-    , ((mod4Mask, xK_e), spawn "gvim")
-    , ((mod1Mask .|. shiftMask, xK_p), spawn "dmenufm")
-    , ((mod1Mask, xK_r), restart "xmonad" True)
-    -- Win-[1..3] and Win-S-[1..3] flip to and move client to monitor 1-3
---    , ((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
---      | (key, sc) <- zip [xK_1, xK_2, xK_3] [0..]
---      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-    ]
+myKeys = [ ("M1-q", spawn "slock")
+         , ("M1-x", spawn "cb-exit")
+         , ("M4-w", spawn "iceweasel")
+         , ("M4-m", spawn "rhythmbox")
+         , ("M4-f", spawn "pcmanfm")
+         , ("M4-e", spawn "gvim")
+         , ("M1-S-p", spawn "dmenufm")
+         , ("M1-r", restart "xmonad" True)
+         , ("M1-<Tab>", cycleRecentWindows [xK_Alt_L] xK_Tab xK_Tab )
+         , ("M1-<Return>", spawn myTerminal)
+         , ("M1-S-<Return>", dwmpromote)
+         , ("M-S-<Left>", shiftToPrev)
+         , ("M-S-<Right>", shiftToNext)
+         ]

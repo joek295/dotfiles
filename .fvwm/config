@@ -5,7 +5,7 @@
 #
 # Global Settings
 # Virtual Desktops are each the size of a single screen. No viewporting.
-DesktopSize 2x2
+DesktopSize 1x1
 EwmhNumberOfDesktops 4
 EdgeThickness 1
 ClickTime 400
@@ -13,7 +13,7 @@ MoveThreshold 10
 Style * SloppyFocus, MouseFocusClickRaises
 Style * PositionPlacement UnderMouse
 # screen edges in form lrtb
-EwmhBaseStruts 0 0 18 0
+EwmhBaseStruts 0 0 18 22
 SnapAttraction 10 Screen
 Style * NoTitle
 Style * DontRaiseTransient, DontLowerTransient, StackTransientParent
@@ -30,8 +30,8 @@ Read modules
 
 ## Functions
 # Startup Functions - currently there is no startup function
-DestroyFunc InitFunction
-AddToFunc   InitFunction
+DestroyFunc StartFunction
+AddToFunc   StartFunction
 + I Exec exec conky
 #+ I Exec exec tint2
 + I Module FvwmIconMan
@@ -52,23 +52,29 @@ AddToFunc   RestoreDesktop
 + I All (CurrentPage, Iconic, State 1) Iconify off
 + I All (CurrentPage, State 1) ThisWindow State 1 False
 
-DestroyFunc FvwmTileHorz
-AddToFunc   FvwmTileHorz
+DestroyFunc FvwmTileNorth
+AddToFunc   FvwmTileNorth
++ I Maximize False
++ I Maximize 100 50
++ I Move 0 0 keep
+
+DestroyFunc FvwmTileSouth
+AddToFunc   FvwmTileSouth
 + I Maximize false
 + I Maximize 100 50
-+ I Move keep 0
-+ I Next Maximize false
-+ I Next Maximize 100 50
-+ I Next Move keep -0
++ I Move 0 -0 keep 
 
-DestroyFunc FvwmTileVert
-AddToFunc   FvwmTileVert
+DestroyFunc FvwmTileEast
+AddToFunc   FvwmTileEast
++ I Maximize false
++ I Maximize 50 100
++ I Move -0 keep
+
+DestroyFunc FvwmTileWest
+AddToFunc   FvwmTileWest
 + I Maximize false
 + I Maximize 50 100
 + I Move 0 keep
-+ I Next Maximize false
-+ I Next Maximize 50 100
-+ I Next Move -0 keep
 
 DestroyFunc FvwmCentre
 AddToFunc   FvwmCentre
@@ -131,7 +137,7 @@ Key Menu A 1 Menu WindowOps
 Key Tab A 1 NextRaise
 Key Tab A S1 PrevRaise
 Key Menu A 4 WindowList Root c c 
-Key p A 1 Exec exec /usr/bin/dmenu_run -nb #2e3436
+Key p A 1 Exec exec /usr/bin/dmenu_run -nb "#2e3436"
 Key p A S1 Exec exec /home/joe/scripts/dmenufm
 
 # Keys - FVWM
@@ -142,6 +148,8 @@ Key x A 1 Exec exec cb-exit
 # Keys - Virtual Desktops
 Key Right A 1 GotoDesk 1 0 3
 Key Left A 1 GotoDesk -1 0 3
+Key Up A 1 GotoDesk 2 0 3
+Key Down A 1 GotoDesk -2 0 3
 Key 1 A 1 GotoDesk 0 0
 Key 2 A 1 GotoDesk 0 1
 Key 3 A 1 GotoDesk 0 2
@@ -156,17 +164,19 @@ Key c WFS S1 Close
 Key n WTFS 1 Maximize
 Key m A 1 Iconify
 Key d A 1 ShowDesktop
-Key minus WTFS 1 FvwmTileHorz
-Key semicolon WTFS 1 FvwmTileVert
 Key h WFS 1 MoveWest
 Key j WFS 1 MoveSouth
 Key k WFS 1 MoveNorth
 Key l WFS 1 MoveEast
+Key h WFS S1 FvwmTileWest
+Key j WFS S1 FvwmTileSouth
+Key k WFS S1 FvwmTileNorth
+Key l WFS S1 FvwmTileEast
 Key Home WFS 1 FvwmCentre
-Key h WFS S1 Direction West (CurrentDesk, CurrentPage, !Transient) SelectWindow
-Key j WFS S1 Direction South (CurrentDesk, CurrentPage, !Transient) SelectWindow
-Key k WFS S1 Direction North (CurrentDesk, CurrentPage, !Transient) SelectWindow
-Key l WFS S1 Direction East (CurrentDesk, CurrentPage, !Transient) SelectWindow
+#Key h WFS S1 Direction West (CurrentDesk, CurrentPage, !Transient) SelectWindow
+#Key j WFS S1 Direction South (CurrentDesk, CurrentPage, !Transient) SelectWindow
+#Key k WFS S1 Direction North (CurrentDesk, CurrentPage, !Transient) SelectWindow
+#Key l WFS S1 Direction East (CurrentDesk, CurrentPage, !Transient) SelectWindow
 
 # Keys - Applications
 Key Return A 1 Exec exec x-terminal-emulator

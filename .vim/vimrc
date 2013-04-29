@@ -1,10 +1,9 @@
 " Joe Kitchen's vimrc file
-" Compatible with Vim 7.03
-" Last Edited: 20/09/2012
+" Compatible with Vim 7.3
 "
-" Changelog:
+" Changelog:{{{ 
 " 19/09/12:
-" + Added a number of new keymaps
+" + Added a number of new keymappings
 " + Cleaned up file layout
 " + Removed superfluous [help] and [RO] flags from statusline
 " 20/09/12:
@@ -12,33 +11,62 @@
 " 19/10/12:
 " + cleaned up all imap, nmap, and vmap to [i|n|v]noremap
 " + Added first abbreviations
-"
-" CONTENTS:
-"   1. GENERAL OPTIONS
-"   2. CODING
-"     2.i   Bracket Options
-"     2.ii  Tab Options
-"     2.iii Indentation Options
-"     2.iv  Filetype Options
-"   3. SEARCHING
-"   4. TABS
-"   5. MOVEMENT
-"   6. MODE CHANGING
-"   7. COPY & PASTE
-"   8. MISC KEYMAPS
-"   9. FUNCTIONS
-"   10. STATUSLINE
-"   11. ABBREVIATIONS
+" 21/10/12:
+" + Expanded section on abbreviations
+" + Simpler screen splitting
+" + Added mappings surrounding words/selections with brackets/quote marks
+" + Added marker at column 80
+" 25/03/13
+" + moved abbreviations to ~/.vim/autocorrect and sourced
+" + added command for quick editing of xmonad.hs
+" + added a section for quick-config commands
+" 26/03/13
+" + added commands for quick-editing of .bashrc and .xinitrc
+" 29/03/13
+" + added Pathogen
+" + changed colorscheme to Solarized
+" + added keymappings for move to next section in latex files
+" + added keymappings to emphasise or bold a word in latex files
+" 30/03/13
+" + added HardMode
+" 01/04/13
+" + HardMode disabled by default; movement with h&l disabled
+" + Added Folding Marks
+" }}}
+" CONTENTS:{{{
+"   1.  GENERAL OPTIONS
+"   2.  CODING
+"     i   Bracket Options
+"     ii  Tab Options
+"     iii Indentation Options
+"     iv  Filetype Options
+"   3.  SEARCHING
+"   4.  TABS
+"   5.  MOVEMENT
+"   6.  MODE CHANGING
+"   7.  COPY & PASTE
+"   8.  CONFIGURATION
+"   9.  MISC KEYMAPS
+"   10.  FUNCTIONS
+"   11. STATUSLINE
+"   12. ABBREVIATIONS
+"   13. PLUG-INS
+"   14: BOILERPLATE
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" GENERAL OPTIONS{{{ 
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" GENERAL OPTIONS
-
-runtime! debian.vim    " DO NOT REMOVE. ENABLES DEBIAN SYSTEM OPTIONS.
+" runtime! debian.vim    " DO NOT REMOVE. ENABLES DEBIAN SYSTEM OPTIONS.
 set nocompatible       " turn off vi compatibility mode
+
+execute pathogen#infect()
+execute pathogen#helptags()
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 let mapleader = ","
 let maplocalleader = "\\"
                        " leader is , rather than \
+                       " local leader is \
 set mouse=a            " mouse is always available
+set encoding=utf-8     " for Powerline
 set hidden             " hide abandoned buffers
 set wildmenu           " allow tab-completion and stuff
 set showcmd            " show partial command
@@ -46,19 +74,32 @@ set number             " line numbers on
 set cursorline         " highlight cursor line
 set cursorcolumn       " highlight cursor column
 set shortmess+=I       " disable welcome message
-set laststatus=2       " always show statusline
+set laststatus=2       " always show status-line
 set noswapfile         " disable backups
-set nobackup
-set nowb
-set spell              " spellcheck on
-set spelllang=en
+set nobackup           " disable backups
+set nowritebackup      " disable backups
+set spell              " spell-check on
+set spelllang=en       " set English as spell-check's language
 set formatoptions=l    " enable soft word-wrap
-set lbr                " wrap at end of word, rather than in middle
+set linebreak          " wrap at end of word, rather than in middle
+set whichwrap=h,l      " h and l commands can wrap over lines
+set foldmethod=marker  " {{{ and }}} mark folds
+set guioptions-=T      " if using gvim, do not show toolbar
+set guioptions-=m      " if using gvim, do not show menus
+set guioptions-=r      " do not show right-scrollbar
+set guioptions-=l      " ditto left scrollbar
+au FocusLost * :wa
+                       " save everything when tabbing to another window
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" CODING{{{ 
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" CODING
-
-syntax on              " syntax hilighting
+syntax enable          " syntax hilighting
+if has('gui_running')
+  set background=light
+else
+  set background=dark
+endif
+colorscheme solarized
 " Bracket Options
 set showmatch          " show matching brackets
 nnoremap <tab> %
@@ -76,9 +117,11 @@ filetype on            " try to recognise filetypes
 filetype indent on     " set indentation options appropriate to filetypes
 filetype plugin on
 filetype plugin indent on
+" Misc Options
+set colorcolumn=80     " Highlight 80th column
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" SEARCHING
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" SEARCHING{{{
 
 set ignorecase         " case insensitive matching
 set smartcase          " smart case matching
@@ -91,8 +134,8 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
                        " In visual mode, search backward for selection
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" TABS
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" TABS & SPLITSCREENS{{{
 " more convenient tabbing
 map <leader>t :tabnew<cr>
                        " ,t opens a new tab
@@ -117,42 +160,75 @@ map <leader> 8 :tabn 8<cr>
 map <leader> 9 :tabn 9<cr>
                        " ,<num> switches to tab #<num>
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" MOVEMENT
+" make splitscreen easier to use
+" ,v splits screen vertically; ,h horizontally
+nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>h <C-w>s<C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-left> <C-w>h
+nnoremap <C-down> <C-w>j
+nnoremap <C-up> <C-w>k
+nnoremap <C-right> <C-w>l
+
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" MOVEMENT{{{
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
+nnoremap h <nop>
+nnoremap l <nop>
 " j and k move by screenlines rather than absolute lines
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
+"vnoremap j gj
+"vnoremap k gk
+" H & L move to beginning and end of lines
 nnoremap H 0
 nnoremap L $
+" G also centres new line
+nnoremap G Gzz
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" MODE CHANGING
-" jj and <F1> escape into normal mode 
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" MODE CHANGING{{{
+" jj escapes into normal mode 
 inoremap jj <ESC>
-inoremap <F1> <Esc>
+inoremap jk <ESC>
 " ; enters cmd mode
 nnoremap ; :
+" toggle paste mode (to paste properly indented text)
+noremap <F6> :set invpaste paste?<CR>
+set pastetoggle=<F6>
+set showmode
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" COPY & PASTE
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" COPY & PASTE{{{
 " ,y ,Y and ,p are y Y and p using the system clipboard as the buffer
+" I barely ever use this: highlight and <S-INS> is much more common...
 noremap <leader>y "+y
 noremap <leader>Y "+Y
 noremap <leader>p "+gP
+" remap Y to behave consistently with C and D
+nnoremap Y y$
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" MISC KEYMAPS:
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" CONFIGURATION{{{
+" Quickly edit/reload the vimrc file
+nnoremap <silent> <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
+nnoremap <silent> <leader>ea :vsplit ~/.vim/autocorrect<CR>
+nnoremap <silent> <leader>eb :vsplit ~/.bashrc<CR>
+nnoremap <silent> <leader>ef :vsplit ~/.fvwm/config<CR>
+nnoremap <silent> <leader>ei :vsplit ~/.xinitrc<CR>
+nnoremap <silent> <leader>eo :vsplit ~/.config/openbox/rc.xml<CR>
+nnoremap <silent> <leader>ex :vsplit ~/.xmonad/xmonad.hs
+
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" MISC KEYMAPS{{{
  
-" toggle paste mode (to paste properly indented text)
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
 " use :w!! to write to a file using sudo
 cmap w!! %!sudo tee > /dev/null %
 " ,j inserts line-break at cursor
@@ -160,15 +236,10 @@ nnoremap <silent> <leader>j i<CR><ESC>
 " ,o and ,O insert newlines without entering insert mode
 nnoremap <silent> <leader>o o<ESC>
 nnoremap <silent> <leader>O O<ESC>
-" make splitscreen easier to use
-nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-" Quickly edit/reload the vimrc file
-nnoremap <silent> <leader>ev :vsplit $MYVIMRC<CR>
-nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
+" Ctrl+Backspace deletes last word
+inoremap <C-BS> <C-W>
+" Ctrl+Del deletes next word
+inoremap <C-Del> <esc>cw
 " Quickly surround word with ", ', (, [, {, <, or `
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
@@ -178,23 +249,42 @@ nnoremap <leader>{ viw<esc>a{<esc>hbi}<esc>lel
 nnoremap <leader>< viw<esc>a<<esc>hbi><esc>lel
 nnoremap <leader>` viw<esc>a`<esc>hbi`<esc>lel
 " Quickly surround selection with ", ', (, [, {, <, or `
-vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
-vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
-vnoremap <leader>( <esc>`<i(<esc>`>la)<esc>
-vnoremap <leader>[ <esc>`<i[<esc>`>la]<esc>
-vnoremap <leader>{ <esc>`<i{<esc>`>la}<esc>
-vnoremap <leader>< <esc>`<i<<esc>`>la><esc>
-vnoremap <leader>` <esc>`<i`<esc>`>la`<esc>
+vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
+vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
+vnoremap <leader>( <esc>`<i(<esc>`>a)<esc>
+vnoremap <leader>[ <esc>`<i[<esc>`>a]<esc>
+vnoremap <leader>{ <esc>`<i{<esc>`>a}<esc>
+vnoremap <leader>< <esc>`<i<<esc>`>a><esc>
+vnoremap <leader>` <esc>`<i`<esc>`>a`<esc>
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" FUNCTIONS
+" Bullet point a list: preface line with a *
+nnoremap <leader>* I*<space><esc>
+" Number all lines
+nnoremap <leader># :%s/^/\=line('.').". "/ 
+
+nnoremap <leader>, ,
+nnoremap <leader>; ;
+
+nnoremap <F8> :!ctags -R<CR>
+
+" TEMP
+" F1-4 and F8-12 are kept free for temporary remapping, as are <S-F[4-12]>
+
+" Filetype Specific
+autocmd FileType tex nnoremap <buffer> <localleader>i bi\textit{<ESC>ea}<ESC>
+autocmd FileType tex nnoremap <buffer> <localleader>b bi\textbf{<ESC>ea}<ESC>
+autocmd FileType tex nnoremap <buffer> <f2> A\\ <ESC>
+autocmd FileType tex nnoremap <silent> ]n :/\\\(sub\)\{,2}section\s*{<CR> :noh<CR>
+autocmd FileType tex nnoremap <silent> [n :?\\\(sub\)\{,2}section\s*{<CR> :noh<CR>
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" FUNCTIONS{{{
 
 " F5 toggles between abs. and rel. line #s [vim 7.3 onwards]
 function! g:ToggleNuMode()
 	if(&rnu == 1)
-		set nu
+		set number
 	else
-		set rnu
+		set relativenumber
 	endif
 endfunc
 nnoremap <F5> :call g:ToggleNuMode()<CR>
@@ -216,7 +306,7 @@ function! Chomp(str)
 endfunction
 
 function! DmenuOpen(cmd)
-  let fname = Chomp(system("find ~/ | dmenu -i -l 20 -p " . a:cmd))
+  let fname = Chomp(system("find ~/ -type f | dmenu -nb '#2e3436' -i -l 20 -p " . a:cmd))
   if empty(fname)
     return
   endif
@@ -225,58 +315,30 @@ endfunction
 map <c-t> :call DmenuOpen("tabe")<cr>
 map <c-f> :call DmenuOpen("e")<cr>
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" STATUSLINE
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" STATUSLINE{{{
 
-"define 3 custom highlight groups
-hi User1 ctermbg=green ctermfg=black   guibg=green guifg=black 
-hi User2 ctermbg=red   ctermfg=darkblue  guibg=red   guifg=darkblue
-hi User3 ctermbg=blue  ctermfg=green guibg=blue  guifg=green
+" name, modified flag, filetype, lines, columns, total lines
+set statusline=%F%m\ %y\ %=[%l,%c%V][%p%%]\ [%L] 
 
-set statusline=
-set statusline+=%1*
-" filepath
-set statusline+=%.30F
-set statusline+=%*
-" filetype, [modified flag]
-set statusline+=\ %y\ %m
-" statusline: separation between left and right aligned items
-set statusline+=%=
-" statusline: line number, column number, percent
-set statusline+=%3*
-set statusline+=[L:\ %l/%L]\ [C:\ %v]
-set statusline+=%2*
-set statusline+=\ [%p%%]
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" ABBREVIATIONS{{{
+source ~/.vim/autocorrect
 
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" ABBREVIATIONS
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" PLUG-INS{{{
 
-" Auto-correcting spellings
-iabbrev alleigance allegiance
-iabbrev alliegance allegiance
-" Inserting correct hyphenation
-iabbrev plugin plug-in
-iabbrev plugins plug-ins
-" Capitalising proper nouns
-iabbrev vim Vim
-iabbrev firefox Firefox
-iabbrev iceweasel Iceweasel
-iabbrev linux Linux
-iabbrev unix Unix
-iabbrev england England
-iabbrev britain Britain
-iabbrev germany Germany
-iabbrev france France
-" Expanding abbreviations
-iabbrev WWI First World War
-iabbrev WWII Second World War
-iabbrev wwi First World War
-iabbrev wwii Second World War
+let g:vimwiki_list = [{'path': '~/vimwiki/'}, {'path': '~/documents/schoolwork/university_work/notes/'}]
+nnoremap <F9> :call ToggleHardMode()<CR>
+let g:syntastic_enable_hilighting=1
+nnoremap <F10> :SyntasticCheck<CR>
+let g:tex_pdf_map_keys=0
+autocmd FileType tex nnoremap <silent> <localleader>r :BuildAndViewTexPdf<CR>
 
-" Abbreviations for specific filetypes only
-" LaTeX
-autocmd FileType tex :iabbrev <buffer> < \textless
-autocmd FileType tex :iabbrev <buffer> > \textgreater
-" Python
-autocmd FileType python :iabbrev <buffer> iff if:<left>
-
+" }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" BOILERPLATE{{{
+" Latex
+noremap <S-F1> i\documentclass[a4paper, 12pt]{article}<CR><CR>\title{}<CR>\author{Joe Kitchen}<CR><CR>\begin{document}<CR><CR>\end{document}<ESC>
+noremap <S-F2> i#!/bin/sh<CR><ESC>
+noremap <S-F3> i#!/usr/bin/env python<CR><ESC>
+" }}}
