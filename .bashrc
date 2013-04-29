@@ -43,10 +43,14 @@ alias x=startx
 alias cell=/home/joe/bin/freecell-1.0/src/freecell
 alias tetris=tetris-bsd
 alias apt='sudo aptitude'
+alias chx='chmod +x'
+alias mix='alsamixer'
 # with ls
 alias ls='ls -F --color --group-directories-first'
 alias la='ls -AF --color --group-directories-first'
-alias ll='ls -l'
+alias ll='ls -l --group-directories-first'
+alias lx='ls -X --color'
+alias lp='ls -Al | more' # pipes through more because less can't handle the colourising
 # internet connection
 alias ifup='sudo ifconfig eth0 up'
 alias ifdown='sudo ifconfig eth0 down'
@@ -59,8 +63,11 @@ alias pico=vim
 alias emacs=vim
 alias notepad=vimtutor
 # Misc
-alias commitall='git add . && git commit'
-alias cdd='cd /home/Joe/documents/schoolwork/essays'
+alias commitall='git add . && git commit && git push origin master'
+alias cdd='cd /home/joe/documents/schoolwork/university_work/essays'
+# alias less=some
+alias less='less -F'
+alias nocomment='grep -Ev "^(#|$)"'
 
 extract () {
   if [ -f "$1" ] ; then
@@ -84,6 +91,8 @@ extract () {
       echo "'$1' is not a valid file!"
   fi
 }
+
+mkcd() { mkdir -p "$@" && cd $_; }
 
 # Alias definitions can go in ~/.bash_aliases
 
