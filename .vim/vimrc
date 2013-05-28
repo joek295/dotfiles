@@ -90,6 +90,8 @@ set guioptions-=r      " do not show right-scrollbar
 set guioptions-=l      " ditto left scrollbar
 au FocusLost * :wa
                        " save everything when tabbing to another window
+au BufRead /tmp/mutt-* set tw=72
+                       " wrap 72-column text with mutt
 " }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " CODING{{{ 
 
@@ -100,6 +102,8 @@ else
   set background=dark
 endif
 colorscheme solarized
+call togglebg#map("<F8>")
+
 " Bracket Options
 set showmatch          " show matching brackets
 nnoremap <tab> %
@@ -265,7 +269,7 @@ nnoremap <leader># :%s/^/\=line('.').". "/
 nnoremap <leader>, ,
 nnoremap <leader>; ;
 
-nnoremap <F8> :!ctags -R<CR>
+"nnoremap <F8> :!ctags -R<CR>
 
 " TEMP
 " F1-4 and F8-12 are kept free for temporary remapping, as are <S-F[4-12]>
@@ -331,10 +335,11 @@ source ~/.vim/autocorrect
 let g:vimwiki_list = [{'path': '~/vimwiki/'}, {'path': '~/documents/schoolwork/university_work/notes/'}]
 nnoremap <F9> :call ToggleHardMode()<CR>
 let g:syntastic_enable_hilighting=1
+let g:syntastic_quiet_warnings=1
+let g:syntastic_always_populate_loc_list=1
 nnoremap <F10> :SyntasticCheck<CR>
 let g:tex_pdf_map_keys=0
 autocmd FileType tex nnoremap <silent> <localleader>r :BuildAndViewTexPdf<CR>
-
 " }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " BOILERPLATE{{{
 " Latex
