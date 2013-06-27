@@ -7,7 +7,7 @@ PATH=$PATH:/home/joe/scripts
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Console colors
+# {{{ Console colours
 if [ "$TERM" = "linux" ]; then
     #echo -en "\e]P0549088" #background gaia
     #echo -en "\e]P8073642" #darkgrey
@@ -27,8 +27,9 @@ if [ "$TERM" = "linux" ]; then
     #echo -en "\e]PFF9F9F9" #white
     clear #for background artifacting
 fi
+# }}}
 
-# set PS1:
+# {{{ set PS1:
 # Define color variables
 Color_Off='\[\033[0m\]'         # Text Reset
 
@@ -53,7 +54,9 @@ BCyan='\[\033[1;36m\]'    # Cyan
 BWhite='\[\033[1;37m\]'   # White
 
 PS1="${Red}\u${Blue}@\h${Color_Off}:${Green}\w\n ${Color_Off}$ "
+# }}}
 
+# {{{ History Options
 # don't put duplicate lines in the history. See bash(1) for more options
 # also force ignorespace
 HISTCONTROL=ignoredups
@@ -64,6 +67,7 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash (1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+# }}}
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -79,46 +83,7 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-# some aliases
-# command shortening
-alias sd='sudo shutdown -h now'
-alias rs='sudo shutdown -r now'
-alias x=startx
-alias cell=/home/joe/bin/freecell-1.0/src/freecell
-alias tetris=tetris-bsd
-alias apt='sudo aptitude'
-alias chx='chmod +x'
-alias mix='alsamixer'
-# with ls
-alias ls='ls -F --color --group-directories-first'
-alias la='ls -AF --color --group-directories-first'
-alias ll='ls -l --group-directories-first'
-alias lx='ls -X --color'
-alias lp='ls -Al | more' # pipes through more because less can't handle the colourising
-# internet connection
-alias ifup='sudo ifconfig eth0 up'
-alias ifdown='sudo ifconfig eth0 down'
-# I always forget sudo with these
-alias aptitude='sudo aptitude'
-alias update-grub='sudo update-grub'
-# Vim is the only true text editor
-alias nano=vim
-alias pico=vim
-alias emacs=vim
-alias notepad=vimtutor
-alias vi=vim
-# Misc
-alias commitall='git add . && git commit && git push origin master'
-alias cdd='cd /home/joe/documents/schoolwork/university_work/essays'
-# alias less=some
-alias nocomment='grep -Ev "^(#|$)"'
-alias ttb='teatimer -b'
-alias tto='teatimer -o'
-alias ttg='teatimer -g'
-alias tth='teatimer -h'
-alias tt='teatimer'
-alias ping='ping -c 3 example.com'
-
+# {{{ Functions
 extract () {
   if [ -f "$1" ] ; then
       case "$1" in
@@ -144,18 +109,24 @@ extract () {
 
 mkcd() { mkdir -p "$@" && cd $_; }
 
-# Alias definitions can go in ~/.bash_aliases
+rub() { rubber $1 && rm *.aux *.log;
+  dvipdf *.dvi && rm *dvi;
+}
 
+# }}}
+
+# Alias definitions can go in ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features 
+# {{{ Programmable Completion
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+# }}}
 
-#colourful man pages
+# {{{ colourful man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -163,3 +134,4 @@ export LESS_TERMCAP_se=$'\E[0m' # end the info box
 export LESS_TERMCAP_so=$'\E[01;42;30m' # begin the info box
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+# }}}

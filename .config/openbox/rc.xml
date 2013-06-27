@@ -11,24 +11,15 @@
     <focusNew>yes</focusNew>
     <followMouse>yes</followMouse>
     <focusLast>yes</focusLast>
-    <!-- focus the last used window when changing desktops instead of the one
-       under the mouse pointer when followMouse is enabled -->
     <underMouse>no</underMouse>
-    <!-- move focus under the mouse, even when the mouse is not moving -->
     <focusDelay>200</focusDelay>
     <raiseOnFocus>no</raiseOnFocus>
   </focus>
   <placement>
     <policy>Smart</policy>
-    <!-- 'Smart' or 'UnderMouse' -->
     <center>yes</center>
-    <!-- place windows in the center of free area or top left corner -->
     <monitor>Active</monitor>
-    <!-- on multi-monitor system, place new windows on: 
-    	 'Any' - any monitor, 'Mouse' - with mouse, 'Active' - with active window -->
     <primaryMonitor>1</primaryMonitor>
-    <!-- Can be a number from 1, specifying a particular monitor, or:
-  		 'Mouse' - where the mouse is, or 'Active' - where the active window is -->
   </placement>
   <theme>
     <name>Natura</name>
@@ -226,7 +217,7 @@
       </action>
     </keybind>
     <!-- FOR OB 3.5+    -->
-    <keybind key="A-semicolon">
+    <keybind key="A-S-h">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <x>0</x>
@@ -235,11 +226,29 @@
         <height>100%</height>
       </action>
     </keybind>
-    <keybind key="A-minus">
+    <keybind key="A-S-l">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>100%</height>
+      </action>
+    </keybind>
+    <keybind key="A-S-k">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
         <x>0</x>
         <y>0</y>
+        <width>100%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="A-S-j">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>-0</y>
         <width>100%</width>
         <height>50%</height>
       </action>
@@ -469,12 +478,9 @@
     </context>
   </mouse>
   <menu>
-    <!-- You can specify more than one menu file in here and they are all loaded -->
     <file>/var/lib/openbox/debian-menu.xml</file>
     <file>menu.xml</file>
     <hideDelay>200</hideDelay>
-    <!-- if a press-release lasts longer than this setting (in milliseconds), the
-       menu is hidden again -->
     <middle>no</middle>
     <!-- center submenus vertically about the parent entry -->
     <submenuShowDelay>100</submenuShowDelay>

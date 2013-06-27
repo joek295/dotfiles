@@ -1,5 +1,5 @@
 ## MENUS
-# Styles
+# {{{ Styles
 MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
 MenuStyle * PopupOffset -5 100, TitleWarpOff
 MenuStyle * TitleUnderlines2, SeparatorsLong, TrianglesSolid
@@ -11,16 +11,31 @@ MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
 MenuStyle * MenuColorset 0
 MenuStyle * ActiveFore, Hilight3DOff
 MenuStyle * ActiveColorset 0
+# }}}
 
-# Root Menu
+# {{{ Root Menu
 DestroyMenu RootMenu
 AddToMenu   RootMenu "Root Menu" Title
 Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Debian" Popup "/Debian"
 Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Re-read Menu" Read "$[FVWM_USERDIR]/menudefs.hook"
 Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Update Menu" PipeRead 'update-menus &&  echo "Read $[FVWM_USERDIR]/menudefs.hook"'
 + "" Nop
++ "&Web" Popup WebMenu
++ "" Nop
 + "&Restart/Quit" Popup RestartQuit
+# }}}
 
+# {{{ Internet
+DestroyMenu WebMenu
+AddToMenu WebMenu "Web" Title
++ "Iceweasel" Exec exec Iceweasel
++ "Mutt" Exec exec urxvt -e mutt
++ "Transmission" Exec exec transmission-gtk
++ "Uzbl" Exec exec uzbl
++ "Xchat" Exec exec xchat
+# }}}
+
+# {{{ Call Debian Menu
 # Make sure that the Debian menus, and the icons they reference, are 
 # available if we have menudefs.hook
 DestroyFunc SetDebianMenu
@@ -28,14 +43,16 @@ AddToFunc   SetDebianMenu
 + I Read $[FVWM_USERDIR]/menudefs.hook
 + I Test (F $[FVWM_USERDIR]/menudefs.hook) Read menudefs.hook quiet
 Test (f  $[FVWM_USERDIR]/menudefs.hook) SetDebianMenu
+# }}}
 
-# Restart/Quit Menu
+# {{{ Restart/Quit Menu
 DestroyMenu RestartQuit
 AddToMenu RestartQuit
 + "&Restart" Restart
 + "&Quit" Quit
+# }}}
 
-# Window Operations Menu
+# {{{ Window Operations Menu
 DestroyMenu WindowOps
 AddToMenu   WindowOps "Window Operations" Title
 + "&Move"               Move
@@ -58,6 +75,7 @@ AddToMenu   WindowOps "Window Operations" Title
 + "" Nop
 + "Ide&ntify"           Module FvwmIdent
 
+# {{{ SubMenu: Window Style
 DestroyMenu WindowStyle
 AddToMenu   WindowStyle
 + "Title&AtTop"        Pick (CirculateHit) Style $n TitleAtTop
@@ -86,7 +104,9 @@ AddToMenu   WindowStyle
 + "&ClickToFocus"      Pick (CirculateHit) Style $n ClickToFocus
 + "&MouseFocus"        Pick (CirculateHit) Style $n MouseFocus
 + "&NeverFocus"        Pick (CirculateHit) Style $n NeverFocus
+# }}}
 
+# {{{ SubMenu: Window Rearrange
 DestroyMenu WinRearrange
 AddToMenu   WinRearrange
 + "&Cascade"         FvwmRearrange -cascade -m 3 3 -incx 2
@@ -95,4 +115,5 @@ AddToMenu   WinRearrange
 + "" Nop
 + "&Arrange Icons"   All (CurrentDesk Iconic) RecaptureWindow
 + "&Refresh Screen"  Refresh
-
+# }}}
+# }}}

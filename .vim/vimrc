@@ -200,7 +200,7 @@ nnoremap G Gzz
 " MODE CHANGING{{{
 " jj escapes into normal mode 
 inoremap jj <ESC>
-inoremap jk <ESC>
+inoremap kj <ESC>
 " ; enters cmd mode
 nnoremap ; :
 " toggle paste mode (to paste properly indented text)

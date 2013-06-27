@@ -3,55 +3,62 @@
 # This configuration is intended to be usable in both moused and mouseless environments.
 # To that end it makes heavy use of keyboard-commands, including vim-like movement.
 #
-# Global Settings
-# Virtual Desktops are each the size of a single screen. No viewporting.
+# {{{ Global Settings
+# {{{ Virtual Desktops 
+# each the size of a single screen. No viewporting.
 DesktopSize 1x1
 EwmhNumberOfDesktops 4
+# }}}
+# {{{ screen edges 
 EdgeThickness 1
+# number of protected pixels on left-right-top-bottom edge
+EwmhBaseStruts 0 0 18 22
+SnapAttraction 10 Screen
+# }}}
 ClickTime 400
 MoveThreshold 10
 Style * SloppyFocus, MouseFocusClickRaises
 Style * PositionPlacement UnderMouse
-# screen edges in form lrtb
-EwmhBaseStruts 0 0 18 22
-SnapAttraction 10 Screen
 Style * NoTitle
 Style * DontRaiseTransient, DontLowerTransient, StackTransientParent
 Style * GrabFocusOff
 Style * BorderWidth 1, HandleWidth 1
 Style * !IconTitle
-
 # Coloursets - defined colours can be found with '''showrgb | less'''
 Colorset 0 fg Contrast bg 2e/34/36
-
-# Other Files called by this configuration
+# }}}
+# {{{ Read other files
+# if absolute path is not defined, file is in ~/.fvwm/config
 Read menu
 Read modules
-
-## Functions
-# Startup Functions - currently there is no startup function
+# }}}
+## {{{ Functions
+# {{{ Startup Functions 
 DestroyFunc StartFunction
 AddToFunc   StartFunction
 + I Exec exec conky
 #+ I Exec exec tint2
 + I Module FvwmIconMan
 + I Module FvwmPager 0 3
-+ I Exec exec hsetroot -solid "#2e3436"
+# Cannot get network manager working with fvwm's modules. Possibly the trick is to use stalonetray or similar.
 #+ I Exec exec nm-applet
-
-# Complex Functions
+# }}}
+# {{{ Complex Functions
+# {{{ Show Desktop 
 DestroyFunc ShowDesktop
 AddToFunc   ShowDesktop
 + I All (CurrentPage, Iconic, State 1) RestoreDesktop
 + I TestRc (Match) Break
 + I All (CurrentPage, !Iconic, !State 1) ThisWindow State 1 True
 + I All (CurrentPage, !Iconic, State 1) Iconify
-
+# }}}
+# {{{ Restore Desktop
 DestroyFunc RestoreDesktop
 AddToFunc   RestoreDesktop
 + I All (CurrentPage, Iconic, State 1) Iconify off
 + I All (CurrentPage, State 1) ThisWindow State 1 False
-
+# }}}
+# {{{ Tile Directionally
 DestroyFunc FvwmTileNorth
 AddToFunc   FvwmTileNorth
 + I Maximize False
@@ -75,13 +82,16 @@ AddToFunc   FvwmTileWest
 + I Maximize false
 + I Maximize 50 100
 + I Move 0 keep
-
+# }}}
+#  {{{ Move window
+# {{{ Centre Window
 DestroyFunc FvwmCentre
 AddToFunc   FvwmCentre
 + I Maximize false
 + I Maximize 50 50
 + I Move 50-50w 50-50w
-
+# }}}
+# {{{ Move Directionally
 DestroyFunc MoveNorth
 AddToFunc MoveNorth
 + I Move keep 0
@@ -101,7 +111,9 @@ DestroyFunc MoveWest
 AddToFunc MoveWest
 + I Move 0 keep
 + I WarpToWindow 50 50
-
+# }}}
+# }}}
+# {{{ Alt-tab
 DestroyFunc NextRaise
 AddToFunc NextRaise
 + I Next (CurrentPage !ButtonDocks) FlipFocus
@@ -113,7 +125,8 @@ AddToFunc PrevRaise
 + I Prev (CurrentPage !ButtonDocks) FlipFocus
 + I Current (*) Raise
 + I Iconify false
-
+# }}}
+# {{{ Alt-click
 DestroyFunc MouseMove
 AddToFunc MouseMove
 + H Move
@@ -123,15 +136,21 @@ DestroyFunc MouseResize
 AddToFunc MouseResize
 + H Resize bottomright
 + M Resize bottomright
-
+# }}}
 DestroyFunc SelectWindow
 AddToFunc SelectWindow
 + I FlipFocus
 + I Raise
 + I WarpToWindow 50 50
-
-## Key- and Mouse-Bindings
-# Keys - Menus:
+# }}}
+# }}}
+## {{{ Key- and Mouse-Bindings
+# {{{ Keys - FVWM
+Key q A S1 Quit
+Key r A S1 Restart
+Key x A 1 Exec exec cb-exit
+# }}}
+# {{{ Keys - Menus:
 Key Menu A N Menu RootMenu
 Key Menu A 1 Menu WindowOps
 Key Tab A 1 NextRaise
@@ -139,13 +158,9 @@ Key Tab A S1 PrevRaise
 Key Menu A 4 WindowList Root c c 
 Key p A 1 Exec exec /usr/bin/dmenu_run -nb "#2e3436"
 Key p A S1 Exec exec /home/joe/scripts/dmenufm
-
-# Keys - FVWM
-Key q A S1 Quit
-Key r A S1 Restart
-Key x A 1 Exec exec cb-exit
-
-# Keys - Virtual Desktops
+# }}}
+# {{{ Keys - Virtual Desktops
+# {{{ Go to
 Key Right A 1 GotoDesk 1 0 3
 Key Left A 1 GotoDesk -1 0 3
 Key Up A 1 GotoDesk 2 0 3
@@ -154,41 +169,44 @@ Key 1 A 1 GotoDesk 0 0
 Key 2 A 1 GotoDesk 0 1
 Key 3 A 1 GotoDesk 0 2
 Key 4 A 1 GotoDesk 0 3
+# }}}
+# {{{ Move to
 Key 1 A S1 MovetoDesk 0 0
 Key 2 A S1 MovetoDesk 0 1
 Key 3 A S1 MovetoDesk 0 2
 Key 4 A S1 MovetoDesk 0 3
-
-# Keys - WM
+# }}}
+# }}}
+# {{{ Keys - WM
 Key c WFS S1 Close
+# {{{ Resize
 Key n WTFS 1 Maximize
-Key m A 1 Iconify
-Key d A 1 ShowDesktop
-Key h WFS 1 MoveWest
-Key j WFS 1 MoveSouth
-Key k WFS 1 MoveNorth
-Key l WFS 1 MoveEast
 Key h WFS S1 FvwmTileWest
 Key j WFS S1 FvwmTileSouth
 Key k WFS S1 FvwmTileNorth
 Key l WFS S1 FvwmTileEast
+Key m A 1 Iconify
+Key d A 1 ShowDesktop
+# }}}
+# {{{ Move
+Key h WFS 1 MoveWest
+Key j WFS 1 MoveSouth
+Key k WFS 1 MoveNorth
+Key l WFS 1 MoveEast
 Key Home WFS 1 FvwmCentre
-#Key h WFS S1 Direction West (CurrentDesk, CurrentPage, !Transient) SelectWindow
-#Key j WFS S1 Direction South (CurrentDesk, CurrentPage, !Transient) SelectWindow
-#Key k WFS S1 Direction North (CurrentDesk, CurrentPage, !Transient) SelectWindow
-#Key l WFS S1 Direction East (CurrentDesk, CurrentPage, !Transient) SelectWindow
-
-# Keys - Applications
+# }}}
+# }}}
+# {{{ Keys - Applications
 Key Return A 1 Exec exec x-terminal-emulator
 Key w A 4 Exec exec iceweasel
 Key e A 4 Exec exec gvim
 Key f A 4 Exec exec pcmanfm
 Key t A 4 Exec exec x-terminal-emulator
 Key m A 4 Exec exec rhythmbox
-Key v A 4 Exec exec gnome-mplayer
+Key v A 4 Exec exec vlc
 Key q A 1 Exec exec slock
-
-# Mouse:
+# }}}
+# {{{ Mouse
 # Buttons 1,2,3 are L,M,R respectively
 Mouse 3 R A Menu RootMenu
 Mouse 1 R A Menu WindowOps
@@ -199,4 +217,5 @@ Mouse 4 R A Desk 1
 Mouse 5 R A Desk -1
 Mouse 1 WFST M MouseMove
 Mouse 3 WFST M MouseResize
-
+# }}}
+# }}}

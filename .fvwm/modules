@@ -1,4 +1,4 @@
-# Icon Manager
+# {{{ Icon Manager
 Style "FvwmIconMan" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
 DestroyModuleConfig FvwmIconMan: *
 
@@ -16,8 +16,8 @@ DestroyModuleConfig FvwmIconMan: *
 *FvwmIconMan: action    Mouse    1 N sendcommand Iconify
 *FvwmIconMan: action    Mouse    2 N sendcommand Close
 *FvwmIconMan: action    Mouse    3 N sendcommand "Menu WindowOps c+0 -101m "
-
-# Desker
+# }}}
+# {{{ Desker
 Style "FvwmPager" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
 DestroyModuleConfig FvwmPager: *
 *FvwmPager: Rows 2
@@ -26,4 +26,10 @@ DestroyModuleConfig FvwmPager: *
 *FvwmPager: Colorset 0
 *FvwmPager: Back #2e3436
 *FvwmPager: Geometry -20+20
-
+# }}}
+# {{{ Buttons
+# Style "FvwmButtons" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
+# DestroyModuleConfig FvwmButtons: *
+# *FvwmButtons: Rows 1
+# *FvwmButtons: Columns 40
+# }}}

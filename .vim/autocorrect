@@ -14,6 +14,9 @@ iabbrev occassion occasion
 iabbrev ocassion occasion
 iabbrev occassional occasional
 iabbrev occassions occasions
+iabbrev percieve perceive
+iabbrev percieves perceives
+iabbrev percieved perceived
 iabbrev recieve receive
 iabbrev recieves receives
 iabbrev recieved received
@@ -23,6 +26,7 @@ iabbrev recieving receiving
 iabbrev seperate separate
 iabbrev seperated separated
 iabbrev seperates separates
+iabbrev seperation separation
 iabbrev supress suppress
 iabbrev supressed suppressed
 iabbrev supresses suppressed
@@ -74,6 +78,8 @@ iabbrev wwi the First World War
 iabbrev wwii the Second World War
 iabbrev ecw English Civil War
 iabbrev ECW English Civil War
+iabbrev athens Athens
+iabbrev athenian Athenian
 
 " Abbreviations for specific filetypes only
 " LaTeX
