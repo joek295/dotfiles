@@ -32,6 +32,9 @@
 " 01/04/13
 " + HardMode disabled by default; movement with h&l disabled
 " + Added Folding Marks
+" 05/08/13
+" + changed split behaviour to :[v]new rather than :[v]split
+" + kj now exits insert mode; jk and jj do not
 " }}}
 " CONTENTS:{{{
 "   1.  GENERAL OPTIONS
@@ -88,7 +91,7 @@ set guioptions-=T      " if using gvim, do not show toolbar
 set guioptions-=m      " if using gvim, do not show menus
 set guioptions-=r      " do not show right-scrollbar
 set guioptions-=l      " ditto left scrollbar
-au FocusLost * :wa
+au FocusLost * silent! :wa
                        " save everything when tabbing to another window
 au BufRead /tmp/mutt-* set tw=72
                        " wrap 72-column text with mutt
@@ -123,6 +126,9 @@ filetype plugin on
 filetype plugin indent on
 " Misc Options
 set colorcolumn=80     " Highlight 80th column
+" automatically give executable permissions to files beginning #! and
+" containing /bin/ in their path
+au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
 
 " }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " SEARCHING{{{
@@ -166,8 +172,8 @@ map <leader> 9 :tabn 9<cr>
 
 " make splitscreen easier to use
 " ,v splits screen vertically; ,h horizontally
-nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>h <C-w>s<C-w>j
+nnoremap <leader>v :vnew<CR>
+nnoremap <leader>h :new<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -198,8 +204,7 @@ nnoremap G Gzz
 
 " }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " MODE CHANGING{{{
-" jj escapes into normal mode 
-inoremap jj <ESC>
+" kj escapes into normal mode 
 inoremap kj <ESC>
 " ; enters cmd mode
 nnoremap ; :
@@ -271,6 +276,9 @@ nnoremap <leader>; ;
 
 "nnoremap <F8> :!ctags -R<CR>
 
+" set return to fold/unfold
+nnoremap <CR> za
+
 " TEMP
 " F1-4 and F8-12 are kept free for temporary remapping, as are <S-F[4-12]>
 
@@ -332,7 +340,7 @@ source ~/.vim/autocorrect
 " }}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " PLUG-INS{{{
 
-let g:vimwiki_list = [{'path': '~/vimwiki/'}, {'path': '~/documents/schoolwork/university_work/notes/'}]
+let g:vimwiki_list = [{'path': '~/media/vimwiki/'}, {'path': '~/documents/schoolwork/university_work/notes/'}]
 nnoremap <F9> :call ToggleHardMode()<CR>
 let g:syntastic_enable_hilighting=1
 let g:syntastic_quiet_warnings=1

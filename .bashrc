@@ -1,12 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (package: bash-doc) for examples
 
-# add ~/scripts to PATH
-PATH=$PATH:/home/joe/scripts
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
 # {{{ Console colours
 if [ "$TERM" = "linux" ]; then
     #echo -en "\e]P0549088" #background gaia
@@ -28,7 +24,6 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 # }}}
-
 # {{{ set PS1:
 # Define color variables
 Color_Off='\[\033[0m\]'         # Text Reset
@@ -53,21 +48,31 @@ BPurple='\[\033[1;35m\]'  # Purple
 BCyan='\[\033[1;36m\]'    # Cyan
 BWhite='\[\033[1;37m\]'   # White
 
-PS1="${Red}\u${Blue}@\h${Color_Off}:${Green}\w\n ${Color_Off}$ "
-# }}}
+# If connected via SSH, hostname and username will be different colours
+SSH_IP=`echo $SSH_CLIENT | awk '{ print $1 }'`
+if [ $SSH_IP ] ; then
+  HOSTNAME_COLOUR=$BRed
+else 
+  HOSTNAME_COLOUR=$Blue
+fi
 
+PS1="${Blue}\u${HOSTNAME_COLOUR}@\h${Color_Off}:${Green}\w\n ${Color_Off}$ "
+# }}}
 # {{{ History Options
-# don't put duplicate lines in the history. See bash(1) for more options
-# also force ignorespace
-HISTCONTROL=ignoredups
-HISTCONTROL=ignoreboth
+# Ignore lines beginning with a space for purposes of history
+HISTCONTROL=ignorespace
 # append to the history file, don't overwrite it
 shopt -s histappend
+# write history live, rather than when a shell exits...
+PROMPT_COMMAND='history -a'
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash (1)
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=5000
+HISTIGNORE=l[asl]:cd:x:exit
 # }}}
+
+CDPATH='.:..:~:~/media/university/essays'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -82,50 +87,17 @@ fi
 case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
-
-# {{{ Functions
-extract () {
-  if [ -f "$1" ] ; then
-      case "$1" in
-          *.tar.bz2)   tar xvjf "$1"    ;;
-          *.tar.gz)    tar xvzf "$1"    ;;
-          *.bz2)       bunzip2 "$1"     ;;
-          *.rar)       rar x "$1"       ;;
-          *.gz)        gunzip "$1"      ;;
-          *.tar)       tar xvf "$1"     ;;
-          *.tbz2)      tar xvjf "$1"    ;;
-          *.tgz)       tar xvzf "$1"    ;;
-          *.zip)       unzip "$1"       ;;
-          *.Z)         uncompress "$1"  ;;
-          *.7z)        7z x "$1"        ;;
-          *.cbr)       rar x "$1"       ;;
-          *.cbz)       unzip "$1"       ;;
-          *)           echo "don't know how to extract '$1'..." ;;
-      esac
-  else
-      echo "'$1' is not a valid file!"
-  fi
-}
-
-mkcd() { mkdir -p "$@" && cd $_; }
-
-rub() { rubber $1 && rm *.aux *.log;
-  dvipdf *.dvi && rm *dvi;
-}
-
-# }}}
-
-# Alias definitions can go in ~/.bash_aliases
+# {{{ Aliases
+# Alias and function definitions go in ~/.bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
+#}}}
 # {{{ Programmable Completion
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+if [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
 fi
 # }}}
-
 # {{{ colourful man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -135,3 +107,5 @@ export LESS_TERMCAP_so=$'\E[01;42;30m' # begin the info box
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 # }}}
+
+

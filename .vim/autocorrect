@@ -45,12 +45,17 @@ iabbrev statuslines status-lines
 " Capitalising proper nouns
   " Trademarks etc.
 iabbrev firefox Firefox
-iabbrev iceweasel Iceweasel
 iabbrev linux Linux
 iabbrev microsoft Microsoft
 iabbrev unix Unix
   " Countries and Places
+iabbrev america America
+iabbrev american American
+iabbrev americans Americans
+iabbrev athens Athens
+iabbrev athenian Athenian
 iabbrev britain Britain
+iabbrev british British
 iabbrev england England
 iabbrev france France
 iabbrev germany Germany
@@ -61,16 +66,16 @@ iabbrev wales Wales
   " Personal Names
 iabbrev charles Charles
 iabbrev elizabeth Elizabeth
-iabbrev henry Henry
-iabbrev james James
-iabbrev william William
-iabbrev mary Mary
 iabbrev harry Harry
+iabbrev henry Henry
 iabbrev hermione Hermione
-iabbrev ron Ron
+iabbrev james James
+iabbrev mary Mary
 iabbrev pepys Pepys
 iabbrev peyps Pepys
 iabbrev Peyps Pepys
+iabbrev ron Ron
+iabbrev william William
 " Expanding abbreviations
 iabbrev WWI the First World War
 iabbrev WWII the Second World War
@@ -78,8 +83,7 @@ iabbrev wwi the First World War
 iabbrev wwii the Second World War
 iabbrev ecw English Civil War
 iabbrev ECW English Civil War
-iabbrev athens Athens
-iabbrev athenian Athenian
+iabbrev govt government
 
 " Abbreviations for specific filetypes only
 " LaTeX
