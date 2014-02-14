@@ -14,23 +14,31 @@ import XMonad.Layout.PerWorkspace (onWorkspace)
 
 myTerminal = "/usr/bin/urxvt"
 
+-- Define applications which should float by default; 
+-- and those which should open on other WS by default
 myManageHook = composeAll . concat $
   [ 
     [ className =? i --> doFloat | i <- myFloats ]
-  , [ className =? m --> doShift "3:Media" | m <- myMediaShifts ]
+  , [ className =? m --> doShift "8" | m <- myMediaShifts ]
+  , [ className =? m --> doShift "9" | m <- myChatShifts ]
   ]
   where
     myFloats = ["Gimp","Skype"]
     myMediaShifts = ["Vlc","Rhythmbox"]
+    myChatShifts = ["Skype","Xchat"]
 
+-- Layouts: Tall and Grid; tabbed sub-layout
+-- If only one window, don't bother with borders for focused
 defaultLayout = windowNavigation $ subTabbed $ avoidStruts $ smartBorders (
   Tall 1 (3/100) (1/2) ||| Grid )
 
 myLayouts = defaultLayout
 
+-- 9 workspaces
 myWorkspaces =
-  [ "1:Gen", "2:SSH", "3:Media" ] ++ map show [4..9]
+  map show [1..9]
 
+-- on startup, run conky
 myStartupHook = do
   spawn "conky"
 
@@ -46,30 +54,38 @@ main = do
 
     -- list of additional custom keybindings:
 myKeys = 
-  [ ("M1-q", spawn "slock")
-  , ("M1-x", spawn "cb-exit")
+  [ 
+  -- various keybindings for starting applications:
+    ("M1-q", spawn "slock")
   , ("M4-w", spawn "iceweasel")
   , ("M4-m", spawn "rhythmbox")
+  , ("M4-v", spawn "vlc")
   , ("M4-f", spawn "pcmanfm")
   , ("M4-e", spawn "gvim")
+  , ("M4-t", spawn myTerminal)
+  , ("M1-<Return>", spawn myTerminal)
   , ("M1-S-p", spawn "dmenufm")
   , ("M4-S-m", spawn "mpdmenu")
+
+  -- control volume from keyboard
+  , ("M1-S-<comma>", spawn "amixer -q set Master,0 5%-")
+  , ("M1-S-<period>", spawn "amixer -q set Master,0 5%+")
+
   , ("M1-r", restart "xmonad" True)
-  , ("M1-<Tab>", cycleRecentWindows [xK_Alt_L] xK_Tab xK_Tab )
-  , ("M1-<Return>", spawn myTerminal)
-  -- A-S-Return promotes focused window to master
   , ("M1-S-<Return>", dwmpromote)
-  -- A-S-<L|R> move windows to next/prev virtual desktop; A-<l|r> move to same
+
+  -- A-<L|R> moves to prev/next WS; A-S-<L|R> pushes window there
   , ("M-<Left>", prevWS)
-  , ("M-S-<Left>", shiftToPrev)
   , ("M-<Right>", nextWS)
+  , ("M-S-<Left>", shiftToPrev)
   , ("M-S-<Right>", shiftToNext)
+
+  -- control tab-groups: 
+  -- pullGroup pulls window in direction into tabgroup
+  -- unMerge takes focused window out of tabgroup
   , ("M-C-k", sendMessage $ pullGroup U)
   , ("M-C-h", sendMessage $ pullGroup L)
   , ("M-C-j", sendMessage $ pullGroup D)
   , ("M-C-l", sendMessage $ pullGroup R)
   , ("M-u", withFocused (sendMessage . UnMerge))
-  -- keyboard volume control
-  , ("M1-S-<comma>", spawn "amixer -q set Master,0 5%-")
-  , ("M1-S-<period>", spawn "amixer -q set Master,0 5%+")
   ]
