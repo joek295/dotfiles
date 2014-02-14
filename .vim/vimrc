@@ -91,6 +91,7 @@ set guioptions-=T      " if using gvim, do not show toolbar
 set guioptions-=m      " if using gvim, do not show menus
 set guioptions-=r      " do not show right-scrollbar
 set guioptions-=l      " ditto left scrollbar
+set guiheadroom=0
 au FocusLost * silent! :wa
                        " save everything when tabbing to another window
 au BufRead /tmp/mutt-* set tw=72

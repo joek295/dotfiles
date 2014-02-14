@@ -29,5 +29,6 @@ PAGER=/usr/bin/less LESSHISTFILE=-
 export EDITOR VISUAL PAGER
 
 pulseaudio --start &
+mpd &
 dropbox start &
 find ~/ > /dev/null &
