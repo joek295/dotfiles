@@ -1,0 +1,119 @@
+## MENUS
+# {{{ Styles
+MenuStyle * PopupDelayed, PopupDelay 300, PopdownImmediately
+MenuStyle * PopupOffset -5 100, TitleWarpOff
+MenuStyle * TitleUnderlines2, SeparatorsLong, TrianglesSolid
+MenuStyle * AnimationOff, AutomaticHotkeysOff
+MenuStyle * BorderWidth 2
+MenuStyle * PopupAsSubmenu, HoldSubmenus, SubmenusRight
+MenuStyle * ItemFormat "%|%5.5i%1.3l%2.3>%|"
+MenuStyle * VerticalItemSpacing 1 1, VerticalTitleSpacing 2 2
+MenuStyle * MenuColorset 0
+MenuStyle * ActiveFore, Hilight3DOff
+MenuStyle * ActiveColorset 0
+# }}}
+
+# {{{ Root Menu
+DestroyMenu RootMenu
+AddToMenu   RootMenu "Root Menu" Title
+Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Debian" Popup "/Debian"
+Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Re-read Menu" Read "$[FVWM_USERDIR]/menudefs.hook"
+Test (f  $[FVWM_USERDIR]/menudefs.hook) + "&Update Menu" PipeRead 'update-menus &&  echo "Read $[FVWM_USERDIR]/menudefs.hook"'
++ "" Nop
++ "&Web" Popup WebMenu
++ "" Nop
++ "&Restart/Quit" Popup RestartQuit
+# }}}
+
+# {{{ Internet
+DestroyMenu WebMenu
+AddToMenu WebMenu "Web" Title
++ "Iceweasel" Exec exec Iceweasel
++ "Mutt" Exec exec urxvt -e mutt
++ "Transmission" Exec exec transmission-gtk
++ "Uzbl" Exec exec uzbl
++ "Xchat" Exec exec xchat
+# }}}
+
+# {{{ Call Debian Menu
+# Make sure that the Debian menus, and the icons they reference, are 
+# available if we have menudefs.hook
+DestroyFunc SetDebianMenu
+AddToFunc   SetDebianMenu
++ I Read $[FVWM_USERDIR]/menudefs.hook
++ I Test (F $[FVWM_USERDIR]/menudefs.hook) Read menudefs.hook quiet
+Test (f  $[FVWM_USERDIR]/menudefs.hook) SetDebianMenu
+# }}}
+
+# {{{ Restart/Quit Menu
+DestroyMenu RestartQuit
+AddToMenu RestartQuit
++ "&Restart" Restart
++ "&Quit" Quit
+# }}}
+
+# {{{ Window Operations Menu
+DestroyMenu WindowOps
+AddToMenu   WindowOps "Window Operations" Title
++ "&Move"               Move
++ "&Resize"             Resize
++ "(De)&Iconify"        Iconify
++ "(Un)M&aximize"       Maximize
++ "Maximize Vertical"   Maximize 0 100
++ "Maximize Horizontal" Maximize 100 0
++ "Shade"               WindowShade
++ "Raise"               Raise
++ "Lower"               Lower
++ "&Omnipresent"        Stick
++ "" Nop
++ "&Close"              Close
++ "&Delete"             Delete
++ "&Kill"               Destroy
++ "" Nop
++ "&Window Style"	      Popup WindowStyle
++ "&Rearrange/Scroll"	  Popup WinRearrange
++ "" Nop
++ "Ide&ntify"           Module FvwmIdent
+
+# {{{ SubMenu: Window Style
+DestroyMenu WindowStyle
+AddToMenu   WindowStyle
++ "Title&AtTop"        Pick (CirculateHit) Style $n TitleAtTop
++ "&NoTitle"	         Pick (CirculateHit) Style $n !Title
++ "&Title"	           Pick (CirculateHit) Style $n !Title
++ "TitleAt&Bottom"     Pick (CirculateHit) Style $n TitleAtBottom
++ "" Nop
++ "StaysOn&Top"        Pick (CirculateHit) StyleAndRecapture $n StaysOnTop
++ "Stays&Put"          Pick (CirculateHit) StyleAndRecapture $n StaysPut
++ "StaysOn&Bottom"     Pick (CirculateHit) StyleAndRecapture $n StaysOnBottom
++ "" Nop
++ "&FvwmBorder"	       Pick (CirculateHit) Style $n FvwmBorder
++ "&MWMBorder"		     Pick (CirculateHit) Style $n MWMBorder
++ "&DepressableBorder" Pick (CirculateHit) Style $n DepressableBorder
++ "&FirmBorder"	       Pick (CirculateHit) Style $n FirmBorder
++ "&Handles"		       Pick (CirculateHit) Style $n Handles
++ "&NoHandles"		     Pick (CirculateHit) Style $n !Handles
++ "BorderWidth &0"     Pick (CirculateHit) Style $n BorderWidth 0
++ "BorderWidth &5"     Pick (CirculateHit) Style $n BorderWidth 5
++ "HandleWidth &0"     Pick (CirculateHit) Style $n HandleWidth 0
++ "HandleWidth &7"     Pick (CirculateHit) Style $n HandleWidth 7
++ "" Nop
++ "&ResizeOpaque"      Pick (CirculateHit) Style $n ResizeOpaque
++ "Resize&Outline"     Pick (CirculateHit) Style $n ResizeOutline
++ "Sloppy&Focus"       Pick (CirculateHit) Style $n SloppyFocus
++ "&ClickToFocus"      Pick (CirculateHit) Style $n ClickToFocus
++ "&MouseFocus"        Pick (CirculateHit) Style $n MouseFocus
++ "&NeverFocus"        Pick (CirculateHit) Style $n NeverFocus
+# }}}
+
+# {{{ SubMenu: Window Rearrange
+DestroyMenu WinRearrange
+AddToMenu   WinRearrange
++ "&Cascade"         FvwmRearrange -cascade -m 3 3 -incx 2
++ "Tile &Horizontal" FvwmRearrange -tile -h -m 2 2 98 98
++ "Tile &Vertical"   FvwmRearrange -tile -m 2 2 98 98
++ "" Nop
++ "&Arrange Icons"   All (CurrentDesk Iconic) RecaptureWindow
++ "&Refresh Screen"  Refresh
+# }}}
+# }}}

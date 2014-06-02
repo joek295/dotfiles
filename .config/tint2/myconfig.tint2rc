@@ -1,0 +1,113 @@
+# Background definitions
+# ID 1
+rounded = 0
+border_width = 1
+background_color = #0A0A0A 60
+border_color = #121212 90
+
+# ID 2 - task active
+rounded = 1
+border_width = 0
+background_color = #d8d8d8 30
+border_color = #d8d8d8 30
+
+# ID 3 - task
+rounded = 1
+border_width = 0
+background_color = #000000 0
+border_color = #000000 0
+
+# ID 4
+rounded = 1
+border_width = 1
+background_color = #888888 20
+border_color = #ED2323 60
+
+# ID 5 - taskbar
+rounded = 0
+border_width = 1
+background_color = #000000 0
+border_color = #000000 0
+
+# ID 6 - active taskbar
+rounded = 0
+border_width = 1
+background_color = #d8d8d8 10
+border_color = #d8d8d8 0
+
+# ID 7 - tooltip
+rounded = 3
+border_width = 0
+background_color = #222222 90
+border_color = #222222 90
+
+# ID 8
+rounded = 1
+border_width = 1
+background_color = #888888 20
+border_color = #888888 20
+
+# --------------------------------------------
+# Panel
+panel_monitor = all
+panel_position = bottom center horizontal
+panel_items = TSC
+panel_size = 98% 20
+panel_margin = 0 0
+panel_padding = 0 0
+panel_dock = 0
+wm_menu = 1
+panel_layer = bottom
+panel_background_id = 1
+
+# Panel Autohide
+autohide = 0
+autohide_show_timeout = 0.3
+autohide_hide_timeout = 1.5
+autohide_height = 6
+strut_policy = follow_size
+
+# --------------------------------------------
+# Taskbar
+taskbar_mode = multi_desktop
+taskbar_padding = 6 0 6
+taskbar_background_id = 5
+taskbar_active_background_id = 6
+taskbar_name = 0
+taskbar_name_background_id = 0
+taskbar_name_active_background_id = 0
+taskbar_name_font = sans 9
+taskbar_name_font_color = #d8d8d8 100
+taskbar_name_active_font_color = #d8d8d8 100
+
+# Tasks
+urgent_nb_of_blink = 20
+task_icon = 1
+task_text = 0
+task_centered = 1
+task_maximum_size = 24 24
+task_padding = 1 1
+task_background_id = 3
+task_active_background_id = 2
+task_urgent_background_id = 4
+task_iconified_background_id = 3
+
+# Task Icons
+task_icon_asb = 80 0 0
+task_active_icon_asb = 100 0 0
+task_urgent_icon_asb = 100 0 0
+task_iconified_icon_asb = 80 0 0
+
+----------------------------------------------
+# System Tray
+systray_padding = 4 2 3
+systray_sort = ascending
+systray_background_id = 0
+systray_icon_size = 24
+systray_icon_asb = 100 0 0
+
+# Mouse
+mouse_middle = none
+mouse_right = close
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify

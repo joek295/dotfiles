@@ -1,0 +1,35 @@
+# {{{ Icon Manager
+Style "FvwmIconMan" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
+DestroyModuleConfig FvwmIconMan: *
+
+*FvwmIconMan: nummanagers 1
+*FvwmIconMan: Resolution  screen
+*FvwmIconMan: colorset    0
+*FvwmIconMan: font        "xft:sans-serif:Medium:pixelsize=12;-*-times-bold-r-*-*-12-*-*-*-*-*-*-*"
+*FvwmIconMan: followfocus true
+*FvwmIconMan: usewinlist  true
+*FvwmIconMan: sort        name
+*FvwmIconMan: drawicons   always
+*FvwmIconMan: title              "Icon Man"
+*FvwmIconMan: managergeometry    24x1+0-0
+*FvwmIconMan: buttongeometry     56x20
+*FvwmIconMan: action    Mouse    1 N sendcommand Iconify
+*FvwmIconMan: action    Mouse    2 N sendcommand Close
+*FvwmIconMan: action    Mouse    3 N sendcommand "Menu WindowOps c+0 -101m "
+# }}}
+# {{{ Desker
+Style "FvwmPager" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Rows 2
+*FvwmPager: Columns 2
+*FvwmPager: DeskHilight
+*FvwmPager: Colorset 0
+*FvwmPager: Back #2e3436
+*FvwmPager: Geometry -20+20
+# }}}
+# {{{ Buttons
+# Style "FvwmButtons" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
+# DestroyModuleConfig FvwmButtons: *
+# *FvwmButtons: Rows 1
+# *FvwmButtons: Columns 40
+# }}}

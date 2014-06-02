@@ -43,8 +43,11 @@ iabbrev spellchecks spell-checks
 iabbrev statusline status-line
 iabbrev statuslines status-lines
 " Capitalising proper nouns
+<<<<<<< HEAD
 iabbrev scotus SCOTUS
 iabbrev potus POTUS
+=======
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
   " Trademarks etc.
 iabbrev firefox Firefox
 iabbrev linux Linux
@@ -59,15 +62,22 @@ iabbrev athenian Athenian
 iabbrev britain Britain
 iabbrev british British
 iabbrev england England
+<<<<<<< HEAD
 iabbrev europe Europe
 iabbrev european European
 iabbrev france France
 iabbrev french French
+=======
+iabbrev france France
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 iabbrev germany Germany
 iabbrev greece Greece
 iabbrev rome Rome
 iabbrev scotland Scotland
+<<<<<<< HEAD
 iabbrev vietnam Vietnam
+=======
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 iabbrev wales Wales
   " Personal Names
 iabbrev charles Charles

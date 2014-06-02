@@ -10,9 +10,15 @@ al() {
   done
 }
 
+<<<<<<< HEAD
 alias ls='ls -F --group-directories-first'
 alias la='ls -AF --color --group-directories-first'
 alias ll='ls -lh --group-directories-first'
+=======
+alias ls='ls -F --color --group-directories-first'
+alias la='ls -AF --color --group-directories-first'
+alias ll='ls -l --group-directories-first'
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 alias lx='ls -X --color'
 alias lp='ls -Al | more' # pipes through more because less can't handle the colourising
 
@@ -40,6 +46,10 @@ alias chx='chmod +x'
 alias nocomment='grep -Ev "^(#|$)"'
 alias bc='bc -l'
 alias path='echo -e ${PATH//:/\\n}'
+<<<<<<< HEAD
+=======
+alias top='htop'
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 alias df='df -h'
 alias popular="cat .bash_history | awk '{ print \$1 }' | sort | uniq -c | sort -rn | less"
 alias tetris='tetris-bsd'
@@ -49,6 +59,7 @@ alias a='./a.out'
 
 mank() { apropos "$@"; }
 cc() { gcc "$@"; }
+<<<<<<< HEAD
 label() { echo -ne "\e]0;$1\a"; }
 
 top () {
@@ -58,6 +69,9 @@ top () {
     top
   fi
 }
+=======
+label() { echo -ne "\e]0;SSH -- $1\a"; }
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 
 extract () {
   if [ -f "$1" ] ; then
@@ -96,6 +110,9 @@ alias sdf='label SDF && ssh jk564@sdf.org'
 alias twenex='label TWENEX && ssh twenex@sdf.org'
 alias vms='label VMS && ssh jk564@jack.vistech.net'
 
+<<<<<<< HEAD
 alias ll='ls -lh'
 alias ll='ls -lh --group-directories-firs'
 alias ll='ls -lh --group-directories-first'
+=======
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678

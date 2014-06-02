@@ -1,0 +1,56 @@
+alignment middle_left
+double_buffer yes
+minimum_size 150
+max_text_width 200
+maximum_width 200
+update_interval 1
+use_xft yes
+xftfont mono:pixelsize=11
+
+
+TEXT
+${time %H:%M} ${alignr}${time %d-%m} 
+
+SYSTEM$hr
+${sysname} ${alignr}${nodename}
+${kernel}
+${uptime_short}
+
+CPU ${freq}MHz ${cpu}% ${acpitemp}°C
+${cpugraph 20,150}
+PROCESSES ${processes} ${alignr}${running_processes} RUNNING
+${top name 1} ${top pid 1} ${top cpu 1}
+${top name 2} ${top pid 2} ${top cpu 2}
+${top name 3} ${top pid 3} ${top cpu 3}
+
+RAM ${mem}
+${acpitemp}°C
+
+HDD$hr
+/ ${alignr}${fs_bar 6,100 /}
+/home ${alignr}${fs_bar 6,100 /home}
+IO ${alignr}${diskio}
+
+BATTERY$hr
+${battery}
+${battery_bar 6,100}
+
+NETWORK$hr
+UP 
+ETH0 ${alignr}${upspeed eth0} ${totalup eth0}
+WLAN0 ${alignr}${upspeed wlan0} ${totalup wlan0}
+${upspeedgraph 20,150}
+
+DOWN 
+ETH0 ${alignr}${downspeed eth0} ${totaldown eth0}
+WLAN0 ${alignr}${downspeed eth0} ${totaldown wlan0}
+${downspeedgraph 20,150}
+
+${if_up wlan0}
+SIGNAL STRENGTH ${alignr}${wireless_link_qual_perc wlan0}${endif}
+
+${if_running mocp}NOW PLAYING${hr}
+${exec mocp -Q %artist}
+${exec mocp -Q %song}
+${exec mocp -Q %album}
+${endif}

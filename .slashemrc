@@ -1,0 +1,20 @@
+#Joe's Slash'Em config
+OPTIONS=pickup_types:$
+OPTIONS=autopickup,autodig
+OPTIONS=!cmdassist
+OPTIONS=color,hilite_pet
+OPTIONS=showexp,showweight
+# Colours: R-G-Brown-Blue-Mag-Cyan-bWhite-bRed-bGreen-Yellow-bBlue-bMag-bCyan
+# For use with solarized colour theme for rxvt
+OPTIONS=videocolors:1-2-9-4-5-6-7-14-2-3-4-5-6
+OPTIONS=menucolors
+MENUCOLOR=" blessed"=green
+MENUCOLOR=" holy"=green
+MENUCOLOR=" cursed"=red
+MENUCOLOR=" unholy"=red
+MENUCOLOR=" (lit)"=yellow
+MENUCOLOR=" \((being worn)\|hands?)\|(in quiver)\)"=&bold
+MENUCOLOR=" blessed .* \((being worn)\|hands?)\|(in quiver)\)"=green&bold
+MENUCOLOR=" cursed .* \((being worn)\|hands?)\)"=orange&underline
+MENUCOLOR=" corpse"=brown
+#OPTIONS=nopet

@@ -16,6 +16,7 @@ use_spacer left
 use_xft yes
 xftfont mono:pixelsize=10
 
+<<<<<<< HEAD
 # color[1-4]: green, yellow, orange, red
 color1 859900
 color2 b58900
@@ -31,3 +32,7 @@ UPDATES ${execi 3600 checkpkg}| ${mpd_smart} | $alignr |\
 ${if_match ${acpitemp} > 60}${color4}${else}${if_match ${acpitemp} > 50}${color3}${else}${color1}${endif}${endif}${acpitemp}°C ${color}|\
 ${if_match ${battery_percent} > 75}${color1}${else}${if_match ${battery_percent} > 50}${color2}${else}${if_match ${battery_percent} > 25}${color3}${else}${color4}${endif}${endif}${endif} ${battery_percent}% ${color}| \
 ${uptime_short} | ${time  %H:%M %d-%m} 
+=======
+TEXT
+${offset 5}/ ${fs_used_perc /}% | media ${fs_used_perc /home/joe/media}% | CPU ${cpugraph 9,100 859900 dc322f -t} | RAM ${mem} ${if_up eth0}| UP ${totalup eth0} | DN ${totaldown eth0} ${endif}${if_up wlan0}| UP ${totalup wlan0} | DN ${totaldown wlan0} | WIFI ${wireless_link_qual_perc wlan0} ${endif} | UPDATES ${execi 3600 checkpkg} | $mpd_title - $mpd_artist - $mpd_elapsed/$mpd_length ${alignr} | ${acpitemp}°C | BAT ${battery_percent} | ${uptime_short} | ${time  %H:%M %d-%m} 
+>>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
