@@ -1,0 +1,30 @@
+# {{{ Icon Manager
+Style "FvwmIconMan" Title "", !Handles, Sticky, WindowListSkip, CirculateSkip
+DestroyModuleConfig FvwmIconMan: *
+
+*FvwmIconMan: nummanagers 1
+*FvwmIconMan: Resolution  screen
+*FvwmIconMan: colorset    0
+*FvwmIconMan: font        "xft:sans-serif:Medium:pixelsize=12;-*-times-bold-r-*-*-12-*-*-*-*-*-*-*"
+*FvwmIconMan: followfocus true
+*FvwmIconMan: usewinlist  true
+*FvwmIconMan: sort        id
+*FvwmIconMan: drawicons   always
+*FvwmIconMan: title              "Icon Man"
+*FvwmIconMan: managergeometry    28x1+0-0
+*FvwmIconMan: buttongeometry     56x26
+*FvwmIconMan: action    Mouse    1 N sendcommand Iconify
+*FvwmIconMan: action    Mouse    2 N sendcommand Close
+*FvwmIconMan: action    Mouse    3 N sendcommand "Menu WindowOps c+0 -101m "
+# }}}
+# {{{ Buttons
+Style "FvwmButtons" !Title, !Handles, Sticky, WindowListSkip, CirculateSkip
+DestroyModuleConfig FvwmButtons: *
+*FvwmButtons: Rows 1
+*FvwmButtons: Columns 40
+*FvwmButtons: Geometry 1376x28+0-0
+*FvwmButtons: Colorset 0
+*FvwmButtons: BoxSize smart
+*FvwmButtons: (35x1 Swallow FvwmIconMan)
+*FvwmButtons: (5x1 Swallow stalonetray 'Exec exec stalonetray --geometry 6x1 &')
+# }}}

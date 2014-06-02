@@ -1,0 +1,108 @@
+" ABBREVIATIONS
+
+" Auto-correcting spellings
+iabbrev alleigance allegiance
+iabbrev alliegance allegiance
+iabbrev commited committed
+iabbrev comitted committed
+iabbrev embarassing embarrassing
+iabbrev excercise exercise
+iabbrev excercises exercises
+iabbrev excercised exercised
+iabbrev excercising exercising
+iabbrev occassion occasion
+iabbrev ocassion occasion
+iabbrev occassional occasional
+iabbrev occassions occasions
+iabbrev percieve perceive
+iabbrev percieves perceives
+iabbrev percieved perceived
+iabbrev recieve receive
+iabbrev recieves receives
+iabbrev recieved received
+iabbrev reciever receiver
+iabbrev recievers receivers
+iabbrev recieving receiving
+iabbrev seperate separate
+iabbrev seperated separated
+iabbrev seperates separates
+iabbrev seperation separation
+iabbrev supress suppress
+iabbrev supressed suppressed
+iabbrev supresses suppressed
+iabbrev teh the
+iabbrev hte the
+iabbrev tehre there
+iabbrev theif thief
+iabbrev theives thieves
+" Inserting correct hyphenation
+iabbrev plugin plug-in
+iabbrev plugins plug-ins
+iabbrev spellcheck spell-check
+iabbrev spellchecks spell-checks
+iabbrev statusline status-line
+iabbrev statuslines status-lines
+" Capitalising proper nouns
+iabbrev scotus SCOTUS
+iabbrev potus POTUS
+  " Trademarks etc.
+iabbrev firefox Firefox
+iabbrev linux Linux
+iabbrev microsoft Microsoft
+iabbrev unix Unix
+  " Countries and Places
+iabbrev america America
+iabbrev american American
+iabbrev americans Americans
+iabbrev athens Athens
+iabbrev athenian Athenian
+iabbrev britain Britain
+iabbrev british British
+iabbrev england England
+iabbrev europe Europe
+iabbrev european European
+iabbrev france France
+iabbrev french French
+iabbrev germany Germany
+iabbrev greece Greece
+iabbrev rome Rome
+iabbrev scotland Scotland
+iabbrev vietnam Vietnam
+iabbrev wales Wales
+  " Personal Names
+iabbrev charles Charles
+iabbrev elizabeth Elizabeth
+iabbrev harry Harry
+iabbrev henry Henry
+iabbrev hermione Hermione
+iabbrev james James
+iabbrev mary Mary
+iabbrev pepys Pepys
+iabbrev peyps Pepys
+iabbrev Peyps Pepys
+iabbrev ron Ron
+iabbrev william William
+" Expanding abbreviations
+iabbrev WWI the First World War
+iabbrev WWII the Second World War
+iabbrev wwi the First World War
+iabbrev wwii the Second World War
+iabbrev ecw English Civil War
+iabbrev ECW English Civil War
+iabbrev govt government
+
+" Abbreviations for specific filetypes only
+" LaTeX
+autocmd FileType tex :iabbrev <buffer> < \textless
+autocmd FileType tex :iabbrev <buffer> > \textgreater
+autocmd FileType tex :iabbrev <buffer> 19th 19$^{th}$
+autocmd FileType tex :iabbrev <buffer> 18th 18$^{th}$
+autocmd FileType tex :iabbrev <buffer> 17th 17$^{th}$
+autocmd FileType tex :iabbrev <buffer> 16th 16$^{th}$
+autocmd FileType tex :iabbrev <buffer> 20th 20$^{th}$
+autocmd FileType tex :iabbrev <buffer> 21st 21$^{st}$
+autocmd FileType tex :iabbrev <buffer> zz \\
+" Python
+autocmd FileType python :iabbrev <buffer> iff if:<left>
+
+

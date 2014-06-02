@@ -1,0 +1,17 @@
+Set the background as Waldorf Grey:
+hsetroot -solid "#2e3436"
+#hsetroot -fill ~/images/wallpapers/tea/Tea-tea-13892949-1920-1200.jpg
+# loads the .Xresources file, where urxvt settings are kept
+xrdb -merge ~/.Xresources
+# Make capslock into another control key
+if [ -f ~/.Xmodmap ]; then
+  xmodmap ~/.Xmodmap
+fi
+# turns off touchpad
+#synclient TouchpadOff=1
+
+#exec ck-launch-session dbus-launch fvwm
+#exec ck-launch-session dbus-launch openbox-session
+#exec ck-launch-session dbus-launch sawfish
+#exec ck-launch-session dbus-launch spectrwm
+exec xmonad
