@@ -1,7 +1,6 @@
 # Executed by the command interpreter by login shells.
 # If the shell is bash, is overridden by .bash_profile or .bash_login
 
-<<<<<<< HEAD
 # mount the /dev/sda6 filesystem, where music & documents are stored
 mount /dev/sda6
 
@@ -26,31 +25,10 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-=======
-# if running bash then include .bashrc
-if [ -n "$BASH_VERSION" ]; then
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-# include sbin in PATH
-if [ -d "/sbin" ] ; then
-    PATH="/sbin:$PATH"
-fi
-if [ -d "/usr/sbin" ] ; then
-    PATH="/usr/sbin:$PATH"
-fi
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 if [ -d "$HOME/scripts" ] ; then
     PATH="$HOME/scripts:$PATH"
 fi
 
-<<<<<<< HEAD
 # Set environmental variables:
 
 # if vim is installed, both EDITOR and VISUAL are set to /usr/bin/vim
@@ -98,14 +76,3 @@ find ~/ > /dev/null &
 if [ -f $HOME/.motd ]; then
   cat $HOME/.motd
 fi
-=======
-EDITOR=/usr/bin/vim
-VISUAL=$EDITOR
-PAGER=/usr/bin/less LESSHISTFILE=-
-export EDITOR VISUAL PAGER
-
-pulseaudio --start &
-mpd &
-dropbox start &
-find ~/ > /dev/null &
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678

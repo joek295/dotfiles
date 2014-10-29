@@ -1,14 +1,8 @@
 ## FVWM Config File
 # Joe's FVWM Config
-<<<<<<< HEAD
 # This configuration is intended to be usable in both moused and mouse-less environments.
 # To that end it makes heavy use of keyboard-commands, including vim-like movement.
 
-=======
-# This configuration is intended to be usable in both moused and mouseless environments.
-# To that end it makes heavy use of keyboard-commands, including vim-like movement.
-#
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 # {{{ Features:
 # 4 virtual desktops
 # vim-like window movement
@@ -19,10 +13,7 @@
   # Alt-tab function is stolen from Packrat's fvwm config on the #! forums
 # Network Manager integration via Stalonetray
 # }}}
-<<<<<<< HEAD
 
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 # {{{ Global Settings
 # {{{ Virtual Desktops 
 # each the size of a single screen. No viewporting.
@@ -47,19 +38,13 @@ Style * !IconTitle
 # Coloursets - defined colours can be found with '''showrgb | less'''
 Colorset 0 fg Contrast bg 2e/34/36
 # }}}
-<<<<<<< HEAD
 
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 # {{{ Read other files
 # if absolute path is not defined, file is in ~/.fvwm/config
 Read menu
 Read modules
 # }}}
-<<<<<<< HEAD
 
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 ## {{{ Function
 # {{{ Startup Functions 
 DestroyFunc StartFunction
@@ -198,10 +183,7 @@ AddToFunc SelectWindow
 # }}}
 # }}}
 # }}}
-<<<<<<< HEAD
 
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 ## {{{ Key- and Mouse-Bindings
 # {{{ Keys - FVWM
 Key q A S1 Quit
@@ -285,10 +267,7 @@ Mouse 1 WFST M MouseMove
 Mouse 3 WFST M MouseResize
 # }}}
 # }}}
-<<<<<<< HEAD
 
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 # {{{ Specific window styles
 Style rhythmbox SkipMapping, StartsOnDesk 1
 Style sauer_client SkipMapping, StartsOnDesk 2

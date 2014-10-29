@@ -1,5 +1,4 @@
 import XMonad
-<<<<<<< HEAD
 
 -- actions
 import XMonad.Actions.DwmPromote
@@ -19,21 +18,6 @@ import XMonad.Layout.PerWorkspace -- specific layouts for specific workspaces
 import XMonad.Util.EZConfig -- easy keybindings
 
 -- define the default terminal emulator
-=======
-import XMonad.Actions.CycleWindows
-import XMonad.Actions.DwmPromote
-import XMonad.Actions.CycleWS
-import XMonad.Actions.SpawnOn
-import XMonad.Hooks.ManageDocks
-import XMonad.Util.EZConfig
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Grid
-import XMonad.Layout.Tabbed
-import XMonad.Layout.SubLayouts
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.PerWorkspace (onWorkspace)
-
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 myTerminal = "/usr/bin/urxvt"
 
 -- Define applications which should float by default; 
@@ -41,15 +25,11 @@ myTerminal = "/usr/bin/urxvt"
 myManageHook = composeAll . concat $
   [ 
     [ className =? i --> doFloat | i <- myFloats ]
-<<<<<<< HEAD
   , [ className =? m --> doShift "2" | m <- myWebShifts ]
-=======
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
   , [ className =? m --> doShift "8" | m <- myMediaShifts ]
   , [ className =? m --> doShift "9" | m <- myChatShifts ]
   ]
   where
-<<<<<<< HEAD
     myFloats = ["Gimp","Skype","XBoard"]
     -- Web browsers should be sent to Desktop #2
     myWebShifts = ["Iceweasel","Firefox","Google-chrome","Chromium"]
@@ -70,18 +50,6 @@ defaultLayout = windowNavigation $ subTabbed $ avoidStruts $ smartBorders (
 webLayout = avoidStruts $ smartBorders ( Full )
 
 myLayouts = onWorkspace "2" webLayout $ defaultLayout 
-=======
-    myFloats = ["Gimp","Skype"]
-    myMediaShifts = ["Vlc","Rhythmbox"]
-    myChatShifts = ["Skype","Xchat"]
-
--- Layouts: Tall and Grid; tabbed sub-layout
--- If only one window, don't bother with borders for focused
-defaultLayout = windowNavigation $ subTabbed $ avoidStruts $ smartBorders (
-  Tall 1 (3/100) (1/2) ||| Grid )
-
-myLayouts = defaultLayout
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 
 -- 9 workspaces
 myWorkspaces =
@@ -91,7 +59,6 @@ myWorkspaces =
 myStartupHook = do
   spawn "conky"
 
-<<<<<<< HEAD
 -- custom border colours
 -- Focused = orange; unfocused = dark blue/grey
 myNormalBorderColor  = "#073642"
@@ -105,14 +72,6 @@ main = do
     , terminal = myTerminal
     , normalBorderColor = myNormalBorderColor
     , focusedBorderColor = myFocusedBorderColor
-=======
-main = do
-  xmonad $ defaultConfig
-    { manageHook = manageDocks <+> myManageHook <+> manageSpawn <+> manageHook defaultConfig
-    , layoutHook = myLayouts
-    , workspaces = myWorkspaces
-    , terminal = myTerminal
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
     , startupHook = myStartupHook
     } 
     `additionalKeysP` myKeys
@@ -123,18 +82,11 @@ myKeys =
   -- various keybindings for starting applications:
     ("M1-q", spawn "slock")
   , ("M4-w", spawn "iceweasel")
-<<<<<<< HEAD
   , ("M4-v", spawn "vlc")
-=======
-  , ("M4-m", spawn "rhythmbox")
-  , ("M4-v", spawn "vlc")
-  , ("M4-f", spawn "pcmanfm")
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
   , ("M4-e", spawn "gvim")
   , ("M4-t", spawn myTerminal)
   , ("M1-<Return>", spawn myTerminal)
   , ("M1-S-p", spawn "dmenufm")
-<<<<<<< HEAD
   , ("M4-p", spawn "dmenufm")
   , ("M4-m", spawn "mpdmenu")
   , ("M1-g", gotoMenu)
@@ -142,13 +94,6 @@ myKeys =
   -- control mpd
   --, ("M1-<bracketright>", spawn "mpc next")
   --, ("M1-<bracketleft>", spawn "mpc prev")
-=======
-  , ("M4-S-m", spawn "mpdmenu")
-
-  -- control volume from keyboard
-  , ("M1-S-<comma>", spawn "amixer -q set Master,0 5%-")
-  , ("M1-S-<period>", spawn "amixer -q set Master,0 5%+")
->>>>>>> 962a925543e61c9fc6daadd315ef6e0fcccf8678
 
   , ("M1-r", restart "xmonad" True)
   , ("M1-S-<Return>", dwmpromote)

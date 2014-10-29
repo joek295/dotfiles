@@ -1,6 +1,6 @@
-A repository for configuration files.
-Unless noted otherwise, these are taken from Debian Linux (Squeeze or Wheezy).
-No guarantees are made that they will work on other Linux Distributions.
+A repository for configuration files.  Unless noted otherwise, these
+are taken from Debian Linux (Squeeze or Wheezy).  No guarantees are
+made that they will work on other Linux Distributions.
 
 What is here?
 =============

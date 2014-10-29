@@ -1,61 +1,124 @@
+# junethack joek
+
 # INTERFACE
 OPTIONS=showexp,showscore,time,color
-OPTIONS=fruit:slime mold,boulder:0
-OPTIONS=catname:Clio,dogname:Artemis
 OPTIONS=msg_window:reversed,!cmdassist
 OPTIONS=number_pad:0
 OPTIONS=suppress_alert:3.4.3
 OPTIONS=lit_corridor,hilite_pet
-OPTIONS=autodig
+OPTIONS=autodig,quiver_fired
+OPTIONS=fruit:slime mold,boulder:0
+OPTIONS=catname:Clio,dogname:Artemis
+OPTIONS=monsters:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@87&;:~]
+OPTIONS=showborn
+OPTIONS=sortloot:full
+OPTIONS=hilite_hidden_stairs
+OPTIONS=hilite_obj_piles
+OPTIONS=!item_use_menu
 
 # AUTOPICKUP
-OPTIONS=autopickup,pickup_types:$*/=+
-# Always pick these:
-AUTOPICKUP_EXCEPTION="<*magic lamp*"
+OPTIONS=autopickup,pickup_types:$*/=+"
+OPTIONS=pickup_burden:unencumbered
+# Always pick up
 AUTOPICKUP_EXCEPTION="<*wand of wishing*"
 AUTOPICKUP_EXCEPTION="<*wand of death*"
 AUTOPICKUP_EXCEPTION="<*wand of polymorph*"
-AUTOPICKUP_EXCEPTION="<*magic marker*"
+AUTOPICKUP_EXCEPTION="<*wand of fire*"
+AUTOPICKUP_EXCEPTION="<*magic*"
+AUTOPICKUP_EXCEPTION="<*unicorn horn*"
+AUTOPICKUP_EXCEPTION="<*marker*"
+AUTOPICKUP_EXCEPTION="<*lamp*"
+AUTOPICKUP_EXCEPTION="<*whistle*"
+AUTOPICKUP_EXCEPTION="<*candle*"
 AUTOPICKUP_EXCEPTION="<*healing*"
-## Don't pick these:
+AUTOPICKUP_EXCEPTION="<*gain level*"
+AUTOPICKUP_EXCEPTION="<*holding*"
+AUTOPICKUP_EXCEPTION="<*tricks*"
+# Never pick up
+AUTOPICKUP_EXCEPTION=">*tin*"
 AUTOPICKUP_EXCEPTION=">*worthless piece of*"
 AUTOPICKUP_EXCEPTION=">*loadstone*"
 AUTOPICKUP_EXCEPTION=">*flint stone*"
 AUTOPICKUP_EXCEPTION=">*gray stone*"
 AUTOPICKUP_EXCEPTION=">*rock*"
+AUTOPICKUP_EXCEPTION=">A gem"
 
-OPTIONS=hilite_hidden_stairs
-OPTIONS=hilite_obj_piles
-OPTIONS=showborn
-#
-## Disable the generic item use menu (select an item to use directly
-## from inventory)
-#OPTIONS=!item_use_menu
-#
-## Show item glyphs (color and symbol) in tty menus.
-#OPTIONS=menu_glyphs
-#
+# STATUS COLOURS
 OPTIONS=statuscolors
+# Hit Points
 STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=orange
-STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse
+# when hp is 1/7 of max or less, can pray for healing
+STATUSCOLOR=hp%14:magenta&inverse
+# Power
 STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold
-STATUSCOLOR=hungry:orange,weak:red&bold
+STATUSCOLOR=pw%15:red&inverse,pw%0:magenta&inverse
+# Hunger
+STATUSCOLOR=hungry:orange,weak:red&bold,fainting:red&inverse
+# Mental
 STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold
+# Health
 STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+# Load
+STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+
 OPTIONS=menucolors
+# beatitude
 MENUCOLOR=" blessed "=green
+MENUCOLOR=" blessed .* (being worn)"=green&bold
+MENUCOLOR=" blessed .* hand"=green&bold
 MENUCOLOR=" holy "=green
 MENUCOLOR=" cursed "=red
 MENUCOLOR=" unholy "=red
-MENUCOLOR=" cursed .* (being worn)"=orange&underline
+MENUCOLOR=" cursed .* (being worn)"=red&bold
+MENUCOLOR=" cursed .* hand"=red&bold
+# worn
+MENUCOLOR=" (being worn)"=&bold
+MENUCOLOR=" hand"=&inverse
+# lit
 MENUCOLOR=" (lit)"=yellow
-MENUCOLOR=" corpse"=brown
-#
-## Sort items by name. One of "none", "loot", or "full"
-#OPTIONS=sortloot:full
-#
-OPTIONS=quiver_fired
-#
+# food
+MENUCOLOR=" corpse"=brown&bold
+MENUCOLOR="lizard corpse"=brown&bold&inverse
+MENUCOLOR=" ration"=brown
+
+#  spell failure rates
+MENUCOLOR=" 0%"=lightgreen
+MENUCOLOR=" [1-9]%"=yellow
+MENUCOLOR=" 1[0-9]%"=yellow
+MENUCOLOR=" 2[0-4]%"=yellow
+MENUCOLOR=" 2[5-9]%"=orange
+MENUCOLOR=" [3-4][0-9]%"=orange
+MENUCOLOR=" [5-9][0-9]%"=red
+MENUCOLOR=" 100%"=lightmagenta
+
+# Configurable monster colors
+MONSTERCOLOR=manes:lightgreen # distinguish from imps
+MONSTERCOLOR=master mind flayer:orange # distinguish from dwarven kings
+MONSTERCOLOR=mind flayer:lightmagenta # distinguish from dwarven kings
+
+#Key rebinding
+BINDINGS=v:untrap,-:travel
+
+# Messagetype patch: http://bilious.alt.org/?397
+# Uses globbing, unless you set OPTIONS=msgtype_regex
+MSGTYPE=hide "The * picks up a *"
+MSGTYPE=hide "The * wields a *"
+MSGTYPE=hide "The * whizzes by *"
+MSGTYPE=hide "But it reflects *"
+MSGTYPE=hide "You feel a wrenching sensation."
+MSGTYPE=hide "You have no ammunition readied!"
+MSGTYPE=hide "With * effort you move the boulder."
+MSGTYPE=hide "You displaced *."
+MSGTYPE=hide "You fall down the stairs."
+MSGTYPE=norep "You see here a *"
+MSGTYPE=norep "You see here an *"
+MSGTYPE=stop "You are slowing down."
+MSGTYPE=stop "You find it hard to breathe."
+MSGTYPE=stop "You are turning a little *"
+MSGTYPE=stop "You feel a strange vibration *"
+
 # Configurable dungeon feature colors: http://bilious.alt.org/?17
 #DUNGEONCOLOR= 0  7  7  7  7  7  7  7  7  7 \
 #              7  7  7  3  3  3  3  6  2  7 \
@@ -66,39 +129,3 @@ OPTIONS=quiver_fired
 #
 # ``DUNGEONCOLOR'' are in the same order as ``DUNGEON'', and
 # ``TRAPCOLORS'' as ``TRAPS''
-#
-#
-# Configurable monster colors
-#MONSTERCOLOR=floating eye:yellow
-#MONSTERCOLOR=master mind flayer:lightmagenta
-#
-#
-#Key rebinding and extended command autocomplete:
-# 1) All commands are now extended commands. Use the ext command name
-#    for binding and autocompleting.
-# 2) Key to bind can be:
-#      "x" for regular key x,
-#      "mx" or "m-x" for meta-x,
-#      "cx" or "c-x" or "^x" for ctrl-x,
-#      "<enter>", "<space>" or "<esc>"
-#BINDINGS=!:inventory,v:untrap
-# BINDIng a key to "nothing" will remove the binding.
-#
-AUTOCOMPLETE=loot
-# prefixing the command name with '!' will prevent it from being autocompleted.
-
-#
-# Messagetype patch: http://bilious.alt.org/?397
-# Uses globbing, unless you set OPTIONS=msgtype_regex
-## displacing pets. hide the message.
-#MSGTYPE=hide "You displaced *"
-MSGTYPE=hide "The * picks up a *"
-MSGTYPE=hide "The * wields a *"
-MSGTYPE=hide "You feel a wrenching sensation."
-MSGTYPE=hide "You have no ammunition readied!"
-MSGTYPE=norep "You see here a *"
-MSGTYPE=norep "You see here an *"
-MSGTYPE=stop "You are slowing down."
-MSGTYPE=stop "You find it hard to breathe."
-MSGTYPE=stop "You are turning a little *"
-
