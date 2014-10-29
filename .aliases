@@ -1,0 +1,49 @@
+# -*- sh -*-
+# sourced by ~/.bashrc
+# aliases for bash are defined in this file.
+# man bash has this to say about aliases:
+#
+#     There is no mechanism for using arguments in the replacement text.  If arguments are needed, a shell function should be used.
+#     ...
+#     Aliases are not expanded when the shell is not interactive, unless the expand_aliases shell option is set using shopt.
+#     ...
+#     For almost every purpose, aliases are superseded by shell functions.
+
+# various aliases for ls
+alias ls='ls -F --color --group-directories-first'
+alias la='ls -AF --color --group-directories-first'
+alias ll='ls -l --group-directories-first'
+alias lx='ls -X --color'
+alias lp='ls -Al | more' # pipes through more because less can't handle the colourising
+
+# option flags should always be used by some commands
+alias su='su -' # su should try to follow my own environment
+alias df='df -h' # df should be in human-readable form
+
+# one- and two-letter aliases
+alias c='clear'
+alias e='$EDITOR'
+alias m='mutt'
+alias x='startx'
+alias sd='sudo shutdown -h now'
+alias rs='sudo shutdown -r now'
+
+# those commands which I always forget to sudo...
+alias update-grub='sudo update-grub'
+alias apt='sudo aptitude'
+
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias tetris='tetris-bsd'
+alias mix='alsamixer'
+alias a='./a.out'
+alias emacs='emacs -nw'
+
+# telnet and ssh
+alias srcf='ssh jk564@shell.srcf.net'
+alias sdf='ssh jk564@sdf.org'
+alias twenex='ssh twenex@sdf.org'
+alias vms='ssh jk564@jack.vistech.net'
+alias nao='telnet nethack.alt.org'

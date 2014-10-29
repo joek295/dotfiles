@@ -1,6 +1,6 @@
 A repository for configuration files.  Unless noted otherwise, these
-are taken from Debian Linux (Squeeze or Wheezy).  No guarantees are
-made that they will work on other Linux Distributions.
+are taken from Debian Linux.  No guarantees are made that they will
+work on other Linux Distributions.
 
 What is here?
 =============
@@ -16,7 +16,12 @@ What is here?
   + scrotwm
   + xmonad
 * Some conky setups
-* .bashrc
+* bash and zsh configurations:
+  + .bashrc
+  + .zshrc
+  + .profile
+  + aliases, functions
+  + .bash_logout
 * .pentadactylrc
 * .nethackrc and .slashemrc
 * tint2rc

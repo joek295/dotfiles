@@ -1,0 +1,15 @@
+set keymap vi
+set editing-mode vi
+set show-mode-in-prompt on
+set bell-style none
+# ignore case when tab-completing 
+set completion-ignore-case on
+set completion-prefix-display-length 2
+# always show possible completions
+# no need to double-tap tab
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+# up and down search through history
+# limiting it to that including any text before the cursor
+"\e[A": history-search-backward
+"\e[B": history-search-forward
