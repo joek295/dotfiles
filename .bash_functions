@@ -26,6 +26,7 @@ popular() { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | les
 cdll() { cd "$@" && clear && ls -l --group-directories-first; }
 mkcd() { mkdir -p "$@" && cd $_; }
 rem() { pkill emacs && command emacs --daemon && emacsclient -nw; }
+edi() { pkill emacs && command emacs --debug-init; }
 
 # prefer more modern versions of standard applications
 htop() {
