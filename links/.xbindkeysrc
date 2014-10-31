@@ -1,0 +1,29 @@
+"urxvt"
+  Alt + Return
+
+"iceweasel"
+  Mod4 + w
+
+"vlc"
+  Mod4 + v
+
+"gvim"
+  Mod4 + e
+
+"dmenu_run"
+  Mod1 + p
+
+"dmenufm"
+  Mod1+Shift + p
+
+"mpdmenu"
+  Mod4 + m
+
+"slock"
+  Mod1 + q
+
+"amixer sset Master,0 5+"
+  Mod1 + period
+
+"amixer sset Master,0 5-"
+  Mod1 + comma

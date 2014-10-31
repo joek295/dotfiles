@@ -1,0 +1,22 @@
+map , <Leader>
+map ; :
+" Speed up tab navigation
+map w gT
+map e gt
+map <left> gT
+map <right> gt
+nmap <Leader>a :dialog addons <CR>
+map A <nop>
+map v i
+
+set! browser.startup.page=1
+set defsearch=duckduckgo
+set newtab=all
+set showtabline=multitab
+" same as set incsearch in vim
+set incfind
+set hlfind
+set findcase=smart
+set noerrorbells
+set novisualbell
+set editor='urxvt -e emacs <file>'

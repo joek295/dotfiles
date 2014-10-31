@@ -9,8 +9,7 @@ import XMonad.Hooks.ManageDocks
 
 -- layouts
 import XMonad.Layout.NoBorders -- does what it says on the tin
-import XMonad.Layout.Grid -- grid layout
-import XMonad.Layout.Tabbed -- tabbed layout: used in sublayouts
+import XMonad.Layout.Tabbed -- tabbed layout
 import XMonad.Layout.SubLayouts -- layouts within layouts
 import XMonad.Layout.WindowNavigation -- referring to windows directionally
 import XMonad.Layout.PerWorkspace -- specific layouts for specific workspaces
@@ -30,7 +29,7 @@ myManageHook = composeAll . concat $
   , [ className =? m --> doShift "9" | m <- myChatShifts ]
   ]
   where
-    myFloats = ["Gimp","Skype","XBoard"]
+    myFloats = ["Gimp","Skype"]
     -- Web browsers should be sent to Desktop #2
     myWebShifts = ["Iceweasel","Firefox","Google-chrome","Chromium"]
     -- media players to desktop #8
@@ -41,15 +40,16 @@ myManageHook = composeAll . concat $
 -- Layouts: Tall and Grid; tabbed sub-layout
 -- smartBorders: if only one window, don't bother with borders for focused
 -- avoidStruts: windows should respect conky
--- subTabbed: allows for tabbed sublayouts -- see keybindings section
--- windowNavigation allows the directional selection of windows for manipulating sublayouts
-defaultLayout = windowNavigation $ subTabbed $ avoidStruts $ smartBorders (
-  Tall 1 (3/100) (1/2) ||| Grid )
+
+myTabConfig = defaultTheme { fontName = "terminus-12" }
+
+defaultLayout = avoidStruts $ smartBorders ( Tall 1 (3/100) (1/2) ||| tabbed shrinkText myTabConfig )
+-- defaultLayout = windowNavigation $ avoidStruts $ smartBorders $ addTabs shrinkText myTabConfig $ subLayout [0] ( Tall 1 (3/100) (1/2) )
 
 -- the browser desktop should always be fullscreen
-webLayout = avoidStruts $ smartBorders ( Full )
+webLayout = avoidStruts $ smartBorders $ Full
 
-myLayouts = onWorkspace "2" webLayout $ defaultLayout 
+myLayouts = onWorkspace "2" webLayout $ defaultLayout
 
 -- 9 workspaces
 myWorkspaces =
@@ -81,14 +81,14 @@ myKeys =
   [ 
   -- various keybindings for starting applications:
     ("M1-q", spawn "slock")
-  , ("M4-w", spawn "iceweasel")
-  , ("M4-v", spawn "vlc")
-  , ("M4-e", spawn "gvim")
-  , ("M4-t", spawn myTerminal)
+  --, ("M4-w", spawn "iceweasel")
+  --, ("M4-v", spawn "vlc")
+  --, ("M4-e", spawn "gvim")
+  --, ("M4-t", spawn myTerminal)
   , ("M1-<Return>", spawn myTerminal)
-  , ("M1-S-p", spawn "dmenufm")
-  , ("M4-p", spawn "dmenufm")
-  , ("M4-m", spawn "mpdmenu")
+  --, ("M1-S-p", spawn "dmenufm")
+  --, ("M4-p", spawn "dmenufm")
+  --, ("M4-m", spawn "mpdmenu")
   , ("M1-g", gotoMenu)
 
   -- control mpd
