@@ -1,29 +1,32 @@
 "urxvt"
-  Alt + Return
+  Mod4 + Return
+
+"urxvt"
+  Mod1 + Return
 
 "iceweasel"
   Mod4 + w
 
-"vlc"
-  Mod4 + v
-
-"gvim"
-  Mod4 + e
-
 "dmenu_run"
-  Mod1 + p
+  Mod4 + p
 
-"dmenufm"
-  Mod1+Shift + p
+"dfm"
+  Mod4+Shift + p
 
-"mpdmenu"
+"dmpd"
   Mod4 + m
 
 "slock"
-  Mod1 + q
+  Mod4 + q
 
 "amixer sset Master,0 5+"
-  Mod1 + period
+  Mod4 + period
 
 "amixer sset Master,0 5-"
-  Mod1 + comma
+  Mod4 + comma
+
+"mpc next"
+  Mod4 + greater
+
+"mpc previous"
+  Mod4 + less

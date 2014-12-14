@@ -1,15 +1,18 @@
 # -*- sh -*-
-# sourced by ~/.bashrc
-# functions for bash are defined in this file.
+
+# Sourced by ~/.bashrc, ~/.zshrc, and possibly other files.
+# If at all possible, functions should be sh-compatible.
+
 # man bash has this to say about aliases and functions:
-#
-#     There is no mechanism for using arguments in the replacement text.  If arguments are needed, a shell function should be used.
-#     ...
-#     For almost every purpose, aliases are superseded by shell functions.
+
+#     There is no mechanism for using arguments in the replacement
+#     text.  If arguments are needed, a shell function should be used.
+#     ...  For almost every purpose, aliases are superseded by shell
+#     functions.
 
 # `al alias='command --args'` appends the defined alias to ~/.bash_aliases
 # and also sets it in the current session
-al() {
+al () {
   local a
   for a; do
     alias "$a" && alias "${a%%=*}" >> ~/.bash_aliases
@@ -17,40 +20,50 @@ al() {
 }
 
 # some one-liners
-cc() { gcc "$@"; }
-emacs() { emacsclient -nw -a ""; } # I use emacsdaemon/emacsclient rather than plain emacs
-label() { echo -ne "\e]0;$1\a"; } # labels the terminal for easily seeing which has which session
-path() { echo $PATH | sed s/:/\\n/g; } # easy-to-read $PATH
-popular() { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
-#cd() { command cd "$@" && clear; }
-cdll() { cd "$@" && clear && ls -l --group-directories-first; }
-mkcd() { mkdir -p "$@" && cd $_; }
-rem() { pkill emacs && command emacs --daemon && emacsclient -nw; }
-edi() { pkill emacs && command emacs --debug-init; }
+cc () { gcc "$@"; }
+label () { echo -ne "\e]0;$1\a"; } 
+path () { echo $PATH | sed s/:/\\n/g; } 
+popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
+cdll () { cd "$@" && clear && ls -l --group-directories-first; }
+mkcd () { mkdir -p "$@" && cd $_; }
+pdf () { pdflatex "$@" && rm `dirname "$@"`*.{aux,log}; }
+
+# for emacs
+emacs () { emacsclient -nw -a ""; }
+rem () { pkill emacs; command emacs --daemon && emacsclient -nw; }
+edi () { pkill emacs; command emacs --debug-init; }
+
+# print the first line of a file other than the #! which has # as the
+# first non-whitespace character
+docstring () {
+    if [ -r $1 ]; then
+        grep -m 1 '[ \t]*#' $1
+    fi
+}
 
 # prefer more modern versions of standard applications
-htop() {
+htop () {
   if which htop > /dev/null; then
     command htop
   else
     command top
   fi
 }
-vim() {
+vim () {
   if which vim > /dev/null; then
     command vim "$@"
   else
     command vi "$@"
   fi
 }
-top() {
+top () {
   if which htop > /dev/null; then
     command htop
   else
     command top
   fi
 }
-vi() {
+vi () {
   if which vim > /dev/null; then
     command vim "$@"
   else
@@ -81,7 +94,7 @@ extract () {
           *)           echo "don't know how to extract '$1'..." ;;
       esac
   else
-      echo "'$1' is not a valid file!"
+      echo "Error: '$1' is not a valid file!"
       echo "Either $1 is not an archive file, or it is in a format which extract is not familiar with."
   fi
 }
@@ -103,14 +116,14 @@ pack () {
       *.tar.gz) tar -cvzf $DEST "$@" ;;
       *.tgz) tar -cvzf $DEST "$@" ;;
       *.zip) zip -r $DEST "$@" ;;
-      *) echo "Unknown file type - $DEST" ;;
+      *) echo "Error: Unknown file type - $DEST" ;;
     esac
   fi
 }
 
 # mtoc prints a table of contents for a man page
 # handy for stupidly long pages like bash and fvwm
-mtoc() { man --ascii "$1" 2>/dev/null | awk '
+mtoc () { man --ascii "$1" 2>/dev/null | awk '
             BEGIN { a[""]++ }
             /^\s{0,4}\S/ && !($0 in a) { a[$0]++ ; b[i++]=$0 }
             END { for (j=0 ; j<i ; j++) print b[j] } '

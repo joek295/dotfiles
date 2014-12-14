@@ -37,3 +37,10 @@ in if they were in $HOME.  Anything which I don't necessarily install
 into $HOME whenever I clone this repository is not in ./links/, but
 should still be in the correct directory structure.
 
+## Installation of Dotfiles:
+
+1. Clone this repository.
+
+2. Ensure that all files to install are in the ./links/ folder.
+
+3. Run ./install.sh

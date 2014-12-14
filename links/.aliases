@@ -1,7 +1,5 @@
-# -*- sh -*-
-# sourced by ~/.bashrc
-# aliases for bash are defined in this file.
-# man bash has this to say about aliases:
+# -*- sh -*- sourced by ~/.bashrc aliases for bash are defined in this
+# file.  man bash has this to say about aliases:
 #
 #     There is no mechanism for using arguments in the replacement text.  If arguments are needed, a shell function should be used.
 #     ...

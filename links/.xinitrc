@@ -4,30 +4,35 @@ export TERM="xterm-256color"
 
 # choose a cursor and background colour
 xsetroot -cursor_name left_ptr
-xsetroot -solid #2e3436
+xsetroot -solid '#2e3436'
 
 # turns off screen blanking
 xset s off &
 
 # loads the .Xresources file, where urxvt settings are kept
 if [ -s ~/.Xresources ]; then
-  xrdb -merge ~/.Xresources
+    xrdb -merge ~/.Xresources
 fi
 
 # if laptop is plugged into an external monitor
 # VGA
 if xrandr | grep 'VGA1 connected'; then
-  xrandr --output LVDS1 --off --output VGA1 --auto
+    xrandr --output LVDS1 --off --output VGA1 --auto
 fi
 
 # HDMI
 if xrandr | grep 'HDMI1 connected'; then
-  xrandr --output LVDS1 --off --output HDMI1 --auto
+    xrandr --output LVDS1 --off --output HDMI1 --auto
 fi
+
+# if conky is installed:
+#if conky -v; then
+conky &
+#fi
 
 # if we have xbindkeys configured
 if [ -s ~/.xbindkeysrc ]; then
-  xbindkeys
+    xbindkeys
 fi
 
 # Make capslock into another control key
@@ -38,8 +43,9 @@ fi
 # turns off touchpad if mouse is plugged in
 # if exists /dev/hidraw0 (the device file for my mouse)
 if [ -e /dev/hidraw0 ]; then
-  # turn off touchpad
-  synclient TouchpadOff=1
+    # turn off touchpad
+    synclient TouchpadOff=1
 fi
 
-exec xmonad
+#exec xmonad
+exec i3
