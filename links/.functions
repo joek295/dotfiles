@@ -10,19 +10,32 @@
 #     ...  For almost every purpose, aliases are superseded by shell
 #     functions.
 
-# `al alias='command --args'` appends the defined alias to ~/.bash_aliases
-# and also sets it in the current session
+# for distribution-agnostic package-management commands
+Get_Dist () {
+    DIST=`cat /proc/version | cut -d "(" -f 2 | cut -d " " -f 1`
+    case $DIST in
+        "Debian") PKGMNGR=apt;;
+        "Arch") PKGMNGR=pacman;;
+        "Crux") PKGMNGR=prt-get;;
+    esac
+    export PKGMNGR;
+}
+
+Get_Dist
+
+# `al alias='command --args'` appends the defined alias to
+# ~/.bash_aliases and also sets it in the current session
 al () {
-  local a
-  for a; do
-    alias "$a" && alias "${a%%=*}" >> ~/.bash_aliases
-  done
+    local a
+    for a; do
+        alias "$a" && alias "${a%%=*}" >> ~/.bash_aliases
+    done
 }
 
 # some one-liners
 cc () { gcc "$@"; }
-label () { echo -ne "\e]0;$1\a"; } 
-path () { echo $PATH | sed s/:/\\n/g; } 
+label () { echo -ne "\e]0;$1\a"; }
+path () { echo $PATH | sed s/:/\\n/g; }
 popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
 cdll () { cd "$@" && clear && ls -l --group-directories-first; }
 mkcd () { mkdir -p "$@" && cd $_; }
@@ -41,90 +54,140 @@ docstring () {
     fi
 }
 
-# prefer more modern versions of standard applications
-htop () {
-  if which htop > /dev/null; then
-    command htop
-  else
-    command top
-  fi
-}
-vim () {
-  if which vim > /dev/null; then
-    command vim "$@"
-  else
-    command vi "$@"
-  fi
-}
-top () {
-  if which htop > /dev/null; then
-    command htop
-  else
-    command top
-  fi
-}
-vi () {
-  if which vim > /dev/null; then
-    command vim "$@"
-  else
-    command vi "$@"
-  fi
+# Package Management
+inst () {
+    case $PKGMNGR in
+        "apt") sudo apt-get install "$@";;
+        "prt-get") sudo prt-get depinst "$@";;
+        "pacman") sudo pacman -S "$@";;
+    esac;
 }
 
-# handy uncompression function
-# intelligently uncompresses files with extensions from various compression algorithms
+upgr () {
+    case $PKGMNGR in
+        "apt") sudo apt-get upgrade;;
+    esac;
+}
+
+upda () {
+    case $PKGMNGR in
+        "apt") sudo apt-get update;;
+    esac;
+}
+
+psearch () {
+    case $PKGMNGR in
+        "apt") apt-cache search "$@";;
+        "prt-get") prt-get search "$@";;
+        "pacman") pacman -Ss "$@";;
+    esac;
+}
+
+pcount () {
+    case $PKGMNGR in
+        "apt") dpkg --get-selections | grep -v deinstall | wc -l;;
+        "prt-get") prt-get listinst | wc -l;;
+    esac;
+}
+
+# apt-get:
+apti () { sudo apt-get install "@$"; }
+aptud () { sudo apt-get update; }
+aptug () { sudo apt-get upgrade; }
+aptr () { sudo apt-get purge "@$"; }
+apts () { apt-cache search  "@$"; }
+aptl () { dpkg --get-selections | grep -v deinstall; }
+
+# prt-get:
+prti () { sudo prt-get depinst "@$"; }
+prts () { prt-get search "@$"; }
+prtinfo () { prt-get info "@$"; }
+prtl () { prt-get listinst; }
+
+# prefer more modern versions of standard applications
+htop () {
+    if which htop > /dev/null; then
+        command htop
+    else
+        command top
+    fi
+}
+vim () {
+    if which vim > /dev/null; then
+        command vim "$@"
+    else
+        command vi "$@"
+    fi
+}
+top () {
+    if which htop > /dev/null; then
+        command htop
+    else
+        command top
+    fi
+}
+vi () {
+    if which vim > /dev/null; then
+        command vim "$@"
+    else
+        command vi "$@"
+    fi
+}
+
+# handy uncompression function intelligently uncompresses files with
+# extensions from various compression algorithms
 extract () {
-  if [ -f "$1" ] ; then
-      case "$1" in
-          *.tar.bz2)   tar xvjf "$1"    ;;
-          *.tar.gz)    tar xvzf "$1"    ;;
-          *.tar.xz)    tar xfJ "$1"     ;;
-          *.bz2)       bunzip2 "$1"     ;;
-          *.rar)       rar x "$1"       ;;
-          *.gz)        gunzip "$1"      ;;
-          *.tar)       tar xvf "$1"     ;;
-          *.xz)        unxz "$1"        ;;
-          *.tbz2)      tar xvjf "$1"    ;;
-          *.tgz)       tar xvzf "$1"    ;;
-          *.zip)       unzip "$1"       ;;
-          *.Z)         uncompress "$1"  ;;
-          *.7z)        7z x "$1"        ;;
-          *.cbr)       rar x "$1"       ;;
-          *.cbz)       unzip "$1"       ;;
-          *)           echo "don't know how to extract '$1'..." ;;
-      esac
-  else
-      echo "Error: '$1' is not a valid file!"
-      echo "Either $1 is not an archive file, or it is in a format which extract is not familiar with."
-  fi
+    if [ -f "$1" ] ; then
+        case "$1" in
+            *.tar.bz2)   tar xvjf "$1"    ;;
+            *.tar.gz)    tar xvzf "$1"    ;;
+            *.tar.xz)    tar xfJ "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       rar x "$1"       ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xvf "$1"     ;;
+            *.xz)        unxz "$1"        ;;
+            *.tbz2)      tar xvjf "$1"    ;;
+            *.tgz)       tar xvzf "$1"    ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *.cbr)       rar x "$1"       ;;
+            *.cbz)       unzip "$1"       ;;
+            *)           echo "don't know how to extract '$1'..." ;;
+        esac
+    else
+        echo "Error: '$1' is not a valid file!"
+        echo "Either $1 is not an archive file, or it is in a format which extract is not familiar with."
+    fi
 }
 
 # pack is like extract in reverse...
 pack () {
-  if [ $# -lt 2 ]; then
-    echo -e "\npack usage:"
-    echo -e "\tpack archive_name file1 file2 ... fileN"
-    echo -e "\tpack creates archive of files\n"
-    echo -e "file types supported:"
-    echo -e "\t .tar.bz2; .tar.gz; .tgz; .zip; .xpi; .7z\n"
-  else
-    DEST=$1
-    shift
+    if [ $# -lt 2 ]; then
+        echo -e "\npack usage:"
+        echo -e "\tpack archive_name file1 file2 ... fileN"
+        echo -e "\tpack creates archive of files\n"
+        echo -e "file types supported:"
+        echo -e "\t .tar.bz2; .tar.gz; .tgz; .zip; .xpi; .7z\n"
+    else
+        DEST=$1
+        shift
 
-    case $DEST in
-      *.tar.bz2) tar -cvjf $DEST "$@" ;;
-      *.tar.gz) tar -cvzf $DEST "$@" ;;
-      *.tgz) tar -cvzf $DEST "$@" ;;
-      *.zip) zip -r $DEST "$@" ;;
-      *) echo "Error: Unknown file type - $DEST" ;;
-    esac
-  fi
+        case $DEST in
+            *.tar.bz2) tar -cvjf $DEST "$@" ;;
+            *.tar.gz) tar -cvzf $DEST "$@" ;;
+            *.tgz) tar -cvzf $DEST "$@" ;;
+            *.zip) zip -r $DEST "$@" ;;
+            *) echo "Error: Unknown file type - $DEST" ;;
+        esac
+    fi
 }
 
-# mtoc prints a table of contents for a man page
-# handy for stupidly long pages like bash and fvwm
+# mtoc prints a table of contents for a man page. Handy for stupidly
+# long pages like bash and fvwm
 mtoc () { man --ascii "$1" 2>/dev/null | awk '
             BEGIN { a[""]++ }
             /^\s{0,4}\S/ && !($0 in a) { a[$0]++ ; b[i++]=$0 }
             END { for (j=0 ; j<i ; j++) print b[j] } '
-}
+        }
