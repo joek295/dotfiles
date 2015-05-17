@@ -10,41 +10,58 @@
 #     ...  For almost every purpose, aliases are superseded by shell
 #     functions.
 
-# for distribution-agnostic package-management commands
-Get_Dist () {
-    DIST=`cat /proc/version | cut -d "(" -f 2 | cut -d " " -f 1`
-    case $DIST in
-        "Debian") PKGMNGR=apt;;
-        "Arch") PKGMNGR=pacman;;
-        "Crux") PKGMNGR=prt-get;;
-    esac
+# find out which package manager is being used.  Original approach
+# involved looking in /proc/version, but that was too kludgy and had
+# too many odd exceptions.
+Get_PkgMngr () {
+    if which apt-get >/dev/null; then
+        PKGMNGR=apt
+    else
+        if which prt-get >/dev/null; then
+            PKGMNGR=prt-get
+        else
+            if which pacman >/dev/null; then
+                PKGMNGR=pacman
+            fi
+        fi
+    fi
     export PKGMNGR;
 }
 
-Get_Dist
+Get_PkgMngr
 
 # `al alias='command --args'` appends the defined alias to
 # ~/.bash_aliases and also sets it in the current session
 al () {
     local a
     for a; do
-        alias "$a" && alias "${a%%=*}" >> ~/.bash_aliases
+        alias "$a" && alias "${a%%=*}" >> ~/.aliases
     done
 }
 
 # some one-liners
 cc () { gcc "$@"; }
+chx () { chmod +x "$@"; }
 label () { echo -ne "\e]0;$1\a"; }
 path () { echo $PATH | sed s/:/\\n/g; }
 popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
 cdll () { cd "$@" && clear && ls -l --group-directories-first; }
 mkcd () { mkdir -p "$@" && cd $_; }
-pdf () { pdflatex "$@" && rm `dirname "$@"`*.{aux,log}; }
+pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
 
 # for emacs
 emacs () { emacsclient -nw -a ""; }
 rem () { pkill emacs; command emacs --daemon && emacsclient -nw; }
 edi () { pkill emacs; command emacs --debug-init; }
+
+# volume control
+volup () { amixer sset Master,0 5+; }
+voldown () { amixer sset Master,0 5-; }
+
+# xall: chmod +x every file in a folder
+xall () { for i in *; do
+              chmod +x $i
+          done }
 
 # print the first line of a file other than the #! which has # as the
 # first non-whitespace character
@@ -62,19 +79,17 @@ inst () {
         "pacman") sudo pacman -S "$@";;
     esac;
 }
-
 upgr () {
     case $PKGMNGR in
         "apt") sudo apt-get upgrade;;
     esac;
 }
-
 upda () {
     case $PKGMNGR in
         "apt") sudo apt-get update;;
+        "prt-get") sudo ports -u;;
     esac;
 }
-
 psearch () {
     case $PKGMNGR in
         "apt") apt-cache search "$@";;
@@ -82,27 +97,33 @@ psearch () {
         "pacman") pacman -Ss "$@";;
     esac;
 }
-
 pcount () {
     case $PKGMNGR in
         "apt") dpkg --get-selections | grep -v deinstall | wc -l;;
         "prt-get") prt-get listinst | wc -l;;
     esac;
 }
+pinfo () {
+    case $PKGMNGR in
+        "apt") apt-cache showpkg "$@";;
+        "prt-get") prt-get info "$@";;
+    esac
+}
 
 # apt-get:
-apti () { sudo apt-get install "@$"; }
-aptud () { sudo apt-get update; }
-aptug () { sudo apt-get upgrade; }
-aptr () { sudo apt-get purge "@$"; }
-apts () { apt-cache search  "@$"; }
-aptl () { dpkg --get-selections | grep -v deinstall; }
+apti    () { sudo apt-get install "@$"; }
+aptud   () { sudo apt-get update; }
+aptug   () { sudo apt-get upgrade; }
+aptr    () { sudo apt-get purge "@$"; }
+apts    () { apt-cache search  "@$"; }
+aptl    () { dpkg --get-selections | grep -v deinstall; }
+uncache () { sudo apt-get clean; }
 
 # prt-get:
-prti () { sudo prt-get depinst "@$"; }
-prts () { prt-get search "@$"; }
+prti    () { sudo prt-get depinst "@$"; }
+prts    () { prt-get search "@$"; }
 prtinfo () { prt-get info "@$"; }
-prtl () { prt-get listinst; }
+prtl    () { prt-get listinst; }
 
 # prefer more modern versions of standard applications
 htop () {

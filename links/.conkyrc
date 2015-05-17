@@ -30,7 +30,7 @@ ${mem} \
 ${if_up eth0}| UP ${totalup eth0} | DN ${totaldown eth0} ${endif}${if_up wlan0}| UP ${totalup wlan0} | DN ${totaldown wlan0} | \
 WIFI ${wireless_link_qual_perc wlan0} ${endif} | \
 UPDATES ${execi 3600 checkpkg} | \
-${mpd_smart} | \
+${mpd_artist} – ${mpd_name}${mpd_title} | \
 ${alignr} | ${acpitemp}C | \
 ${if_match ${battery_percent} > 75}${color1}${else}${if_match ${battery_percent} > 50}${color2}${else}${if_match ${battery_percent} > 25}${color3}${else}${color4}${endif}${endif}${endif} ${battery_percent}% ${color}| \
 ${uptime_short} | ${time  %H:%M %d-%m} 

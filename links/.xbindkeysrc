@@ -26,7 +26,10 @@
   Mod4 + comma
 
 "mpc next"
-  Mod4 + greater
+  Mod4+Shift+period
 
 "mpc previous"
-  Mod4 + less
+  Mod4+Shift+comma
+
+"mpc toggle"
+  Mod4+space

@@ -43,9 +43,7 @@ fi
 # turns off touchpad if mouse is plugged in
 # if exists /dev/hidraw0 (the device file for my mouse)
 if [ -e /dev/hidraw0 ]; then
-    # turn off touchpad
     synclient TouchpadOff=1
 fi
 
-#exec xmonad
 exec i3
