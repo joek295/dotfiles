@@ -1,10 +1,15 @@
 # .zshrc is the equivalent of .bashrc & .kshrc
 
 ALIASES=$HOME/.aliases
+ZALIASES=$HOME/.zsh_aliases
 FUNCTIONS=$HOME/.functions
 
 if [ -f $ALIASES ]; then
   source $ALIASES
+fi
+
+if [ -f $ZALIASES ]; then
+    source $ZALIASES
 fi
 
 if [ -f $FUNCTIONS ]; then

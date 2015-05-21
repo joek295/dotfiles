@@ -49,6 +49,21 @@ cdll () { cd "$@" && clear && ls -l --group-directories-first; }
 mkcd () { mkdir -p "$@" && cd $_; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
 
+# startx
+x () {
+    if [ `tty | cut -d / -f 3`  = "tty" ]; then
+        startx
+    else
+        echo "Not at TTY: Cannot startx."
+    fi
+}
+
+# ls
+ls () { command ls -F --color --group-directories-first "$@"; }
+la () { command ls -AF --color --group-directories-first "$@"; }
+ll () { command ls -l --group-directories-first "$@"; }
+lp () { command ls -Al --color='never' "$@" | less; } 
+
 # for emacs
 emacs () { emacsclient -nw -a ""; }
 rem () { pkill emacs; command emacs --daemon && emacsclient -nw; }

@@ -1,0 +1,7 @@
+# -*- sh -*-
+
+# global aliases for zsh are not supported by other shells.  they are
+# defined in this file so that the ~/.aliases file is portable.
+
+alias -g putils=~/media/code/perl/perlutils
+alias -g media=~/media
