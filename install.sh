@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install the dotfiles in the .dotfiles directory into their rightfull places:
+# Install the dotfiles in the .dotfiles directory into their rightful places:
 # symlink the dotfiles to the correct places
 
 # N.B. This requires bash because inline pattern-substitution in this way is a bashism.
