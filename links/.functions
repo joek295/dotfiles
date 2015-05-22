@@ -77,7 +77,7 @@ rs () {
 
 # startx
 x () {
-    if [ `tty | cut -d / -f 3`  = "tty" ]; then
+    if [ `tty | cut -c 6-8`  = "tty" ]; then
         startx
     else
         echo "Not at TTY: Cannot startx."
