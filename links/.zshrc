@@ -16,13 +16,26 @@ if [ -f $FUNCTIONS ]; then
   source $FUNCTIONS
 fi
 
+#history options
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=1000
-setopt appendhistory
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY # incremental append history
 setopt HIST_IGNORE_DUPS
-setopt autocd
 
+setopt AUTO_CD
+setopt AUTO_LIST
+setopt AUTO_PARAM_SLASH
+setopt GLOB_COMPLETE
+setopt NO_BEEP
+setopt MULTIOS
+
+# ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
+# (or anything else containing the string vi, such as nvi or elvis).
+# Here we make sure that this behaviour is as expected.
+bindkey -v
+# up and down should move through command history
 [[ -n "${key[Up]}"   ]]  && bindkey  "${key[Up]}"    history-beginning-search-backward
 [[ -n "${key[Down]}" ]]  && bindkey  "${key[Down]}"  history-beginning-search-forward
 
