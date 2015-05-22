@@ -5,3 +5,5 @@
 
 alias -g putils=~/media/code/perl/perlutils
 alias -g media=~/media
+alias -g dotfiles=/home/joe/media/dotfiles
+alias -g scripts=/home/joe/scripts

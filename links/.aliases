@@ -6,31 +6,23 @@
 #
 # man bash has this to say about aliases:
 #
-#     There is no mechanism for using arguments in the replacement text.  If arguments are needed, a shell function should be used.
-#     ...
-#     Aliases are not expanded when the shell is not interactive, unless the expand_aliases shell option is set using shopt.
-#     ...
-#     For almost every purpose, aliases are superseded by shell functions.
-
+#     There is no mechanism for using arguments in the replacement
+#     text.  If arguments are needed, a shell function should be used
+#     [...] aliases are not expanded when the shell is not
+#     interactive, unless the expand_aliases shell option is set using
+#     shopt [...] for almost every purpose, aliases are superseded by
+#     shell functions.
 
 # option flags should always be used by some commands
-alias su='su -' # su should try to follow my own environment
+alias su='su -p' # su should try to follow my own environment
 alias df='df -h' # df should be in human-readable form
 
 # one- and two-letter aliases
 alias c='clear'
-alias e='$EDITOR'
 alias m='mutt'
-alias sd='sudo shutdown -h now'
-alias rs='sudo shutdown -r now'
 
 # those commands which I always forget to sudo...
 alias update-grub='sudo update-grub'
-alias apt='sudo aptitude'
-
-alias cd..='cd ..'
-alias ..='cd ..'
-alias ...='cd ../..'
 
 alias tetris='tetris-bsd'
 alias mix='alsamixer'

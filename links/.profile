@@ -30,8 +30,7 @@ if [ -d "$HOME/scripts" ] ; then
 fi
 
 # ENVIRONMENT
-# if vim is installed, both EDITOR and VISUAL are set to /usr/bin/vim
-# else, fall back to ed/vi, and warn the user, who might expect a more modern editor
+# if vim is not installed, warn the user: they might expect a more modern editor!
 if command -v vim >/dev/null 2>&1; then
     EDITOR="vim"
     VISUAL=$EDITOR
@@ -65,7 +64,6 @@ fi
 export PAGER
 
 # USER SERVICES
-# Remember to redirect output to /dev/null
 
 # If dropbox daemon is not already running, then start it.  NB: the
 # dropbox start command implies checking if running.
@@ -73,15 +71,9 @@ if command -v dropbox >/dev/null 2>&1; then
     dropbox start >/dev/null &
 fi
 
-# Start the emacs daemon
-#if command -v emacs >/dev/null 2>&1; then
-#    emacs --daemon >/dev/null 2>&1 &
-#fi
-
 # turns off touchpad if mouse is plugged in
 # if exists /dev/hidraw0 (the device file for my mouse)
 if [ -e /dev/hidraw0 ]; then
-    # turn off touchpad
     synclient TouchpadOff=1
 fi
 

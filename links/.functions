@@ -30,13 +30,21 @@ Get_PkgMngr () {
 
 Get_PkgMngr
 
-# `al alias='command --args'` appends the defined alias to
-# ~/.bash_aliases and also sets it in the current session
+# `al alias command` sets an alias in .aliases and in the current
+# session; `alg alias command` sets a zsh global alias in .zsh_aliases
+# and current session
 al () {
-    local a
-    for a; do
-        alias "$a" && alias "${a%%=*}" >> ~/.aliases
-    done
+    if [[ $1 && $2 ]]; then
+        echo "alias $1=\"$2\"" >> ~/.aliases
+        alias $1="$2"
+    fi
+}
+
+alg () {
+    if [[ $1 && $2 ]]; then
+        echo "alias -g $1=$2" >> ~/.zsh_aliases
+        alias -g $1=$2
+    fi
 }
 
 # some one-liners
@@ -45,9 +53,27 @@ chx () { chmod +x "$@"; }
 label () { echo -ne "\e]0;$1\a"; }
 path () { echo $PATH | sed s/:/\\n/g; }
 popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
-cdll () { cd "$@" && clear && ls -l --group-directories-first; }
-mkcd () { mkdir -p "$@" && cd $_; }
+cdl () { cd "$@" && clear && ls -l --group-directories-first; }
+mcd () { mkdir -p "$@" && cd $_; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
+up () { for i in {1..$1}; do cd ..; done }
+
+# power management
+sd () {
+    if which systemctl >/dev/null; then
+        sudo systemctl shutdown
+    else
+        sudo shutdown -h now
+    fi
+}
+
+rs () {
+    if which systemctl >/dev/null; then
+        sudo systemctl restart
+    else
+        sudo shutdown -r now
+    fi
+}
 
 # startx
 x () {
@@ -59,10 +85,10 @@ x () {
 }
 
 # ls
-ls () { command ls -F --color --group-directories-first "$@"; }
-la () { command ls -AF --color --group-directories-first "$@"; }
-ll () { command ls -l --group-directories-first "$@"; }
-lp () { command ls -Al --color='never' "$@" | less; } 
+ls () { command ls -FH --color --group-directories-first "$@"; }
+la () { command ls -AFH --color --group-directories-first "$@"; }
+ll () { command ls -lH --group-directories-first "$@"; }
+lp () { command ls -AlH --color='never' "$@" | less; } 
 
 # for emacs
 emacs () { emacsclient -nw -a ""; }
@@ -126,6 +152,7 @@ pinfo () {
 }
 
 # apt-get:
+apt     () { sudo aptitude; }
 apti    () { sudo apt-get install "@$"; }
 aptud   () { sudo apt-get update; }
 aptug   () { sudo apt-get upgrade; }

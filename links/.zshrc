@@ -27,8 +27,8 @@ setopt autocd
 [[ -n "${key[Down]}" ]]  && bindkey  "${key[Down]}"  history-beginning-search-forward
 
 autoload -U colors && colors
-PS1="%{$fg[blue]%}%n%{$reset_color%}@%m:%~
-%# "
+PS1="%{$fg[blue]%}%n%{$fg[default]%}@%m:%{$fg[green]%}%~
+%{%(#~$fg[red]~$fg[default])%}%#%{$fg[default]%} "
 
 # colourful man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
