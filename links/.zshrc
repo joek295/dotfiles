@@ -24,12 +24,22 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY # incremental append history
 setopt HIST_IGNORE_DUPS
 
-setopt AUTO_CD
-setopt AUTO_LIST
-setopt AUTO_PARAM_SLASH
-setopt GLOB_COMPLETE
 setopt NO_BEEP
 setopt MULTIOS
+setopt AUTO_CD
+
+# Completion: this is significantly more fancy than bash's completion
+# system!
+autoload -U compinit
+compinit
+
+# automatic completion options:
+setopt AUTO_LIST        # tabbing on an ambiguously incomplete command lists possibilities
+setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects first possibility
+setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
+setopt GLOB_COMPLETE    
+setopt COMPLETE_ALIASES
+setopt AUTO_PARAM_SLASH 
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
 # (or anything else containing the string vi, such as nvi or elvis).
@@ -52,6 +62,3 @@ export LESS_TERMCAP_so=$'\E[01;42;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-autoload -U compinit
-compinit
-setopt completealiases
