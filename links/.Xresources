@@ -20,7 +20,7 @@ URxvt*perl-ext-common:
 
 dzen2.font:       -*-fixed-medium-r-*-*-12-*-*-*-*-*-*-*
 
-#include "/home/joe/.config/colorthemes/clean"
-! #include "/home/joe/.config/colorthemes/solarized-dark"
+! #include "/home/joe/.config/colorthemes/clean"
+ #include "/home/joe/.config/colorthemes/solarized-dark"
 ! #include "/home/joe/.config/colorthemes/solarized-light"
 ! #include "/home/joe/.config/colorthemes/ucam"

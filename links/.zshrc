@@ -62,3 +62,12 @@ export LESS_TERMCAP_so=$'\E[01;42;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+# Plugins:
+
+ZSH_PLUGINS=$HOME/.zsh/
+
+# zsh syntax highlighting
+# available at https://github.com/zsh-users/zsh-syntax-highlighting
+if [ -e $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
