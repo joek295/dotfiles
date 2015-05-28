@@ -28,16 +28,17 @@ setopt NO_BEEP
 setopt MULTIOS
 setopt AUTO_CD
 
-# Completion: this is significantly more fancy than bash's completion
-# system!
-autoload -U compinit
-compinit
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+zstyle ':completion:*:expand:*' tag-order all-expansions
+# zsh better completion of kill command:
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 # automatic completion options:
 setopt AUTO_LIST        # tabbing on an ambiguously incomplete command lists possibilities
 setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects first possibility
 setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
 setopt GLOB_COMPLETE    
+setopt GLOB_SUBST
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
 
@@ -79,3 +80,9 @@ ZSH_PLUGINS=$HOME/.zsh/
 if [ -e $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# Completion: this is significantly more fancy than bash's completion
+# system!
+# NB: keep at the bottom of the file; things break otherwise!
+autoload -U compinit
+compinit
