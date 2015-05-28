@@ -53,10 +53,13 @@ chx () { chmod +x "$@"; }
 label () { echo -ne "\e]0;$1\a"; }
 path () { echo $PATH | sed s/:/\\n/g; }
 popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
-cdl () { cd "$@" && clear && ls -l --group-directories-first; }
-mcd () { mkdir -p "$@" && cd $_; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
 up () { for i in {1..$1}; do cd ..; done }
+py () { python "$@"; }
+
+# cd
+cdl () { cd "$@" && clear && ls -l --group-directories-first; }
+mcd () { mkdir -p "$@" && cd $_; }
 
 # power management
 sd () {
@@ -100,9 +103,11 @@ volup () { amixer sset Master,0 5+; }
 voldown () { amixer sset Master,0 5-; }
 
 # xall: chmod +x every file in a folder
-xall () { for i in *; do
-              chmod +x $i
-          done }
+xall () {
+    for i in *; do
+        chmod +x $i
+    done
+}
 
 # print the first line of a file other than the #! which has # as the
 # first non-whitespace character
