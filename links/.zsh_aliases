@@ -16,6 +16,5 @@ alias -g scripts=/home/joe/scripts
 # file's extension.
 
 alias -s tex=emacs
-alias -s pl=emacs
-alias -s py=emacs
+alias -s c=emacs
 alias -s pdf="zathura &"
