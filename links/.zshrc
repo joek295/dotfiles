@@ -39,6 +39,7 @@ setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects f
 setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
 setopt GLOB_COMPLETE    
 setopt GLOB_SUBST
+setopt EXTENDEDGLOB
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
 
