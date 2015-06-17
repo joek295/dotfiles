@@ -17,7 +17,7 @@ OPTIONS=hilite_obj_piles
 OPTIONS=!item_use_menu
 
 # AUTOPICKUP
-OPTIONS=autopickup,pickup_types:$*/=+"
+OPTIONS=autopickup,pickup_types:$*/=+
 OPTIONS=pickup_burden:unencumbered
 # Always pick up
 AUTOPICKUP_EXCEPTION="<*wand of wishing*"

@@ -11,7 +11,7 @@
   Mod4 + p
 
 "dfm"
-  Mod4+Shift + p
+  Mod4 + Shift + p
 
 "dmpd"
   Mod4 + m
@@ -26,10 +26,10 @@
   Mod4 + comma
 
 "mpc next"
-  Mod4+Shift+period
+  Mod4 + Shift + period
 
 "mpc previous"
-  Mod4+Shift+comma
+  Mod4 + Shift + comma
 
 "mpc toggle"
-  Mod4+space
+  Mod4 + space

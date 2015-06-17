@@ -18,4 +18,3 @@ MENUCOLOR=" \((being worn)\|hands?)\|(in quiver)\)"=&bold
 MENUCOLOR=" blessed .* \((being worn)\|hands?)\|(in quiver)\)"=green&bold
 MENUCOLOR=" cursed .* \((being worn)\|hands?)\)"=orange&underline
 MENUCOLOR=" corpse"=brown
-

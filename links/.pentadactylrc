@@ -19,4 +19,4 @@ set hlfind
 set findcase=smart
 set noerrorbells
 set novisualbell
-set editor='urxvt -e emacs <file>'
+set editor='emacsclient -c <file>'
