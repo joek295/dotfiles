@@ -12,6 +12,7 @@ xterm*utf8: 1
 
 !URxvt*font: terminus-14
 URxvt*font: xft:inconsolata:pixelsize=13
+emacs.font: xft:inconsolata:pixelsize=13
 URxvt.scrollstyle: plain
 URxvt.skipScroll: true
 ! setting these to nothing ensures no perl extensions are loaded
