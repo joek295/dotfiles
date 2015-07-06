@@ -12,13 +12,13 @@ function git_branch {
 
 function git_status {
     if git status 2>/dev/null | grep -i "untracked" >/dev/null; then
-        echo "$RED*"
+        echo "$RED*$COLOR_OFF"
     fi
     if git status 2>/dev/null | grep -i "not staged" >/dev/null; then
-        echo "$YELLOW*"
+        echo "$YELLOW*$COLOR_OFF"
     fi
     if git status 2>/dev/null | grep -i "to be committed" >/dev/null; then
-        echo "$GREEN*"
+        echo "$GREEN*$COLOR_OFF"
     fi
 }
 
@@ -33,12 +33,12 @@ function prompt_char {
 PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW$(git_branch)
 $(prompt_char)'
 
+NORMAL_PROMPT="$BLUE NORMAL$COLOR_OFF"
+INSERT_PROMPT="$RED INSERT$COLOR_OFF"
 # RPS1/2 should tell us the mode when in vi-mode
 function zle-line-init zle-keymap-select {
-    NORMAL_PROMPT="%{$fg[blue]%}NORMAL%{$reset_color%}"
-    INSERT_PROMPT="%{$fg[red]%}INSERT%{$reset_color%}"
     GIT_PROMPT="$(git_status)"
-    RPS1="$GIT_PROMPT %{$reset_color%}[ ${${KEYMAP/vicmd/$NORMAL_PROMPT}/(main|viins)/$INSERT_PROMPT} ]"
+    RPS1="$GIT_PROMPT [ ${${KEYMAP/vicmd/$NORMAL_PROMPT}/(main|viins)/$INSERT_PROMPT} ]"
     RPS2=$RPS1
     zle reset-prompt
 }
