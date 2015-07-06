@@ -10,25 +10,15 @@
 #     ...  For almost every purpose, aliases are superseded by shell
 #     functions.
 
-# find out which package manager is being used.  Original approach
-# involved looking in /proc/version, but that was too kludgy and had
-# too many odd exceptions.
-Get_PkgMngr () {
-    if which apt-get >/dev/null; then
-        PKGMNGR=apt
-    else
-        if which prt-get >/dev/null; then
-            PKGMNGR=prt-get
-        else
-            if which pacman >/dev/null; then
-                PKGMNGR=pacman
-            fi
-        fi
-    fi
-    export PKGMNGR;
-}
+# Parts of the functions file are split off and stored here:
+SHCONFIG=$HOME/media/dotfiles/sh.d
 
-Get_PkgMngr
+source $SHCONFIG/lsfunctions
+source $SHCONFIG/gitfunctions
+
+if which apt-get >/dev/null; then
+    source $SHCONFIG/aptfunctions
+fi
 
 # `al alias command` sets an alias in .aliases and in the current
 # session; `alg alias command` sets a zsh global alias in .zsh_aliases
@@ -49,13 +39,25 @@ alg () {
 
 # some one-liners
 cc () { gcc "$@"; }
+c () { clear; }
 chx () { chmod +x "$@"; }
+df () { df -h; }
 label () { echo -ne "\e]0;$1\a"; }
+mix () { alsamixer; }
+nao () { telnet nethack.alt.org; } 
 path () { echo $PATH | sed s/:/\\n/g; }
-popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
-up () { for i in {1..$1}; do cd ..; done }
+popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
 py () { python "$@"; }
+sdf () { ssh jk564@sdf.org; } 
+srcf () { ssh jk564@shell.srcf.net; } 
+su () {su -p; } 
+tetris () { tetris-bsd; }
+twenex () { ssh twenex@sdf.org; } 
+update-grub () {sudo update-grub; } 
+up () { for i in {1..$1}; do cd ..; done }
+vms () { ssh jk564@jack.vistech.net; }
+which-command () { whence; }
 
 # cd
 cdl () { cd "$@" && clear && ls -l --group-directories-first; }
@@ -87,11 +89,6 @@ x () {
     fi
 }
 
-# ls
-ls () { command ls -FH --color --group-directories-first "$@"; }
-la () { command ls -AFH --color --group-directories-first "$@"; }
-ll () { command ls -lH --group-directories-first "$@"; }
-lp () { command ls -AlH --color='never' "$@" | less; } 
 
 # for emacs
 emacs () { emacsclient -nw -a ""; }
@@ -116,62 +113,6 @@ docstring () {
         grep -m 1 '[ \t]*#' $1
     fi
 }
-
-# Package Management
-inst () {
-    case $PKGMNGR in
-        "apt") sudo apt-get install "$@";;
-        "prt-get") sudo prt-get depinst "$@";;
-        "pacman") sudo pacman -S "$@";;
-    esac;
-}
-upgr () {
-    case $PKGMNGR in
-        "apt") sudo apt-get upgrade;;
-    esac;
-}
-upda () {
-    case $PKGMNGR in
-        "apt") sudo apt-get update;;
-        "prt-get") sudo ports -u;;
-    esac;
-}
-psearch () {
-    case $PKGMNGR in
-        "apt") apt-cache search "$@";;
-        "prt-get") prt-get search "$@";;
-        "pacman") pacman -Ss "$@";;
-    esac;
-}
-pcount () {
-    case $PKGMNGR in
-        "apt") dpkg --get-selections | grep -v deinstall | wc -l;;
-        "prt-get") prt-get listinst | wc -l;;
-    esac;
-}
-pinfo () {
-    case $PKGMNGR in
-        "apt") apt-cache showpkg "$@";;
-        "prt-get") prt-get info "$@";;
-    esac
-}
-
-# apt-get:
-apt     () { sudo aptitude; }
-apti    () { sudo apt-get install "@$"; }
-aptud   () { sudo apt-get update; }
-aptug   () { sudo apt-get upgrade; }
-aptr    () { sudo apt-get purge "@$"; }
-apts    () { apt-cache search  "@$"; }
-apthold () { sudo apt-mark hold "@$"; }
-aptl    () { dpkg --get-selections | grep -v deinstall; }
-uncache () { sudo apt-get clean; }
-
-# prt-get:
-prti    () { sudo prt-get depinst "@$"; }
-prts    () { prt-get search "@$"; }
-prtinfo () { prt-get info "@$"; }
-prtl    () { prt-get listinst; }
 
 # prefer more modern versions of standard applications
 htop () {

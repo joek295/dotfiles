@@ -1,0 +1,55 @@
+! Colours: 
+
+#define M_Red       #8b3c4e
+#define M_BRed      #a4564e
+#define M_Yellow    #b0b958
+#define M_BYellow   #dbf268
+#define M_Green     #196d37
+#define M_BGreen    #3c8b53
+#define M_Blue      #3e84b2
+#define M_BBlue     #479dbd
+#define M_Magenta   #937290
+#define M_BMagenta  #c995ae
+#define M_Cyan      #4e9ca4
+#define M_BCyan     #7dbbc1
+#define M_Black     #1b1f20
+#define M_BBlack    #2e3436
+#define M_White     #abadae
+#define M_BWhite    #c0c2c2
+
+! URxvt:
+
+URxvt*intensityStyles: true
+URxvt*fading: 40
+URxvt*fadeColor: M_BBlack
+
+*background: M_Black
+*foreground: M_White
+*cursorColor: M_BWhite
+*pointerColorBackground: M_BGreen
+*pointerColorForeground: M_BCyan
+
+! Black & Dark Grey
+*color0: M_Black
+*color8: M_BBlack
+! Red and Orange
+*color1: M_Red
+*color9: M_BRed
+! Green & DarkGreen
+*color2: M_Green
+*color10: M_BGreen
+! Yellow & DarkYellow
+*color3: M_Yellow
+*color11: M_BYellow
+! Blue & DarkBlue
+*color4: M_Blue
+*color12: M_BBlue
+! Magenta & Violet
+*color5: M_Magenta
+*color13: M_BMagenta
+! Cyan & DarkCyan
+*color6: M_Cyan
+*color14: M_BCyan
+! LightGrey & White
+*color7: M_White
+*color15: M_BWhite

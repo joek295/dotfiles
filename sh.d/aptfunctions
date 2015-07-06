@@ -1,0 +1,13 @@
+# -*- sh -*-
+
+# functions for systems which have apt-get installed:
+
+apt     () { sudo aptitude; }
+apti    () { sudo apt-get install "@$"; }
+aptud   () { sudo apt-get update; }
+aptug   () { sudo apt-get upgrade; }
+aptr    () { sudo apt-get purge "@$"; }
+apts    () { apt-cache search  "@$"; }
+apthold () { sudo apt-mark hold "@$"; }
+aptl    () { dpkg --get-selections | grep -v deinstall; }
+uncache () { sudo apt-get clean; }

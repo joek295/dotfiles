@@ -20,15 +20,23 @@ directory into your home directory.
   first encounter with it, some time in 2011, with #! Statler.  My
   conky is a single line at the top of my monitor.
 
-* bash and zsh configurations: I used bash for a long time, but have
-  now moved on to trying out zsh.  I have rc files for both, a
-  .functions and .aliases file which are both compatible with both
-  (and, at least theoretically, other sh-based shells), and a fairly
-  extensive .profile file.
+* shell configuration: I have a fairly comprehensive set of
+configuration files for both bash, which I used for many years, and
+zsh, which I switched to around the end of 2014.  This includes: a
+fairly extensive .profile file, which configures various settings
+which are shell-independent; .bashrc and .zshrc files; the sh.d/
+directory, containing settings which can be sourced by any sh-derived
+shell; a functions file, in sh.d/, itself split into various parts;
+the zsh.d/ directory, containing settings which can be sourced by zsh;
+the bash.d/ directory, containing settings which can be sourced by
+bash; an .inputrc file for programs, including bash, which use
+readline; and .bash_logout, .bash_profile, and .zprofile files.
 
 * .xinitrc, .Xresources, and .xbindkeys files.
 
 * misc other configuration files.
+
+* colorthemes for .Xresources, in the colorthemes/ directory.
 
 ## Organisation:
 
@@ -36,6 +44,20 @@ Files in ./links/ should be in the directory structure they would be
 in if they were in $HOME.  Anything which I don't necessarily install
 into $HOME whenever I clone this repository is not in ./links/, but
 should still be in the correct directory structure.
+
+As much as possible is kept out of the way in the dotfiles directory
+itself.  Files in links/ source from various files in the dotfiles
+directory, and there is no guarantee that they will work out of the
+box without fixing these links.  Files to look out for include:
+
+* .zshrc
+
+* .bashrc
+
+* .Xresources
+
+* sh.d/functions, which is sourced by both .zshrc and .bashrc.
+
 
 ## Installation of Dotfiles:
 

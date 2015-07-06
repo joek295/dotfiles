@@ -1,0 +1,7 @@
+# -*- sh -*-
+
+# ls
+ls () { command ls -FH --color --group-directories-first "$@"; }
+la () { command ls -AFH --color --group-directories-first "$@"; }
+ll () { command ls -lH --group-directories-first "$@"; }
+lp () { command ls -AlH --color='never' "$@" | less; } 
