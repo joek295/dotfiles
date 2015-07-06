@@ -19,8 +19,8 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 
-ALIASES=$HOME/.aliases
-FUNCTIONS=$HOME/.functions
+ALIASES=$DOTFILES/sh.d/aliases
+FUNCTIONS=$DOTFILES/sh.d/functions
 PROMPT=$HOME/.bash_prompt
 
 # set PS1:
