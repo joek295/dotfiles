@@ -17,6 +17,9 @@ function git_status {
     if git status 2>/dev/null | grep -i "not staged" >/dev/null; then
         echo "$YELLOW*"
     fi
+    if git status 2>/dev/null | grep -i "to be committed" >/dev/null; then
+        echo "$GREEN*"
+    fi
 }
 
 function prompt_char {
