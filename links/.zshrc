@@ -1,8 +1,13 @@
 # .zshrc is the equivalent of .bashrc & .kshrc
 
-ALIASES=$HOME/.aliases
-ZALIASES=$HOME/.zsh_aliases
-FUNCTIONS=$HOME/.functions
+DOTFILES=$HOME/media/dotfiles
+ZSH_PLUGINS=$DOTFILES/zsh.d
+
+ALIASES=$DOTFILES/sh.d/aliases
+FUNCTIONS=$DOTFILES/sh.d/functions
+
+ZALIASES=$ZSH_PLUGINS/aliases.zsh
+ZPROMPT=$ZSH_PLUGINS/prompt.zsh
 
 if [ -f $ALIASES ]; then
   source $ALIASES
@@ -67,9 +72,6 @@ export LESS_TERMCAP_so=$'\E[01;42;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# Plugins:
-
-ZSH_PLUGINS=$HOME/.zsh/
 
 # zsh syntax highlighting
 # available at https://github.com/zsh-users/zsh-syntax-highlighting
