@@ -47,6 +47,7 @@ setopt GLOB_SUBST
 setopt EXTENDEDGLOB
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
+setopt PROMPT_SUBST     # allow functions in the prompt
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
 # (or anything else containing the string vi, such as nvi or elvis).
