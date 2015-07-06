@@ -19,9 +19,10 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 
+DOTFILES=$HOME/media/dotfiles
 ALIASES=$DOTFILES/sh.d/aliases
 FUNCTIONS=$DOTFILES/sh.d/functions
-PROMPT=$HOME/.bash_prompt
+PROMPT=$DOTFILES/bash.d/prompt
 
 # set PS1:
 # source a different file, because like aliases and functions, this can get 
