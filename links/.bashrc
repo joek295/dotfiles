@@ -30,7 +30,7 @@ PROMPT=$HOME/.bash_prompt
 # .bash_prompt should be preferred, in case other shells with incompatible
 # ps1 syntaxes want to look in .ps1
 if [ -f $PROMPT ]; then
-    . $PROMPT
+    source $PROMPT
 else
     # if no defined PS1, then have a basic fall-back
     # no color or any other fancy things
@@ -59,13 +59,13 @@ shopt -s globstar # allow the /dir/**/file syntax
 # source aliases
 
 if [ -f $ALIASES ]; then
-     . $ALIASES
+     source $ALIASES
 fi
 
 # source ~.bash_functions
 
 if [ -f $FUNCTIONS ]; then
-    . $FUNCTIONS
+    source $FUNCTIONS
 fi
 
 # Completion should be enabled by default if available
