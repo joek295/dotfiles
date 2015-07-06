@@ -51,7 +51,7 @@ popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | le
 py () { python "$@"; }
 sdf () { ssh jk564@sdf.org; } 
 srcf () { ssh jk564@shell.srcf.net; } 
-su () {su -p; } 
+su () { command su -p; } 
 tetris () { tetris-bsd; }
 twenex () { ssh twenex@sdf.org; } 
 update-grub () {sudo update-grub; } 
