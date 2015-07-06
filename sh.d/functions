@@ -54,7 +54,7 @@ srcf () { ssh jk564@shell.srcf.net; }
 su () { command su -p; } 
 tetris () { tetris-bsd; }
 twenex () { ssh twenex@sdf.org; } 
-update-grub () {sudo update-grub; } 
+update-grub () { sudo update-grub; } 
 up () { for i in {1..$1}; do cd ..; done }
 vms () { ssh jk564@jack.vistech.net; }
 which-command () { whence; }
