@@ -11,15 +11,18 @@ function git_branch {
 }
 
 function git_status {
+    local s=""
     if git status 2>/dev/null | grep -i "untracked" >/dev/null; then
-        echo "$RED*$COLOR_OFF"
+        s+="$RED⊛"
     fi
     if git status 2>/dev/null | grep -i "not staged" >/dev/null; then
-        echo "$YELLOW*$COLOR_OFF"
+        s+="$YELLOW⊛"
     fi
     if git status 2>/dev/null | grep -i "to be committed" >/dev/null; then
-        echo "$GREEN*$COLOR_OFF"
+        s+="$GREEN⊛"
     fi
+    s+="$COLOR_OFF"
+    echo ${~~s}
 }
 
 function prompt_char {
