@@ -25,16 +25,11 @@ FUNCTIONS=$DOTFILES/sh.d/functions
 PROMPT=$DOTFILES/bash.d/prompt
 
 # set PS1:
-# source a different file, because like aliases and functions, this can get 
-# rather messy
-# look in .ps1 and .bash_prompt for configurations
-# .bash_prompt should be preferred, in case other shells with incompatible
-# ps1 syntaxes want to look in .ps1
+# Prompt is defined in a separate file because it can be rather complex
 if [ -f $PROMPT ]; then
     source $PROMPT
 else
-    # if no defined PS1, then have a basic fall-back
-    # no color or any other fancy things
+    # fallback prompt, if the $PROMPT file doesn't exist...
     PS1="\u@\h:\w $ "
 fi
 
@@ -57,14 +52,10 @@ shopt -s checkwinsize # update window size after every command
 shopt -s autocd # typing a directory name should cd to that directory
 shopt -s globstar # allow the /dir/**/file syntax
 
-# source aliases
-
+# source aliases and functions:
 if [ -f $ALIASES ]; then
      source $ALIASES
 fi
-
-# source ~.bash_functions
-
 if [ -f $FUNCTIONS ]; then
     source $FUNCTIONS
 fi
