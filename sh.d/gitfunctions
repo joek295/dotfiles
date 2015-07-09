@@ -1,7 +1,11 @@
 # -*- sh -*-
 
 # functions for git
-gitc () { git commit; }
-gitch () { git checkout "$@"; }
-gitbc () { git branch "$@" && git checkout "$1"; }
-gitbd () { git branch -d "$1"; } 
+gc () { git commit; }
+go () { git checkout "$@"; }
+ga () { git add "$@"; }
+
+# git branch
+gbc () { git branch "$@" && git checkout "$1"; }
+gbd () { git branch -d "$1"; } 
+gbs () { git branch -a; }
