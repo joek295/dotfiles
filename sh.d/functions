@@ -116,28 +116,28 @@ docstring () {
 
 # prefer more modern versions of standard applications
 htop () {
-    if which htop > /dev/null; then
+    if command which htop > /dev/null; then
         command htop
     else
         command top
     fi
 }
 vim () {
-    if which vim > /dev/null; then
+    if command which vim > /dev/null; then
         command vim "$@"
     else
         command vi "$@"
     fi
 }
 top () {
-    if which htop > /dev/null; then
+    if command which htop > /dev/null; then
         command htop
     else
         command top
     fi
 }
 vi () {
-    if which vim > /dev/null; then
+    if command which vim > /dev/null; then
         command vim "$@"
     else
         command vi "$@"
