@@ -57,7 +57,6 @@ twenex () { ssh twenex@sdf.org; }
 update-grub () { sudo update-grub; } 
 up () { for i in {1..$1}; do cd ..; done }
 vms () { ssh jk564@jack.vistech.net; }
-which-command () { whence; }
 
 # cd
 cdl () { cd "$@" && clear && ls -l --group-directories-first; }
