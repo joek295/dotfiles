@@ -7,7 +7,7 @@ ls () { command ls -F --color --group-directories-first "$@"; }
 la () { command ls -AF --color --group-directories-first "$@"; }
 ll () { command ls -hlL --color --group-directories-first "$@"; }
 lp () { command ls -hlAL --color='never' "$@" | less; } 
-lr () { command ls -rF --color --group-directories-first "$@"; }
+lr () { command ls -RF --color --group-directories-first "$@"; }
 
 # combine la and ll
 lla () { command ls -hlALFH --color --group-directories-first "$@"; }
