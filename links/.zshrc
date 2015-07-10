@@ -1,15 +1,13 @@
 # .zshrc is the equivalent of .bashrc & .kshrc
 
-DOTFILES=$HOME/media/dotfiles
-ZSH_PLUGINS=$DOTFILES/zsh.d
+ZSH_PLUGINS=$HOME/media/dotfiles/zsh.d
 
-ALIASES=$DOTFILES/sh.d/aliases
-FUNCTIONS=$DOTFILES/sh.d/functions
-
-ZALIASES=$ZSH_PLUGINS/aliases.zsh
-PROMPT=$ZSH_PLUGINS/prompt.zsh
-HISTORY=$ZSH_PLUGINS/history.zsh
+ALIASES=$HOME/media/dotfiles/sh.d/aliases
 COMPLETION=$ZSH_PLUGINS/completions.zsh
+FUNCTIONS=$HOME/media/dotfiles/sh.d/functions
+HISTORY=$ZSH_PLUGINS/history.zsh
+PROMPT=$ZSH_PLUGINS/prompt.zsh
+ZALIASES=$ZSH_PLUGINS/aliases.zsh
 
 if [ -f $ALIASES ]; then
   source $ALIASES
