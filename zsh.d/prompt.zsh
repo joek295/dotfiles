@@ -1,4 +1,5 @@
 # -*- sh -*-
+setopt PROMPT_SUBST     # allow functions in the prompt
 
 COLOR_OFF=%{$fg[default]%}
 BLUE=%{$fg[blue]%}
@@ -7,7 +8,7 @@ RED=%{$fg[red]%}
 YELLOW=%{$fg[yellow]%}
 
 function git_branch {
-    git branch >/dev/null 2>/dev/null && echo -n "(" && echo "$(git branch) )" | cut -c 2-
+    git status >/dev/null 2>/dev/null && echo "$(git status)" | cut -d " " -f 3 | head -n 1
 }
 
 function git_status {
@@ -33,7 +34,7 @@ function prompt_char {
     fi
 }
 
-PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW$(git_branch)
+PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW($(git_branch))
 $(prompt_char)'
 
 NORMAL_PROMPT="$BLUE NORMAL$COLOR_OFF"
@@ -45,3 +46,6 @@ function zle-line-init zle-keymap-select {
     RPS2=$RPS1
     zle reset-prompt
 }
+
+zle -N zle-line-init
+zle -N zle-keymap-select

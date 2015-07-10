@@ -7,7 +7,8 @@ ALIASES=$DOTFILES/sh.d/aliases
 FUNCTIONS=$DOTFILES/sh.d/functions
 
 ZALIASES=$ZSH_PLUGINS/aliases.zsh
-ZPROMPT=$ZSH_PLUGINS/prompt.zsh
+PROMPT=$ZSH_PLUGINS/prompt.zsh
+HISTORY=$ZSH_PLUGINS/history.zsh
 
 if [ -f $ALIASES ]; then
   source $ALIASES
@@ -21,13 +22,7 @@ if [ -f $FUNCTIONS ]; then
   source $FUNCTIONS
 fi
 
-#history options
-HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=1000
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY # incremental append history
-setopt HIST_IGNORE_DUPS
+source $HISTORY
 
 setopt NO_BEEP
 setopt MULTIOS
@@ -47,32 +42,20 @@ setopt GLOB_SUBST
 setopt EXTENDEDGLOB
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
-setopt PROMPT_SUBST     # allow functions in the prompt
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
 # (or anything else containing the string vi, such as nvi or elvis).
-# Here we make sure that this behaviour is as expected.
+# in case for any reason it isn't, set it anyway.
 bindkey -v
 # up and down should move through command history
 [[ -n "${key[Up]}"   ]]  && bindkey  "${key[Up]}"    history-beginning-search-backward
 [[ -n "${key[Down]}" ]]  && bindkey  "${key[Down]}"  history-beginning-search-forward
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
 
 autoload -U colors && colors
 
-source $ZPROMPT
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# colourful man pages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m' 
-export LESS_TERMCAP_so=$'\E[01;42;30m' 
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
+source $PROMPT
 
 # zsh syntax highlighting
 # available at https://github.com/zsh-users/zsh-syntax-highlighting
@@ -83,5 +66,4 @@ fi
 # Completion: this is significantly more fancy than bash's completion
 # system!
 # NB: keep at the bottom of the file; things break otherwise!
-autoload -U compinit
-compinit
+autoload -U compinit && compinit

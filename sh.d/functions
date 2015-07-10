@@ -47,7 +47,7 @@ mix () { alsamixer; }
 nao () { telnet nethack.alt.org; } 
 path () { echo $PATH | sed s/:/\\n/g; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
-popular () { awk '{ print $1 }' ~/.bash_history | sort | uniq -c | sort -rn | less; }
+popular () { awk '{ print $1 }' $HISTFILE | sort | uniq -c | sort -rn | less; }
 py () { python "$@"; }
 sdf () { ssh jk564@sdf.org; } 
 srcf () { ssh jk564@shell.srcf.net; } 
