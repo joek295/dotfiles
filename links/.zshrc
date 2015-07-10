@@ -8,6 +8,7 @@ FUNCTIONS=$DOTFILES/sh.d/functions
 
 ZALIASES=$ZSH_PLUGINS/aliases.zsh
 PROMPT=$ZSH_PLUGINS/prompt.zsh
+HISTORY=$ZSH_PLUGINS/history.zsh
 
 if [ -f $ALIASES ]; then
   source $ALIASES
@@ -21,14 +22,7 @@ if [ -f $FUNCTIONS ]; then
   source $FUNCTIONS
 fi
 
-#history options
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=5000
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY # incremental append history
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
+source $HISTORY
 
 setopt NO_BEEP
 setopt MULTIOS
