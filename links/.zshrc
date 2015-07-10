@@ -26,6 +26,8 @@ source $HISTORY
 setopt NO_BEEP
 setopt MULTIOS
 setopt AUTO_CD
+# With this set, myshell() (in functions) can work in zsh
+setopt POSIX_ARGZERO
 
 # automatic completion options:
 setopt GLOB_COMPLETE    
