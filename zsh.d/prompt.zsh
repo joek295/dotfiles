@@ -39,9 +39,9 @@ $(prompt_char)'
 
 NORMAL_PROMPT="$BLUE NORMAL$COLOR_OFF"
 INSERT_PROMPT="$RED INSERT$COLOR_OFF"
+GIT_PROMPT="$(git_status)"
 # RPS1/2 should tell us the mode when in vi-mode
 function zle-line-init zle-keymap-select {
-    GIT_PROMPT="$(git_status)"
     RPS1="$GIT_PROMPT [${${KEYMAP/vicmd/$NORMAL_PROMPT}/(main|viins)/$INSERT_PROMPT} ]"
     RPS2=$RPS1
     zle reset-prompt
