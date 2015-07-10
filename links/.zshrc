@@ -32,15 +32,18 @@ zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 zstyle ':completion:*:expand:*' tag-order all-expansions
 # zsh better completion of kill command:
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+# completion for my functions...
+zstyle ':completion:*:*:extract:*' file-patterns '*.tar *.*bz2 *.*gz *.xz *.rar *.cbr *.zip *.cbz *.Z *.7z *(-/)'
+zstyle ':completion:*:*:pdf:*' file-patterns '*.tex *(-/)'
 
 # automatic completion options:
 setopt AUTO_LIST        # tabbing on an ambiguously incomplete command lists possibilities
 setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects first possibility
 setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
+setopt COMPLETE_ALIASES
 setopt GLOB_COMPLETE    
 setopt GLOB_SUBST
 setopt EXTENDEDGLOB
-setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
@@ -67,3 +70,5 @@ fi
 # system!
 # NB: keep at the bottom of the file; things break otherwise!
 autoload -U compinit && compinit
+
+compdef mtoc=man

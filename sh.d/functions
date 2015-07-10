@@ -167,7 +167,6 @@ extract () {
         esac
     else
         echo "Error: '$1' is not a valid file!"
-        echo "Either $1 is not an archive file, or it is in a format which extract is not familiar with."
     fi
 }
 
