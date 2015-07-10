@@ -8,7 +8,7 @@ RED=%{$fg[red]%}
 YELLOW=%{$fg[yellow]%}
 
 function git_branch {
-    git branch >/dev/null 2>/dev/null && echo -n "(" && echo "$(git branch) )" | cut -c 2-
+    git status >/dev/null 2>/dev/null && echo "$(git status)" | cut -d " " -f 3 | head -n 1
 }
 
 function git_status {
@@ -34,7 +34,7 @@ function prompt_char {
     fi
 }
 
-PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW$(git_branch)
+PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW($(git_branch))
 $(prompt_char)'
 
 NORMAL_PROMPT="$BLUE NORMAL$COLOR_OFF"
