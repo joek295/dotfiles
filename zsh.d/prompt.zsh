@@ -1,4 +1,5 @@
 # -*- sh -*-
+setopt PROMPT_SUBST     # allow functions in the prompt
 
 COLOR_OFF=%{$fg[default]%}
 BLUE=%{$fg[blue]%}

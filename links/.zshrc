@@ -47,7 +47,6 @@ setopt GLOB_SUBST
 setopt EXTENDEDGLOB
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
-setopt PROMPT_SUBST     # allow functions in the prompt
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
 # (or anything else containing the string vi, such as nvi or elvis).
@@ -71,7 +70,6 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;42;30m' 
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-
 
 # zsh syntax highlighting
 # available at https://github.com/zsh-users/zsh-syntax-highlighting
