@@ -83,5 +83,4 @@ fi
 # Completion: this is significantly more fancy than bash's completion
 # system!
 # NB: keep at the bottom of the file; things break otherwise!
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
