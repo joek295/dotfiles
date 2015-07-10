@@ -6,18 +6,18 @@
 # man bash has this to say about aliases and functions:
 
 #     There is no mechanism for using arguments in the replacement
-#     text.  If arguments are needed, a shell function should be used.
-#     ...  For almost every purpose, aliases are superseded by shell
-#     functions.
+#     text [of an alias].  If arguments are needed, a shell function
+#     should be used[...]  For almost every purpose, aliases are
+#     superseded by shell functions.
 
 # Parts of the functions file are split off and stored here:
 SHCONFIG=$HOME/media/dotfiles/sh.d
 
-source $SHCONFIG/lsfunctions
-source $SHCONFIG/gitfunctions
+. $SHCONFIG/lsfunctions
+. $SHCONFIG/gitfunctions
 
 if which apt-get >/dev/null; then
-    source $SHCONFIG/aptfunctions
+    . $SHCONFIG/aptfunctions
 fi
 
 # `al alias command` sets an alias in .aliases and in the current
@@ -54,9 +54,10 @@ srcf () { ssh jk564@shell.srcf.net; }
 su () { command su -p; } 
 tetris () { tetris-bsd; }
 twenex () { ssh twenex@sdf.org; } 
-update-grub () { sudo update-grub; } 
+udg () { sudo update-grub; } 
 up () { for i in {1..$1}; do cd ..; done }
 vms () { ssh jk564@jack.vistech.net; }
+myshell () { echo $0; }
 
 # cd
 cdl () { cd "$@" && clear && ls -l --group-directories-first; }
