@@ -23,11 +23,12 @@ fi
 
 #history options
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=5000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY # incremental append history
 setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
 
 setopt NO_BEEP
 setopt MULTIOS
