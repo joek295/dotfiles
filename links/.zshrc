@@ -7,7 +7,7 @@ ALIASES=$DOTFILES/sh.d/aliases
 FUNCTIONS=$DOTFILES/sh.d/functions
 
 ZALIASES=$ZSH_PLUGINS/aliases.zsh
-ZPROMPT=$ZSH_PLUGINS/prompt.zsh
+PROMPT=$ZSH_PLUGINS/prompt.zsh
 
 if [ -f $ALIASES ]; then
   source $ALIASES
@@ -51,18 +51,17 @@ setopt PROMPT_SUBST     # allow functions in the prompt
 
 # ZSH should use vi-style line-editing when $EDITOR is set as vi, vim
 # (or anything else containing the string vi, such as nvi or elvis).
-# Here we make sure that this behaviour is as expected.
+# in case for any reason it isn't, set it anyway.
 bindkey -v
 # up and down should move through command history
 [[ -n "${key[Up]}"   ]]  && bindkey  "${key[Up]}"    history-beginning-search-backward
 [[ -n "${key[Down]}" ]]  && bindkey  "${key[Down]}"  history-beginning-search-forward
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
 
 autoload -U colors && colors
 
-source $ZPROMPT
-
-zle -N zle-line-init
-zle -N zle-keymap-select
+source $PROMPT
 
 # colourful man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
