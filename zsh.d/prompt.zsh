@@ -7,6 +7,16 @@ GREEN=%{$fg[green]%}
 RED=%{$fg[red]%}
 YELLOW=%{$fg[yellow]%}
 
+function ssh_hostname {
+    local s=""
+    if [ -z $SSH_CLIENT ]; then
+        s+="$COLOR_OFF@%m"
+    else
+        s+="@$RED%m$COLOR_OFF"
+    fi
+    echo ${~~s}
+}
+
 function git_branch {
     git status >/dev/null 2>/dev/null && echo "$(git status)" | cut -d " " -f 3 | head -n 1
 }
@@ -34,7 +44,7 @@ function prompt_char {
     fi
 }
 
-PS1='$BLUE%n$COLOR_OFF@%m:$GREEN%~ $YELLOW($(git_branch))
+PS1='$BLUE%n$(ssh_hostname):$GREEN%~ $YELLOW($(git_branch))
 $(prompt_char)'
 
 NORMAL_PROMPT="$BLUE NORMAL$COLOR_OFF"
