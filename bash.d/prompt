@@ -26,8 +26,7 @@ BCyan='\[\033[1;36m\]'    # Cyan
 BWhite='\[\033[1;37m\]'   # White
 
 # If connected via SSH, hostname and username will be different colours
-SSH_IP=`echo $SSH_CLIENT | awk '{ print $1 }'`
-if [ $SSH_IP ] ; then
+if [ -n "$SSH_CLIENT" ]; then
   HOSTNAME_COLOUR=$BRed
 else 
   HOSTNAME_COLOUR=$Blue
