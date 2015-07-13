@@ -21,6 +21,10 @@ if [ -f $FUNCTIONS ]; then
   source $FUNCTIONS
 fi
 
+if [ -e $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 source $HISTORY
 
 setopt NO_BEEP
@@ -50,8 +54,5 @@ source $PROMPT
 
 # zsh syntax highlighting
 # available at https://github.com/zsh-users/zsh-syntax-highlighting
-if [ -e $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 source $COMPLETION

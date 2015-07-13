@@ -1,3 +1,5 @@
+# -*- sh -*-
+
 setopt AUTO_LIST        # tabbing on an ambiguously incomplete command lists possibilities
 setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects first possibility
 setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
