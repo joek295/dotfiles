@@ -18,4 +18,4 @@ alias -g scripts=/home/joe/scripts
 alias -s tex=emacs
 alias -s c=emacs
 alias -s pdf="zathura &"
-alias -s bf=/home/joe/media/code/brainfuck/bf.py
+alias -s bf=/home/joe/media/code/brainfuck/brainfuck
