@@ -3,9 +3,13 @@
 setopt AUTO_LIST        # tabbing on an ambiguously incomplete command lists possibilities
 setopt MENU_COMPLETE    # tabbing on an ambiguously incomplete command selects first possibility
 setopt COMPLETE_IN_WORD # tabbing in the middle of a word will try to complete that word
+setopt ALWAYS_TO_END    # when completing from middle of word, move cursor to end of that word
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
 
+#zmodload -i zsh/complist
+
+#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 zstyle ':completion:*:expand:*' tag-order all-expansions
 # zsh better completion of kill command:

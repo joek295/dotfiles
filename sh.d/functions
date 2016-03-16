@@ -11,13 +11,17 @@
 #     superseded by shell functions.
 
 # Parts of the functions file are split off and stored here:
-SHCONFIG=$HOME/media/dotfiles/sh.d
+SHCONFIG=$HOME/dotfiles/sh.d
 
 . $SHCONFIG/lsfunctions
 . $SHCONFIG/gitfunctions
 
-if which apt-get >/dev/null; then
+if which apt-get >/dev/null 2>&1; then
     . $SHCONFIG/aptfunctions
+fi
+
+if which pacman >/dev/null 2>&1; then
+    . $SHCONFIG/pmfunctions
 fi
 
 # `al alias command` sets an alias in .aliases and in the current
@@ -45,7 +49,6 @@ df () { df -h; }
 label () { echo -ne "\e]0;$1\a"; }
 mix () { alsamixer; }
 nao () { telnet nethack.alt.org; } 
-path () { echo $PATH | sed s/:/\\n/g; }
 pdf () { pdflatex "$@" && rm `dirname "$@"`/*.{aux,log}; }
 popular () { awk '{ print $1 }' $HISTFILE | sort | uniq -c | sort -rn | less; }
 py () { python "$@"; }
@@ -58,10 +61,14 @@ udg () { sudo update-grub; }
 up () { for i in {1..$1}; do cd ..; done }
 vms () { ssh jk564@jack.vistech.net; }
 myshell () { echo $0; }
+dorf () { /home/joe/media/bin/df_linux/df; }
+grep () { grep --color=auto "$@"; }
 
 # cd
 cdl () { cd "$@" && clear && ls -l --group-directories-first; }
 mcd () { mkdir -p "$@" && cd $_; }
+
+path () { echo $PATH | sed s/:/\\n/g; }
 
 # power management
 sd () {
@@ -90,11 +97,6 @@ x () {
 }
 
 
-# for emacs
-emacs () { emacsclient -nw -a ""; }
-rem () { pkill emacs; command emacs --daemon && emacsclient -nw; }
-edi () { pkill emacs; command emacs --debug-init; }
-
 # volume control
 volup () { amixer sset Master,0 5+; }
 voldown () { amixer sset Master,0 5-; }
@@ -116,28 +118,28 @@ docstring () {
 
 # prefer more modern versions of standard applications
 htop () {
-    if command which htop > /dev/null; then
+    if command which htop > /dev/null 2>&1; then
         command htop
     else
         command top
     fi
 }
 vim () {
-    if command which vim > /dev/null; then
+    if command which vim > /dev/null 2>&1; then
         command vim "$@"
     else
         command vi "$@"
     fi
 }
 top () {
-    if command which htop > /dev/null; then
+    if command which htop > /dev/null 2>&1; then
         command htop
     else
         command top
     fi
 }
 vi () {
-    if command which vim > /dev/null; then
+    if command which vim > /dev/null 2>&1; then
         command vim "$@"
     else
         command vi "$@"

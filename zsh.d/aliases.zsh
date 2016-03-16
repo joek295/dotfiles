@@ -6,9 +6,9 @@
 
 # global aliases are expanded wherever in the command they are placed
 
-alias -g putils=~/media/code/perl/perlutils
+alias -g putils=~/code/perl/perlutils
 alias -g media=~/media
-alias -g dotfiles=/home/joe/media/dotfiles
+alias -g dotfiles=/home/joe/dotfiles
 alias -g scripts=/home/joe/scripts
 
 # suffix aliases associate a file extension with a given command.
@@ -18,4 +18,4 @@ alias -g scripts=/home/joe/scripts
 alias -s tex=emacs
 alias -s c=emacs
 alias -s pdf="zathura &"
-alias -s bf=/home/joe/media/code/brainfuck/brainfuck
+alias -s bf=/home/joe/code/brainfuck/brainfuck

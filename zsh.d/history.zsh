@@ -5,6 +5,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=5000
 
+# Multiple sessions should all append to the same history file
+setopt APPEND_HISTORY 
 # Append history to the history file as it is written
 setopt INC_APPEND_HISTORY 
 
