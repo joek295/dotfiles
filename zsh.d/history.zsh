@@ -4,6 +4,7 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=5000
+HISTORY_IGNORE='(c|clear|cd|ls|la|ll|[bf]g|exit|fortune*)'
 
 # Multiple sessions should all append to the same history file
 setopt APPEND_HISTORY 

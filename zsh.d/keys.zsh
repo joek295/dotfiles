@@ -19,14 +19,11 @@ bindkey "^[[7~" beginning-of-line
 bindkey "^[[8~" end-of-line
 
 # Normal Mode Keybindings:
-# Search through command history with j and k
-bindkey -M vicmd "j" history-beginning-search-forward
-bindkey -M vicmd "k" history-beginning-search-backward
 # H and L go to beginnings and ends of lines
 bindkey -M vicmd "H" beginning-of-line
 bindkey -M vicmd "L" end-of-line
 
 # Insert Mode Keybindings:
 # Make backspace work like vim, not vi
-bindkey -M viins "^?" backwards-delete-char
-bindkey -M viins "^H" backwards-delete-char
+#bindkey -M viins "^?" backwards-delete-char
+#bindkey -M viins "^H" backwards-delete-char

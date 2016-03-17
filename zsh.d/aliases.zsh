@@ -10,6 +10,7 @@ alias -g putils=~/code/perl/perlutils
 alias -g media=~/media
 alias -g dotfiles=/home/joe/dotfiles
 alias -g scripts=/home/joe/scripts
+alias -g L='| less'
 
 # suffix aliases associate a file extension with a given command.
 # Simply entering a filename will run the command associated with that

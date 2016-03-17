@@ -19,11 +19,7 @@ if [ -f $ZALIASES ]; then
 fi
 
 if [ -f $FUNCTIONS ]; then
-  source $FUNCTIONS
-fi
-
-if [ -f $KEYS ]; then
-  source $KEYS
+    source $FUNCTIONS
 fi
 
 if [ -e $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
@@ -47,6 +43,10 @@ setopt PUSHD_IGNORE_DUPS
 setopt GLOB_COMPLETE    
 setopt GLOB_SUBST
 setopt EXTENDEDGLOB
+
+if [ -f $KEYS ]; then
+  source $KEYS
+fi
 
 autoload -U colors && colors
 

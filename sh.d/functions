@@ -17,7 +17,7 @@ SHCONFIG=$HOME/dotfiles/sh.d
 . $SHCONFIG/gitfunctions
 
 if which apt-get >/dev/null 2>&1; then
-    . $SHCONFIG/aptfunctions
+. $SHCONFIG/aptfunctions
 fi
 
 if which pacman >/dev/null 2>&1; then
@@ -41,11 +41,10 @@ alg () {
     fi
 }
 
-# some one-liners
-cc () { gcc "$@"; }
+# # some one-liners
 c () { clear; }
 chx () { chmod +x "$@"; }
-df () { df -h; }
+df () { command df -h; }
 label () { echo -ne "\e]0;$1\a"; }
 mix () { alsamixer; }
 nao () { telnet nethack.alt.org; } 
@@ -62,7 +61,7 @@ up () { for i in {1..$1}; do cd ..; done }
 vms () { ssh jk564@jack.vistech.net; }
 myshell () { echo $0; }
 dorf () { /home/joe/media/bin/df_linux/df; }
-grep () { grep --color=auto "$@"; }
+px () { ping -c 3 example.com; }
 
 # cd
 cdl () { cd "$@" && clear && ls -l --group-directories-first; }
