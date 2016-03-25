@@ -21,16 +21,20 @@ function git_branch {
     git status >/dev/null 2>/dev/null && echo "$(git status)" | cut -d " " -f 3 | head -n 1
 }
 
+# if you have untracked files, show a red square; unstaged files, a
+# yellow square; staged but uncommitted files, a green square.
+# should also probably track the number of commits which have not yet
+# been pushed upstream.
 function git_status {
     local s=""
     if git status 2>/dev/null | grep -i "untracked" >/dev/null; then
-        s+="$RED⊛"
+        s+="$RED▪"
     fi
     if git status 2>/dev/null | grep -i "not staged" >/dev/null; then
-        s+="$YELLOW⊛"
+        s+="$YELLOW▪"
     fi
     if git status 2>/dev/null | grep -i "to be committed" >/dev/null; then
-        s+="$GREEN⊛"
+        s+="$GREEN▪"
     fi
     s+="$COLOR_OFF"
     echo ${~~s}
