@@ -19,7 +19,7 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 
-DOTFILES=$HOME/media/dotfiles
+DOTFILES=$HOME/dotfiles
 ALIASES=$DOTFILES/sh.d/aliases
 FUNCTIONS=$DOTFILES/sh.d/functions
 PROMPT=$DOTFILES/bash.d/prompt

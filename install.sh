@@ -6,7 +6,7 @@
 # N.B. This requires bash because inline pattern-substitution in this way is a bashism.
 
 # MAKE SURE THESE DIRECTORIES HAVE THE CORRECT SETTINGS BEFORE RUNNING
-DOTDIR=$HOME/media/dotfiles/links
+DOTDIR=$HOME/dotfiles/links
 TARGET=$HOME
 
 overwrite=true

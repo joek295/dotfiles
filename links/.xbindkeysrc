@@ -4,7 +4,7 @@
 "urxvt"
   Mod1 + Return
 
-"iceweasel"
+"firefox"
   Mod4 + w
 
 "dmenu_run"

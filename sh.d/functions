@@ -115,36 +115,6 @@ docstring () {
     fi
 }
 
-# prefer more modern versions of standard applications
-htop () {
-    if command which htop > /dev/null 2>&1; then
-        command htop
-    else
-        command top
-    fi
-}
-vim () {
-    if command which vim > /dev/null 2>&1; then
-        command vim "$@"
-    else
-        command vi "$@"
-    fi
-}
-top () {
-    if command which htop > /dev/null 2>&1; then
-        command htop
-    else
-        command top
-    fi
-}
-vi () {
-    if command which vim > /dev/null 2>&1; then
-        command vim "$@"
-    else
-        command vi "$@"
-    fi
-}
-
 # handy uncompression function intelligently uncompresses files with
 # extensions from various compression algorithms
 extract () {

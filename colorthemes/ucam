@@ -1,56 +1,38 @@
 ! Colours: 
 ! Uses the University of Cambridge colour palette.
 
-#define UC_Red       #d6083b
-#define UC_BRed      #901c3b
-#define UC_Yellow    #ea7125
-#define UC_BYellow   #cb4f00
-#define UC_Green     #55a51c
-#define UC_BGreen    #445026
-#define UC_Blue      #0072cf
-#define UC_BBlue     #003e74
-#define UC_Magenta   #8f2bbc
-#define UC_BMagenta  #422e5d
-#define UC_Cyan      #00b1c1
-#define UC_BCyan     #106470
-#define UC_Black     #1b1f20
-#define UC_BBlack    #2e3436
-#define UC_White     #abadae
-#define UC_BWhite    #c0c2c2
-
 ! URxvt:
-
 URxvt*intensityStyles: true
 URxvt*fading: 40
-URxvt*fadeColor: UC_BBlack
+URxvt*fadeColor: #2e3436
 
-*background: UC_Black
-*foreground: UC_White
-*cursorColor: UC_BWhite
-*pointerColorBackground: UC_BGreen
-*pointerColorForeground: UC_BCyan
+URxvt*background: #1b1f20
+URxvt*foreground: #abadae
+*cursorColor: #c0c2c2
+*pointerColorBackground: #445026
+*pointerColorForeground: #00b1c1
 
 ! Black & Dark Grey
-*color0: UC_Black
-*color8: UC_BBlack
+*color0: #1b1f20
+*color8: #2e3436
 ! Red and Orange
-*color1: UC_Red
-*color9: UC_BRed
+*color1: #d6083b
+*color9: #901c3b
 ! Green & DarkGreen
-*color2: UC_Green
-*color10: UC_BGreen
+*color2: #55a51c
+*color10: #445026
 ! Yellow & DarkYellow
-*color3: UC_Yellow
-*color11: UC_BYellow
+*color3: #ea7125
+*color11: #cb4f00
 ! Blue & DarkBlue
-*color4: UC_Blue
-*color12: UC_BBlue
+*color4: #0072cf
+*color12: #003e74
 ! Magenta & Violet
-*color5: UC_Magenta
-*color13: UC_BMagenta
+*color5: #8f2bbc
+*color13: #422e5d
 ! Cyan & DarkCyan
-*color6: UC_Cyan
-*color14: UC_BCyan
+*color6: 00b1c1
+*color14: 106470
 ! LightGrey & White
-*color7: UC_White
-*color15: UC_BWhite
+*color7: #abadae
+*color15: #c0c2c2
