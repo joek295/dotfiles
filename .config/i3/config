@@ -43,9 +43,8 @@ bindsym $mod+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Right resize grow width 10 px or 10 ppt
 
 bindsym $mod+f fullscreen
-bindsym $mod+minus split horizontal
+bindsym $mod+s split horizontal
 bindsym $mod+v split vertical
-bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
@@ -100,6 +99,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-    status_command $HOME/scripts/conky-i3bar.sh
-    position top
+    #status_command $HOME/scripts/conky-i3bar.sh
+    status_command i3status --config ~/.config/i3/i3status.conf
+    font pango:Anonymous Pro 11
+    #position top
 }
