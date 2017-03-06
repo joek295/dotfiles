@@ -6,11 +6,11 @@ Xft.rgba:      rgb
 Xft.lcdfilter: lcddefault
 Xft.dpi:       96
 
-!xterm*faceName: terminus-12
+!xterm*faceName: terminus-14
 xterm*faceName: inconsolata-10
 xterm*utf8: 1
 
-URxvt*font: xft:inconsolata:pixelsize=13, terminus-12
+URxvt*font: xft:anonymous pro:pixelsize=16, xft:inconsolata:pixelsize=14, terminus-14
 URxvt.scrollstyle: plain
 URxvt.skipScroll: true
 ! setting these to nothing ensures no perl extensions are loaded

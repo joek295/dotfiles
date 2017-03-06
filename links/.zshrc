@@ -1,10 +1,10 @@
 # .zshrc is the equivalent of .bashrc & .kshrc
 
-ZSH_PLUGINS=$HOME/dotfiles/zsh.d
+ZSH_PLUGINS=$HOME/data/dotfiles/zsh.d
 
-ALIASES=$HOME/dotfiles/sh.d/aliases
+ALIASES=$HOME/data/dotfiles/sh.d/aliases
 COMPLETION=$ZSH_PLUGINS/completions.zsh
-FUNCTIONS=$HOME/dotfiles/sh.d/functions
+FUNCTIONS=$HOME/data/dotfiles/sh.d/functions
 HISTORY=$ZSH_PLUGINS/history.zsh
 KEYS=$ZSH_PLUGINS/keys.zsh
 PROMPT=$ZSH_PLUGINS/prompt.zsh

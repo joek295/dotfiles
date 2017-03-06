@@ -11,7 +11,7 @@
 #     superseded by shell functions.
 
 # Parts of the functions file are split off and stored here:
-SHCONFIG=$HOME/dotfiles/sh.d
+SHCONFIG=$HOME/data/dotfiles/sh.d
 
 . $SHCONFIG/lsfunctions
 . $SHCONFIG/gitfunctions
