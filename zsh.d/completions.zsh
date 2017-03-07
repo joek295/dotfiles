@@ -7,7 +7,7 @@ setopt ALWAYS_TO_END    # when completing from middle of word, move cursor to en
 setopt COMPLETE_ALIASES
 setopt AUTO_PARAM_SLASH 
 
-fpath=(/home/joe/dotfiles/zsh.d/zsh-completion $fpath)
+fpath=(/home/joe/data/dotfiles/zsh.d/zsh-completion $fpath)
 
 #zmodload -i zsh/complist
 
