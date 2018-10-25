@@ -17,6 +17,9 @@ new_window pixel 2
 
 assign [class="Iceweasel"] 2
 assign [class="Firefox"] 2
+assign [class="keepassxc"] 5
+assign [class="discord"] 9
+assign [class="skype"] 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -35,6 +38,10 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
+# Move the current workspace to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+x move workspace to output right
 
 # resize w/o resize mode
 bindsym $mod+Left resize shrink width 10 px or 10 ppt
