@@ -10,7 +10,7 @@ Xft.dpi:       96
 xterm*faceName: inconsolata-10
 xterm*utf8: 1
 
-URxvt*font: xft:anonymous pro:pixelsize=16, xft:inconsolata:pixelsize=14, terminus-14
+URxvt*font: xft:anonymous pro:pixelsize=24, xft:inconsolata:pixelsize=18, terminus-14
 URxvt.scrollstyle: plain
 URxvt.skipScroll: true
 ! setting these to nothing ensures no perl extensions are loaded
@@ -33,7 +33,7 @@ dzen2.font: -*-fixed-medium-r-*-*-12-*-*-*-*-*-*-*
 *pointerColorBackground: #586e75
 *pointerColorForeground: #93a1a1
 
-*color0: #073642
+*color0: #93a1a1
 *color1: #dc322f
 *color2: #859900
 *color3: #b58900
