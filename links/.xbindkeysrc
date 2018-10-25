@@ -16,13 +16,13 @@
 "dmpd"
   Mod4 + m
 
-"slock"
+"systemctl suspend; slock"
   Mod4 + q
 
-"amixer sset Master,0 5+"
+"pactl set-sink-volume 0 +5%"
   Mod4 + period
 
-"amixer sset Master,0 5-"
+"pactl set-sink-volume 0 -5%"
   Mod4 + comma
 
 "mpc next"
@@ -33,3 +33,9 @@
 
 "mpc toggle"
   Mod4 + space
+
+"mpc next"
+  XF86AudioNext
+
+"mpc toggle"
+  XF86AudioPlay
