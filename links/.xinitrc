@@ -13,4 +13,8 @@ fi
 
 redshift -l 51:0 &
 
+if xrandr | grep "HDMI1 connected" &>/dev/null; then
+    xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1
+fi
+
 exec i3
